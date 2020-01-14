@@ -9,30 +9,20 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
+    let vkService = VKService()
     var friends:[FriendsModel] = [
         FriendsModel(friendName: "Larin Alex", friendImage: "cat1"),
         FriendsModel(friendName: "Voevodina Elena", friendImage: "cat2"),
         FriendsModel(friendName: "Larina Nastya", friendImage: "cat3"),
         FriendsModel(friendName: "Larina Masha", friendImage: "cat4"),
         FriendsModel(friendName: "Larin Ivan", friendImage: "cat5")
-    
-    
-    
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        vkService.loadFriendsData()
     }
-
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
 

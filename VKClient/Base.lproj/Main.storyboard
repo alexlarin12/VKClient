@@ -19,40 +19,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bup-v3-KqP">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOK-Yf-bob">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="2Wr-am-UkK" kind="custom" customClass="CustomSegue" customModule="VKClient" customModuleProvider="target" id="ozx-lQ-Aag"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HOK-Yf-bob" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6eh-FR-W8h"/>
-                            <constraint firstItem="HOK-Yf-bob" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AGc-VK-5jq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bup-v3-KqP" secondAttribute="bottom" id="FRT-Rf-6w1"/>
-                            <constraint firstAttribute="trailing" secondItem="Bup-v3-KqP" secondAttribute="trailing" id="H2P-L8-tV9"/>
-                            <constraint firstItem="Bup-v3-KqP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XxI-wb-8Pe"/>
-                            <constraint firstItem="Bup-v3-KqP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="e5E-Z6-us7"/>
+                            <constraint firstItem="Bup-v3-KqP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="III-1x-ukB"/>
+                            <constraint firstItem="Bup-v3-KqP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RkQ-ha-mZz"/>
+                            <constraint firstAttribute="bottom" secondItem="Bup-v3-KqP" secondAttribute="bottom" id="itL-dW-5Fq"/>
+                            <constraint firstItem="Bup-v3-KqP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kBl-tP-4I1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="Button" destination="HOK-Yf-bob" id="Tr6-SB-vfO"/>
                         <outlet property="VKWebView" destination="Bup-v3-KqP" id="WxA-5a-IYc"/>
+                        <segue destination="2Wr-am-UkK" kind="show" identifier="FromLaunchToFriends" customClass="CustomSegue" customModule="VKClient" customModuleProvider="target" id="VMr-6j-gNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159" y="114"/>
+            <point key="canvasLocation" x="-159.42028985507247" y="113.83928571428571"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sEz-YB-DSC">

@@ -9,26 +9,14 @@
 import UIKit
 
 class NewsViewController: UIViewController {
-
+    var vkService = VKService()
     @IBOutlet weak var NewsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         NewsTableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsIdentifire")
         self.NewsTableView.rowHeight = 350
         self.NewsTableView.dataSource = self
-        
-        // Do any additional setup after loading the view.
+      
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

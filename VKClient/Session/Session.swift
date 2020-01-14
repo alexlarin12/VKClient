@@ -10,6 +10,6 @@ import UIKit
 class Session {
    static let instance = Session()
     private init(){}
-    var token:String = "abcdefg"
-    var userId:Int = 12345
+    var token:String = ""
+    var userId:Int = 0
 }
