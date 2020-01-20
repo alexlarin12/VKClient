@@ -14,38 +14,20 @@ class FriendCollectionViewController: UICollectionViewController {
     var friendNameForTitle:String = ""
     var friendImageForCollection:String = ""
     var likeCount = 0
+    var vkService = VKService()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = friendNameForTitle
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        vkService.loadPhotosData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return 8
     }
 
@@ -53,8 +35,6 @@ class FriendCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendIdentifire", for: indexPath) as! FriendCollectionCell
         cell.LikeCountLabel.text = "\(likeCount)"
         cell.FriendImageView.image = UIImage(named: friendImageForCollection)
-        // Configure the cell
-    
         return cell
     }
 
