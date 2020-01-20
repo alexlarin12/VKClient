@@ -10,11 +10,16 @@ import UIKit
 
 class GroupsTableViewController: UITableViewController {
     var vkService = VKService()
-    var groups:[GroupsModel] = []
-   
+ //   var groups:[GroupsModel] = []
+   var groups = [ItemsGroup]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        vkService.loadGroupsData()
+        vkService.loadGroupsData(){[weak self] groups in
+            self?.groups = groups
+            self?.tableView.reloadData()
+            
+            
+        }
        
     }
 
@@ -31,8 +36,12 @@ class GroupsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as! GroupsCell
-            cell.GroupsNameLabel.text = groups[indexPath.row].groupName
-            cell.GroupsAvatarImageView.image = UIImage(named: groups[indexPath.row].groupImage)
+        let avatar = groups[indexPath.row].photo50
+        let urlAvatar = URL(string: avatar)!
+        let dataAvatar = try? Data(contentsOf: urlAvatar)
+        
+            cell.GroupsNameLabel.text = groups[indexPath.row].name
+            cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
 
         return cell
     }
@@ -45,20 +54,20 @@ class GroupsTableViewController: UITableViewController {
     }
     
     @IBAction func addGroup(segue: UIStoryboardSegue){
-       if segue.identifier == "addGroup"{
+     /*  if segue.identifier == "addGroup"{
             guard let allGroupsTableViewController = segue.source as? AllGroupsTableViewController
                 else {return}
         
             if let indexPath = allGroupsTableViewController.tableView.indexPathForSelectedRow{
-                let group = allGroupsTableViewController.groups[indexPath.row]
-                if !groups.contains(where: {$0.groupName == group.groupName}){
+               let group = allGroupsTableViewController.groups[indexPath.row]
+               if !groups.contains(where: {$0.name == group.groupName}){
                    groups.append(group)
                    tableView.reloadData()
                 }
          
             }
         }
-
+*/
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }

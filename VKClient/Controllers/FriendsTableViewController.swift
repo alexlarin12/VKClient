@@ -9,17 +9,16 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-    let vkService = VKService()
-    var friends:[FriendsModel] = [
-        FriendsModel(friendName: "Larin Alex", friendImage: "cat1"),
-        FriendsModel(friendName: "Voevodina Elena", friendImage: "cat2"),
-        FriendsModel(friendName: "Larina Nastya", friendImage: "cat3"),
-        FriendsModel(friendName: "Larina Masha", friendImage: "cat4"),
-        FriendsModel(friendName: "Larin Ivan", friendImage: "cat5")
-    ]
+    var vkService = VKService()
+    var friends = [ItemsFriend]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        vkService.loadFriendsData()
+        vkService.loadFriendsData(){ [weak self] friends in
+            self?.friends = friends
+            self?.tableView.reloadData()
+            print(friends.count)
+        }
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -34,14 +33,19 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsIdentifier", for: indexPath) as! FriendsCell
-            cell.FriendNameLabel.text = friends[indexPath.row].friendName
-            cell.FriendsAvatarImageView.image = UIImage(named: friends[indexPath.row].friendImage)
+        let avatar = friends[indexPath.row].photo50
+        let urlAvatar = URL(string: avatar)!
+        let dataAvatar = try? Data(contentsOf: urlAvatar)
+        let fullName = friends[indexPath.row].firstName + " " + friends[indexPath.row].lastName
+        
+            cell.FriendNameLabel.text = fullName
+            cell.FriendsAvatarImageView.image = UIImage(data: dataAvatar!)
         // Configure the cell...
 
         return cell
     }
     
-
+   
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -85,14 +89,16 @@ class FriendsTableViewController: UITableViewController {
         if segue.identifier == "WatchFriend",
             let friendCollectionViewController = segue.destination as? FriendCollectionViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-            let name = friends[indexPath.row].friendName
-            let image = friends[indexPath.row].friendImage
+            let name = friends[indexPath.row].firstName + " " + friends[indexPath.row].lastName
+            let image = friends[indexPath.row].photo50
+            let ownerId = friends[indexPath.row].id
             friendCollectionViewController.friendNameForTitle = name
             friendCollectionViewController.friendImageForCollection = image
+            friendCollectionViewController.friendOwnerId = ownerId
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
     
-
+   
 }

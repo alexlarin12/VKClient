@@ -12,12 +12,12 @@
 		43061C9423AE516500D9A90D /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43061C9323AE516500D9A90D /* CustomNavigationViewController.swift */; };
 		43061C9723AE6E6800D9A90D /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43061C9623AE6E6800D9A90D /* CustomSegue.swift */; };
 		43061C9923AE893000D9A90D /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43061C9823AE892F00D9A90D /* CustomInteractiveTransition.swift */; };
+		4342C60023D36BE600C944B2 /* PhotosModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342C5FF23D36BE600C944B2 /* PhotosModels.swift */; };
 		4345E7E223C9DB15002F50EC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345E7E123C9DB15002F50EC /* Session.swift */; };
 		4345E7E423C9DF34002F50EC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345E7E323C9DF34002F50EC /* MainViewController.swift */; };
 		434A3FAA23CE376500219B09 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A3FA923CE376500219B09 /* VKService.swift */; };
 		434A3FAC23CE3F8100219B09 /* LaunchVC+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A3FAB23CE3F8100219B09 /* LaunchVC+WKNavigationDelegate.swift */; };
 		434A3FB023CE555200219B09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A3FAF23CE555200219B09 /* SessionManager.swift */; };
-		435093C623AE1DDA001393C2 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435093C523AE1DDA001393C2 /* FriendsModel.swift */; };
 		437ABB3F23A167750001B3CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437ABB3E23A167750001B3CB /* AppDelegate.swift */; };
 		437ABB4423A167750001B3CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 437ABB4223A167750001B3CB /* Main.storyboard */; };
 		437ABB4623A167770001B3CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 437ABB4523A167770001B3CB /* Assets.xcassets */; };
@@ -42,6 +42,9 @@
 		437ABB9823A570180001B3CB /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437ABB9623A570180001B3CB /* NewsTableViewCell.xib */; };
 		437ABB9A23A571C90001B3CB /* NewsVC+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437ABB9923A571C90001B3CB /* NewsVC+UITableViewDataSource.swift */; };
 		437ABB9D23A63BD30001B3CB /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437ABB9C23A63BD30001B3CB /* GroupsModel.swift */; };
+		43A90C0323CF70AB00C1B72A /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A90C0223CF70AB00C1B72A /* FriendModel.swift */; };
+		43A90C0523CF70C800C1B72A /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A90C0423CF70C800C1B72A /* GroupModel.swift */; };
+		43A90C0923CF70FB00C1B72A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A90C0823CF70FB00C1B72A /* UserModel.swift */; };
 		7D4CA3760DD2CF47E7552F55 /* Pods_VKClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F689E189D2738CC862E72 /* Pods_VKClient.framework */; };
 		8B4F4B5980258AA2228E90CF /* Pods_VKClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B94F387A15CC3076B4791EE /* Pods_VKClientTests.framework */; };
 		A3FCEE1CA7C38CF0A40ABB7B /* Pods_VKClient_VKClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0236F9442707D68A6D6EB9 /* Pods_VKClient_VKClientUITests.framework */; };
@@ -71,12 +74,12 @@
 		43061C9323AE516500D9A90D /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
 		43061C9623AE6E6800D9A90D /* CustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
 		43061C9823AE892F00D9A90D /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
+		4342C5FF23D36BE600C944B2 /* PhotosModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModels.swift; sourceTree = "<group>"; };
 		4345E7E123C9DB15002F50EC /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4345E7E323C9DF34002F50EC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		434A3FA923CE376500219B09 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		434A3FAB23CE3F8100219B09 /* LaunchVC+WKNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchVC+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		434A3FAF23CE555200219B09 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		435093C523AE1DDA001393C2 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		437ABB3B23A167750001B3CB /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		437ABB3E23A167750001B3CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		437ABB4323A167750001B3CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,6 +110,9 @@
 		437ABB9623A570180001B3CB /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 		437ABB9923A571C90001B3CB /* NewsVC+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsVC+UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		437ABB9C23A63BD30001B3CB /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
+		43A90C0223CF70AB00C1B72A /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
+		43A90C0423CF70C800C1B72A /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		43A90C0823CF70FB00C1B72A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4B94F387A15CC3076B4791EE /* Pods_VKClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		628F689E189D2738CC862E72 /* Pods_VKClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65776147C6179FFFBEE77BD1 /* Pods-VKClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -304,7 +310,10 @@
 			isa = PBXGroup;
 			children = (
 				437ABB9C23A63BD30001B3CB /* GroupsModel.swift */,
-				435093C523AE1DDA001393C2 /* FriendsModel.swift */,
+				43A90C0223CF70AB00C1B72A /* FriendModel.swift */,
+				43A90C0423CF70C800C1B72A /* GroupModel.swift */,
+				43A90C0823CF70FB00C1B72A /* UserModel.swift */,
+				4342C5FF23D36BE600C944B2 /* PhotosModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -552,6 +561,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A90C0323CF70AB00C1B72A /* FriendModel.swift in Sources */,
+				4342C60023D36BE600C944B2 /* PhotosModels.swift in Sources */,
 				4345E7E223C9DB15002F50EC /* Session.swift in Sources */,
 				43061C9923AE893000D9A90D /* CustomInteractiveTransition.swift in Sources */,
 				437ABB7623A170AA0001B3CB /* NewsViewController.swift in Sources */,
@@ -562,6 +573,7 @@
 				434A3FAC23CE3F8100219B09 /* LaunchVC+WKNavigationDelegate.swift in Sources */,
 				437ABB8E23A4E54A0001B3CB /* CircleImageView.swift in Sources */,
 				43061C9023AE4FFF00D9A90D /* CustomPopAnimator.swift in Sources */,
+				43A90C0523CF70C800C1B72A /* GroupModel.swift in Sources */,
 				437ABB8A23A17DC20001B3CB /* GradientView.swift in Sources */,
 				437ABB7A23A171350001B3CB /* GroupsTableViewController.swift in Sources */,
 				437ABB3F23A167750001B3CB /* AppDelegate.swift in Sources */,
@@ -569,12 +581,12 @@
 				437ABB7823A170F00001B3CB /* FriendsTableViewController.swift in Sources */,
 				437ABB9D23A63BD30001B3CB /* GroupsModel.swift in Sources */,
 				434A3FAA23CE376500219B09 /* VKService.swift in Sources */,
-				435093C623AE1DDA001393C2 /* FriendsModel.swift in Sources */,
 				437ABB8623A17AD80001B3CB /* GroupsCell.swift in Sources */,
 				437ABB9A23A571C90001B3CB /* NewsVC+UITableViewDataSource.swift in Sources */,
 				43061C9223AE502E00D9A90D /* CustomPushAnimator.swift in Sources */,
 				437ABB8223A17A8C0001B3CB /* FriendCollectionCell.swift in Sources */,
 				437ABB7123A168D20001B3CB /* LaunchViewController.swift in Sources */,
+				43A90C0923CF70FB00C1B72A /* UserModel.swift in Sources */,
 				437ABB8C23A18B0E0001B3CB /* ShadowView.swift in Sources */,
 				437ABB7C23A171820001B3CB /* AllGroupsTableViewController.swift in Sources */,
 				43061C9423AE516500D9A90D /* CustomNavigationViewController.swift in Sources */,

@@ -9,13 +9,15 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    var vkService = VKService()
+    var user = [ResponseUser]()
     @IBOutlet weak var MainNameLabel: UILabel!
     @IBOutlet weak var MainIdLabel: UILabel!
     @IBOutlet weak var MainImageView: CircleImageView!
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var LightLabel: UILabel!
     @IBOutlet weak var DarkLabel: UILabel!
+   
     
     @IBAction func DarkLightSwitch(_ sender: Any) {
         let changeColorNotification = Notification.Name("changeColorNotification")
@@ -24,13 +26,24 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let session = Session.instance
-        self.MainNameLabel.text = "Token = \(session.token)"
-        self.MainIdLabel.text = "User ID = \(session.userId)"
+        
+        vkService.loadUserData(){ [weak self] user in
+            self?.user = user
+             for i in user{
+                       self?.MainNameLabel.text = i.firstName
+                       self?.MainIdLabel.text = i.lastName
+                       let avatar = i.photo50
+                       let urlAvatar = URL(string: avatar)!
+                       let dataAvatar = try? Data(contentsOf: urlAvatar)
+                       self?.MainImageView.image = UIImage(data: dataAvatar!)
+                
+            }
+        }
+       
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         let changeColorNotification = Notification.Name("changeColorNotification")
         NotificationCenter.default.addObserver(self, selector: #selector(changeColor(notification:)), name: changeColorNotification, object: nil)
-        // Do any additional setup after loading the view.
+      
     }
     @objc func changeColor(notification:Notification){
         if self.view.backgroundColor == #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1) {

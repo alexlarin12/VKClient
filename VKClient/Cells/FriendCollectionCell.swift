@@ -17,6 +17,14 @@ class FriendCollectionCell: UICollectionViewCell {
     @IBOutlet weak var LikeButton: LikeButtonRed!
     var likeCount = 0
     var likeUseCount = 0
+ 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.FriendImageView.image = nil
+    }
+
+    
+    
     
     @IBAction func LikeButtonTap(_ sender: LikeButtonRed) {
         
