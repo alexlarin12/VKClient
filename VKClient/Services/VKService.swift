@@ -9,58 +9,86 @@
 import Foundation
 import Alamofire
 class VKService {
-    let userId = String(Session.instance.userId)
-    let accessToken = Session.instance.token
     
-    func loadFriendsData(){
+    func loadFriendsData(completion: @escaping ([ItemsFriend]) ->Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
         urlConstructor.path = "/method/friends.get"
         urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: userId),
+            URLQueryItem(name: "user_id", value: String(Session.instance.userId)),
             URLQueryItem(name: "fields", value: "photo_50"),
-            URLQueryItem(name: "access_token", value: accessToken),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        SessionManager.custom.request(request).responseJSON{
+        SessionManager.custom.request(request).responseData{
             response in
-            print(response.value ?? "no friends")
+            guard let data = response.value else {return}
+            let friends = try? JSONDecoder().decode(FriendModel.self, from: data).response?.items
+            print(friends ?? "no friends")
+            completion(friends ?? [])
         }
     }
-    func loadGroupsData(){
+    func loadGroupsData(completion: @escaping ([ItemsGroup]) ->Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
         urlConstructor.path = "/method/groups.get"
         urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: userId),
+            URLQueryItem(name: "user_id", value:String(Session.instance.userId)),
             URLQueryItem(name: "extended", value: "1"),
             URLQueryItem(name: "fields", value: "site"),
-            URLQueryItem(name: "access_token", value: accessToken),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        SessionManager.custom.request(request).responseJSON{
+        SessionManager.custom.request(request).responseData{
             response in
-            print(response.value ?? "no groups")
+            guard let data = response.value else{return}
+            let groups = try? JSONDecoder().decode(GroupModel.self, from: data).response?.items
+            print(groups ?? "no groups")
+            completion(groups ?? [])
         }
     }
-    func loadPhotosData(){
+    func loadPhotosData(ownerId:Int,completion: @escaping ([ItemsPhotos]) -> Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
         urlConstructor.path = "/method/photos.getAll"
         urlConstructor.queryItems = [
-            URLQueryItem(name: "owner_id", value: "-\(userId)"),
-            URLQueryItem(name: "access_token", value: accessToken),
+            URLQueryItem(name: "owner_id", value: "\(ownerId)"),
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        SessionManager.custom.request(request).responseJSON{
+        SessionManager.custom.request(request).responseData{
             response in
-            print(response.value ?? "no photos")
+            guard let data = response.value else{return}
+            let photos = try? JSONDecoder().decode(PhotosModel.self, from: data).response?.items
+            print(photos ?? "no photos")
+            completion(photos ?? [])
+        }
+    }
+    func loadUserData(completion: @escaping ([ResponseUser])->Void){
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = "https"
+        urlConstructor.host = "api.vk.com"
+        urlConstructor.path = "/method/users.get"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "user_id", value: String(Session.instance.userId)),
+            URLQueryItem(name: "fields", value: "photo_50"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.103")
+        ]
+        let request = URLRequest(url:urlConstructor.url!)
+        SessionManager.custom.request(request).responseData{
+            response in
+            guard let data = response.value else{return}
+            let user = try! JSONDecoder().decode(UserModel.self, from: data).response
+            print(response.value ?? "no users")
+            completion(user ?? [])
         }
     }
     

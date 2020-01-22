@@ -13,13 +13,20 @@ private let reuseIdentifier = "Cell"
 class FriendCollectionViewController: UICollectionViewController {
     var friendNameForTitle:String = ""
     var friendImageForCollection:String = ""
-    var likeCount = 0
+    var friendOwnerId:Int = 0
+    
     var vkService = VKService()
+    var photos = [ItemsPhotos]()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = friendNameForTitle
+        print("owner_id = \(friendOwnerId)")
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        vkService.loadPhotosData()
+        vkService.loadPhotosData(ownerId:friendOwnerId){[weak self] photos in
+            self?.photos = photos
+            self?.collectionView.reloadData()
+            
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -28,13 +35,17 @@ class FriendCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendIdentifire", for: indexPath) as! FriendCollectionCell
-        cell.LikeCountLabel.text = "\(likeCount)"
-        cell.FriendImageView.image = UIImage(named: friendImageForCollection)
+        let photo = photos[indexPath.row].url
+        let urlPhoto = URL(string: photo)!
+        let dataPhoto = try? Data(contentsOf: urlPhoto)
+       
+            cell.LikeCountLabel.text = "\(photos[indexPath.row].countLikes)"
+            cell.FriendImageView.image = UIImage(data: dataPhoto!)
         return cell
     }
 
