@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 class VKService {
-    
+    let saveRealmData = SaveRealmData()
     func loadFriendsData(completion: @escaping ([ItemsFriend]) ->Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
@@ -26,8 +26,10 @@ class VKService {
             response in
             guard let data = response.value else {return}
             let friends = try? JSONDecoder().decode(FriendModel.self, from: data).response?.items
+            self.saveRealmData.saveFriendData(friends: friends ?? [])
             print(friends ?? "no friends")
             completion(friends ?? [])
+            
         }
     }
     func loadGroupsData(completion: @escaping ([ItemsGroup]) ->Void){
@@ -47,6 +49,7 @@ class VKService {
             response in
             guard let data = response.value else{return}
             let groups = try? JSONDecoder().decode(GroupModel.self, from: data).response?.items
+            self.saveRealmData.saveGroupData(groups: groups ?? [])
             print(groups ?? "no groups")
             completion(groups ?? [])
         }
@@ -67,6 +70,7 @@ class VKService {
             response in
             guard let data = response.value else{return}
             let photos = try? JSONDecoder().decode(PhotosModel.self, from: data).response?.items
+            self.saveRealmData.savePhotosData(photos: photos ?? [])
             print(photos ?? "no photos")
             completion(photos ?? [])
         }
@@ -86,7 +90,8 @@ class VKService {
         SessionManager.custom.request(request).responseData{
             response in
             guard let data = response.value else{return}
-            let user = try! JSONDecoder().decode(UserModel.self, from: data).response
+            let user = try? JSONDecoder().decode(UserModel.self, from: data).response
+            self.saveRealmData.saveUserData(user: user ?? [])
             print(response.value ?? "no users")
             completion(user ?? [])
         }

@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
     var vkService = VKService()
+    var saveRealmData = SaveRealmData()
     var friends = [ItemsFriend]()
     
     override func viewDidLoad() {
@@ -18,6 +19,7 @@ class FriendsTableViewController: UITableViewController {
             self?.friends = friends
             self?.tableView.reloadData()
             print(friends.count)
+            
         }
     }
     override func numberOfSections(in tableView: UITableView) -> Int {

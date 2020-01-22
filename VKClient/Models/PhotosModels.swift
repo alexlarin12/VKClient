@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 class PhotosModel: Decodable {
         let response:ResponsePhotos?
     }
@@ -15,16 +16,16 @@ class ResponsePhotos:Decodable{
     var count:Int
     var items:[ItemsPhotos]?
     }
-class ItemsPhotos:Decodable{
-    var id:Int = 0
-    var albumId:Int = 0
-    var ownerId:Int = 0
-    var url:String = ""
-    var text:String = ""
-    var userLikes:Int = 0
-    var countLikes:Int = 0
-    var countReposts:Int? = 0
-    var realOffset:Int = 0
+class ItemsPhotos:Object, Decodable{
+   @objc dynamic var id:Int = 0
+   @objc dynamic var albumId:Int = 0
+   @objc dynamic var ownerId:Int = 0
+   @objc dynamic var url:String = ""
+   @objc dynamic var text:String = ""
+   @objc dynamic var userLikes:Int = 0
+   @objc dynamic var countLikes:Int = 0
+   @objc dynamic var countReposts:Int = 0
+   @objc dynamic var realOffset:Int = 0
     enum ItemsPhotosKeys:String, CodingKey {
         case id
         case albumId = "album_id"
@@ -65,7 +66,7 @@ class ItemsPhotos:Decodable{
         self.countLikes = try likesValues.decode(Int.self, forKey: .countLikes)
         
         let repostsValues = try values.nestedContainer (keyedBy:RepostsPhotosKeys.self, forKey: .reposts)
-        self.countReposts = try? repostsValues.decode(Int.self, forKey: .countReposts)
+        self.countReposts = try! repostsValues.decode(Int.self, forKey: .countReposts)
 
     }
     
