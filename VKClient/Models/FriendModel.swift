@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 class FriendModel: Decodable {
     let response: ResponseFriend?
 }
@@ -14,15 +15,15 @@ class ResponseFriend:Decodable{
     var count:Int
     var items:[ItemsFriend]?
 }
-class ItemsFriend: Decodable {
-    var id:Int = 0
-    var firstName:String = ""
-    var lastName:String = ""
-    var isClosed:Bool? = true
-    var canAccessClosed:Bool? = true
-    var photo50:String = ""
-    var online:Int = 0
-    var trackCode:String = ""
+class ItemsFriend:Object, Decodable {
+   @objc dynamic var id:Int = 0
+   @objc dynamic var firstName:String = ""
+   @objc dynamic var lastName:String = ""
+   @objc dynamic var isClosed:Bool = true
+   @objc dynamic var canAccessClosed:Bool = true
+   @objc dynamic var photo50:String = ""
+   @objc dynamic var online:Int = 0
+   @objc dynamic var trackCode:String = ""
     enum ItemsFriendKeys:String, CodingKey {
         case id
         case firstName = "first_name"
@@ -39,8 +40,8 @@ class ItemsFriend: Decodable {
         self.id = try values.decode(Int.self, forKey: .id)
         self.firstName = try values.decode(String.self, forKey: .firstName)
         self.lastName = try values.decode(String.self, forKey: .lastName)
-        self.isClosed = try? values.decode(Bool.self, forKey: .isClosed)
-        self.canAccessClosed = try? values.decode(Bool.self, forKey: .canAccessClosed)
+        self.isClosed = try! values.decode(Bool.self, forKey: .isClosed)
+        self.canAccessClosed = try! values.decode(Bool.self, forKey: .canAccessClosed)
         self.photo50 = try values.decode(String.self, forKey: .photo50)
         self.online = try values.decode(Int.self, forKey: .online)
         self.trackCode = try values.decode(String.self, forKey: .trackCode)
