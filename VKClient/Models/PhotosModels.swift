@@ -9,13 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
-class PhotosModel: Decodable {
-        let response:ResponsePhotos?
-    }
-class ResponsePhotos:Decodable{
-    var count:Int
-    var items:[ItemsPhotos]?
-    }
+
 class ItemsPhotos:Object, Decodable{
    @objc dynamic var id:Int = 0
    @objc dynamic var albumId:Int = 0

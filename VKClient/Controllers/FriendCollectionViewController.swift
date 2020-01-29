@@ -14,17 +14,24 @@ class FriendCollectionViewController: UICollectionViewController {
     var friendNameForTitle:String = ""
     var friendImageForCollection:String = ""
     var friendOwnerId:Int = 0
-    
     var vkService = VKService()
     var photos = [ItemsPhotos]()
+    var saveRealmData = SaveRealmData()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = friendNameForTitle
         print("owner_id = \(friendOwnerId)")
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        vkService.loadPhotosData(ownerId:friendOwnerId){[weak self] photos in
-            self?.photos = photos
-            self?.collectionView.reloadData()
+        vkService.loadPhotosData(ownerId:friendOwnerId){result in
+            switch result{
+            case .success(let photos):
+                self.photos = photos
+                self.collectionView.reloadData()
+                self.saveRealmData.savePhotosData(photos: photos)
+            case .failure(let error):
+                print(error)
+            }
+            
             
         }
     }

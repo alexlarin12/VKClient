@@ -45,6 +45,8 @@ class SaveRealmData{
             realm.beginWrite()
             realm.add(user)
             try realm.commitWrite()
+            print(try! Realm().configuration.fileURL!)
+            
         } catch {
             print(error)
         }

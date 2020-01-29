@@ -22,30 +22,26 @@ class MainViewController: UIViewController {
     @IBAction func DarkLightSwitch(_ sender: Any) {
         let changeColorNotification = Notification.Name("changeColorNotification")
         NotificationCenter.default.post(name: changeColorNotification, object: nil)
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vkService.loadUserData(){ [weak self] user in
+        vkService.loadUserData(){[weak self] user in
             self?.user = user
-             for i in user{
-                       self?.MainNameLabel.text = i.firstName
-                       self?.MainIdLabel.text = i.lastName
-                       let avatar = i.photo50
-                       let urlAvatar = URL(string: avatar)!
-                       let dataAvatar = try? Data(contentsOf: urlAvatar)
-                       self?.MainImageView.image = UIImage(data: dataAvatar!)
-                
-            }
+                for i in user{
+                    self?.MainNameLabel.text = i.firstName
+                    self?.MainIdLabel.text = i.lastName
+                    let avatar = i.photo50
+                    let urlAvatar = URL(string: avatar)!
+                    let dataAvatar = try? Data(contentsOf: urlAvatar)
+                    self?.MainImageView.image = UIImage(data: dataAvatar!)
+                }
         }
-       
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         let changeColorNotification = Notification.Name("changeColorNotification")
         NotificationCenter.default.addObserver(self, selector: #selector(changeColor(notification:)), name: changeColorNotification, object: nil)
-      
     }
-    @objc func changeColor(notification:Notification){
+       @objc func changeColor(notification:Notification){
         if self.view.backgroundColor == #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1) {
             self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.MainNameLabel.textColor = #colorLiteral(red: 0.0769745335, green: 0.09174961597, blue: 0.08340293914, alpha: 1)
@@ -64,15 +60,4 @@ class MainViewController: UIViewController {
             self.LightLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

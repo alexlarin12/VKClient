@@ -8,9 +8,32 @@
 
 import Foundation
 import Alamofire
+enum RequestError:Error{
+    case failedRequest(massage:String)
+    case decodableError
+}
 class VKService {
     let saveRealmData = SaveRealmData()
-    func loadFriendsData(completion: @escaping ([ItemsFriend]) ->Void){
+    typealias Out = Swift.Result
+    
+    func loadData<T:Decodable>(request:URLRequest,completion: @escaping(Out<[T], Error>) ->Void){
+           SessionManager.custom.request(request).responseData{
+                 response in
+                 switch response.result {
+                   case .failure(let error):
+                      completion(.failure(RequestError.failedRequest(massage: error.localizedDescription)))
+                   case .success(let data):
+                      do {
+                        let result = try JSONDecoder().decode(CommonResponse<T>.self, from: data)
+                        print(result)
+                        completion(.success(result.response.items))
+                      } catch {
+                        completion(.failure(error))
+                      }
+                }
+            }
+    }
+    func loadFriendsData(completion: @escaping (Out<[ItemsFriend], Error>) ->Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -22,17 +45,10 @@ class VKService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        SessionManager.custom.request(request).responseData{
-            response in
-            guard let data = response.value else {return}
-            let friends = try? JSONDecoder().decode(FriendModel.self, from: data).response?.items
-            self.saveRealmData.saveFriendData(friends: friends ?? [])
-            print(friends ?? "no friends")
-            completion(friends ?? [])
-            
-        }
+        loadData(request: request){ completion($0)}
+        
     }
-    func loadGroupsData(completion: @escaping ([ItemsGroup]) ->Void){
+    func loadGroupsData(completion: @escaping (Out<[ItemsGroup], Error>) ->Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -45,6 +61,8 @@ class VKService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
+        loadData(request: request){completion($0)}
+        /*
         SessionManager.custom.request(request).responseData{
             response in
             guard let data = response.value else{return}
@@ -53,8 +71,9 @@ class VKService {
             print(groups ?? "no groups")
             completion(groups ?? [])
         }
+ */
     }
-    func loadPhotosData(ownerId:Int,completion: @escaping ([ItemsPhotos]) -> Void){
+    func loadPhotosData(ownerId:Int,completion: @escaping (Out<[ItemsPhotos], Error>) -> Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -66,6 +85,8 @@ class VKService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
+        loadData(request: request){completion($0)}
+        /*
         SessionManager.custom.request(request).responseData{
             response in
             guard let data = response.value else{return}
@@ -74,8 +95,9 @@ class VKService {
             print(photos ?? "no photos")
             completion(photos ?? [])
         }
+ */
     }
-    func loadUserData(completion: @escaping ([ResponseUser])->Void){
+    func loadUserData(completion: @escaping ([ResponseUser]) ->Void) {
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -95,6 +117,7 @@ class VKService {
             print(response.value ?? "no users")
             completion(user ?? [])
         }
+ 
     }
     
 }

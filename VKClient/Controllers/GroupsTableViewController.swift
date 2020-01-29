@@ -10,17 +10,21 @@ import UIKit
 
 class GroupsTableViewController: UITableViewController {
     var vkService = VKService()
+    var saveRealmData = SaveRealmData()
  //   var groups:[GroupsModel] = []
    var groups = [ItemsGroup]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        vkService.loadGroupsData(){[weak self] groups in
-            self?.groups = groups
-            self?.tableView.reloadData()
-            
-            
+        vkService.loadGroupsData(){result in
+            switch result{
+            case .success(let groups):
+                self.groups = groups
+                self.tableView.reloadData()
+                self.saveRealmData.saveGroupData(groups: groups)
+            case .failure(let error):
+                print(error)
+            }
         }
-       
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

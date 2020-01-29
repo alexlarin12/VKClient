@@ -13,6 +13,7 @@
 		43061C9723AE6E6800D9A90D /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43061C9623AE6E6800D9A90D /* CustomSegue.swift */; };
 		43061C9923AE893000D9A90D /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43061C9823AE892F00D9A90D /* CustomInteractiveTransition.swift */; };
 		4342ACFE23D8B35100CF06E0 /* SaveRealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342ACFD23D8B35100CF06E0 /* SaveRealmData.swift */; };
+		4342AD0123DD749700CF06E0 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342AD0023DD749700CF06E0 /* CommonResponse.swift */; };
 		4342C60023D36BE600C944B2 /* PhotosModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342C5FF23D36BE600C944B2 /* PhotosModels.swift */; };
 		4345E7E223C9DB15002F50EC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345E7E123C9DB15002F50EC /* Session.swift */; };
 		4345E7E423C9DF34002F50EC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345E7E323C9DF34002F50EC /* MainViewController.swift */; };
@@ -76,6 +77,7 @@
 		43061C9623AE6E6800D9A90D /* CustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
 		43061C9823AE892F00D9A90D /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		4342ACFD23D8B35100CF06E0 /* SaveRealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRealmData.swift; sourceTree = "<group>"; };
+		4342AD0023DD749700CF06E0 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
 		4342C5FF23D36BE600C944B2 /* PhotosModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModels.swift; sourceTree = "<group>"; };
 		4345E7E123C9DB15002F50EC /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4345E7E323C9DF34002F50EC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				43A90C0423CF70C800C1B72A /* GroupModel.swift */,
 				43A90C0823CF70FB00C1B72A /* UserModel.swift */,
 				4342C5FF23D36BE600C944B2 /* PhotosModels.swift */,
+				4342AD0023DD749700CF06E0 /* CommonResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				43061C9023AE4FFF00D9A90D /* CustomPopAnimator.swift in Sources */,
 				4342ACFE23D8B35100CF06E0 /* SaveRealmData.swift in Sources */,
 				43A90C0523CF70C800C1B72A /* GroupModel.swift in Sources */,
+				4342AD0123DD749700CF06E0 /* CommonResponse.swift in Sources */,
 				437ABB8A23A17DC20001B3CB /* GradientView.swift in Sources */,
 				437ABB7A23A171350001B3CB /* GroupsTableViewController.swift in Sources */,
 				437ABB3F23A167750001B3CB /* AppDelegate.swift in Sources */,
