@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 import WebKit
+import SwiftKeychainWrapper
 extension LaunchViewController:WKNavigationDelegate{
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        // let session = Session.instance
-        // let dataSessionRealm = [DataSession]()
+      
         guard let url = navigationResponse.response.url, url.path == "/blank.html",
             let fragment = url.fragment else {
                 decisionHandler(.allow)
@@ -31,12 +31,17 @@ extension LaunchViewController:WKNavigationDelegate{
         }
         
         let token = params["access_token"]
+        KeychainWrapper.standard.set(token ?? "", forKey: "token")
         let userId = params["user_id"]
+        KeychainWrapper.standard.set(Int(userId ?? "") ?? 0, forKey: "id")
         print(token ?? "token is empty")
         print(userId ?? "")
         session.token = token ?? ""
         session.userId = Int(userId ?? "") ?? 0
-        performSegue(withIdentifier: "FromLaunchToFriends", sender: token)
+        let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
+        print(tokenFromKeychain ?? "")
+        
+        performSegue(withIdentifier: "FromLaunchToFriends", sender: tokenFromKeychain)
          decisionHandler(.cancel)
         
     }

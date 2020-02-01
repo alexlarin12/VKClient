@@ -9,8 +9,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    var vkService = VKService()
-    var user = [ResponseUser]()
+    var apiService = ApiService()
+    var useRealmData = UseRealmData()
+    var userRealm = [UserRealm]()
     @IBOutlet weak var MainNameLabel: UILabel!
     @IBOutlet weak var MainIdLabel: UILabel!
     @IBOutlet weak var MainImageView: CircleImageView!
@@ -26,17 +27,20 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vkService.loadUserData(){[weak self] user in
-            self?.user = user
-                for i in user{
-                    self?.MainNameLabel.text = i.firstName
-                    self?.MainIdLabel.text = i.lastName
-                    let avatar = i.photo50
-                    let urlAvatar = URL(string: avatar)!
-                    let dataAvatar = try? Data(contentsOf: urlAvatar)
-                    self?.MainImageView.image = UIImage(data: dataAvatar!)
-                }
+        apiService.loadUserData()
+        useRealmData.getUserData(){[weak self] userRealm in
+            self?.userRealm = userRealm
+            for i in userRealm{
+                self?.MainNameLabel.text = i.firstName
+                self?.MainIdLabel.text = i.lastName
+                let avatar = i.photo50
+                let urlAvatar = URL(string: avatar)!
+                let dataAvatar = try? Data(contentsOf: urlAvatar)
+                self?.MainImageView.image = UIImage(data: dataAvatar!)
+            }
         }
+    
+               
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         let changeColorNotification = Notification.Name("changeColorNotification")
         NotificationCenter.default.addObserver(self, selector: #selector(changeColor(notification:)), name: changeColorNotification, object: nil)

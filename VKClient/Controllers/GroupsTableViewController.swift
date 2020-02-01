@@ -9,54 +9,37 @@
 import UIKit
 
 class GroupsTableViewController: UITableViewController {
-    var vkService = VKService()
-    var saveRealmData = SaveRealmData()
- //   var groups:[GroupsModel] = []
-   var groups = [ItemsGroup]()
+    var apiService = ApiService()
+    var groupRealm = [GroupRealm]()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vkService.loadGroupsData(){result in
-            switch result{
-            case .success(let groups):
-                self.groups = groups
-                self.tableView.reloadData()
-                self.saveRealmData.saveGroupData(groups: groups)
-            case .failure(let error):
-                print(error)
-            }
+        apiService.loadGroupsData(){[weak self] groupRealm in
+            self?.groupRealm = groupRealm
+            self?.tableView.reloadData()
         }
     }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-       
         return 1
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return groups.count
+        return groupRealm.count
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as! GroupsCell
-        let avatar = groups[indexPath.row].photo50
+        let avatar = groupRealm[indexPath.row].photo50
         let urlAvatar = URL(string: avatar)!
         let dataAvatar = try? Data(contentsOf: urlAvatar)
-        
-            cell.GroupsNameLabel.text = groups[indexPath.row].name
+            cell.GroupsNameLabel.text = groupRealm[indexPath.row].name
             cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
-
         return cell
     }
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            groups.remove(at: indexPath.row)
+            groupRealm.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
     @IBAction func addGroup(segue: UIStoryboardSegue){
      /*  if segue.identifier == "addGroup"{
             guard let allGroupsTableViewController = segue.source as? AllGroupsTableViewController
@@ -75,6 +58,4 @@ class GroupsTableViewController: UITableViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
-    
-
 }
