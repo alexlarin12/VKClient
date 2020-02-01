@@ -15,12 +15,20 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vkService.loadFriendsData(){ [weak self] friends in
-            self?.friends = friends
-            self?.tableView.reloadData()
-            print(friends.count)
-            
+        vkService.loadFriendsData(){ result in
+            switch result{
+            case .success(let friends):
+                self.friends = friends
+                self.tableView.reloadData()
+                self.saveRealmData.saveFriendData(friends: friends)
+                print(friends.count)
+            case .failure(let error):
+                print(error)
+            }
         }
+       //  self.saveRealmData.saveFriendData(friends: friends)
+        
+        
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         
