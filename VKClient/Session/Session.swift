@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 class Session {
    static let instance = Session()
     private init(){}

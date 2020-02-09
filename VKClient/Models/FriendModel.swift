@@ -8,16 +8,22 @@
 
 import UIKit
 import RealmSwift
-
-class ItemsFriend:Object, Decodable {
-   @objc dynamic var id:Int = 0
-   @objc dynamic var firstName:String = ""
-   @objc dynamic var lastName:String = ""
-   @objc dynamic var isClosed:Bool = true
-   @objc dynamic var canAccessClosed:Bool = true
-   @objc dynamic var photo50:String = ""
-   @objc dynamic var online:Int = 0
-   @objc dynamic var trackCode:String = ""
+class FriendModel: Decodable {
+    var response:ResponseFriend?
+}
+class ResponseFriend: Decodable{
+    var count:Int
+    var items:[ItemsFriend]?
+}
+class ItemsFriend: Decodable {
+    var id:Int = 0
+    var firstName:String = ""
+    var lastName:String = ""
+    var isClosed:Bool? = true
+    var canAccessClosed:Bool? = true
+    var photo50:String = ""
+    var online:Int = 0
+    var trackCode:String = ""
     enum ItemsFriendKeys:String, CodingKey {
         case id
         case firstName = "first_name"
