@@ -35,12 +35,10 @@ extension LaunchViewController:WKNavigationDelegate{
         let userId = params["user_id"]
         KeychainWrapper.standard.set(Int(userId ?? "") ?? 0, forKey: "id")
         print(token ?? "token is empty")
-        print(userId ?? "")
         session.token = token ?? ""
         session.userId = Int(userId ?? "") ?? 0
         let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
-        print(tokenFromKeychain ?? "")
-        
+    
         performSegue(withIdentifier: "FromLaunchToFriends", sender: tokenFromKeychain)
          decisionHandler(.cancel)
         

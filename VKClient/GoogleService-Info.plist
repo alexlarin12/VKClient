@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>762442883189-sdvj2rotu6tikeagp9bmsvk2ph1bi9gf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.762442883189-sdvj2rotu6tikeagp9bmsvk2ph1bi9gf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAVF_4i0Ei2jsLdtSmnW7kONCWfuMT1bNc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>762442883189</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>AlexLarin.VKClient</string>
+	<key>PROJECT_ID</key>
+	<string>vkclient-615ed</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vkclient-615ed.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:762442883189:ios:87978be24367b56f90183c</string>
+	<key>DATABASE_URL</key>
+	<string>https://vkclient-615ed.firebaseio.com</string>
+</dict>
+</plist>

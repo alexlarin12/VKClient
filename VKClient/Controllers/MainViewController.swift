@@ -10,8 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     var apiService = ApiService()
-    var useRealmData = UseRealmData()
     var userRealm = [UserRealm]()
+    var database = UserRepository()
     @IBOutlet weak var MainNameLabel: UILabel!
     @IBOutlet weak var MainIdLabel: UILabel!
     @IBOutlet weak var MainImageView: CircleImageView!
@@ -27,17 +27,17 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        apiService.loadUserData()
-        useRealmData.getUserData(){[weak self] userRealm in
-            self?.userRealm = userRealm
-            for i in userRealm{
-                self?.MainNameLabel.text = i.firstName
-                self?.MainIdLabel.text = i.lastName
-                let avatar = i.photo50
-                let urlAvatar = URL(string: avatar)!
-                let dataAvatar = try? Data(contentsOf: urlAvatar)
-                self?.MainImageView.image = UIImage(data: dataAvatar!)
-            }
+        apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
+            self?.database.saveUserData(user: user)
+        }
+        userRealm = database.getUserData()
+        userRealm.forEach { user in
+            MainNameLabel.text = user.firstName
+            MainIdLabel.text = user.lastName
+            let avatar = user.photo50
+            let urlAvatar = URL(string: avatar)!
+            let dataAvatar = try? Data(contentsOf: urlAvatar)
+            MainImageView.image = UIImage(data: dataAvatar!)
         }
     
                

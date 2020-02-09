@@ -27,9 +27,5 @@ class CustomNavigationViewController: UINavigationController, UINavigationContro
             return CustomPopAnimator()
         }
         return nil
-        
     }
-    
-    
-    
 }

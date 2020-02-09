@@ -8,13 +8,7 @@
 
 import UIKit
 import RealmSwift
-class FriendModel: Decodable {
-    var response:ResponseFriend?
-}
-class ResponseFriend: Decodable{
-    var count:Int
-    var items:[ItemsFriend]?
-}
+
 class ItemsFriend: Decodable {
     var id:Int = 0
     var firstName:String = ""
