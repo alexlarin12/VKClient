@@ -7,30 +7,73 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
     var apiService = ApiService()
     var groupRealm = [GroupRealm]()
+    var database = GroupsRepository()
+    
+    var groupsResult: Results<GroupRealm>?
+    var token: NotificationToken?
+    
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        apiService.loadGroupsData(){[weak self] groupRealm in
-            self?.groupRealm = groupRealm
-            self?.tableView.reloadData()
+        
+        self.showGroups()
+        apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId){ result in
+            switch result{
+            case .success(let groups):
+                self.database.saveGroupData(groups: groups)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
+    
+    func showGroups(){
+        do{
+            groupsResult = try database.getGroupData()
+            token = groupsResult?.observe { [weak self] results in
+                switch results{
+                case .error(let error):
+                    print(error)
+                case .initial:
+                    self?.tableView.reloadData()
+                case let .update(_, deletions, insertions, modifications):
+                    self?.tableView.beginUpdates()
+                    self?.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .none)
+                    self?.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .none)
+                    self?.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .none)
+                    self?.tableView.endUpdates()
+                }
+            }
+                
+        }catch{
+            print(error)
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupRealm.count
+        return groupsResult?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as! GroupsCell
-        let avatar = groupRealm[indexPath.row].photo50
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as? GroupsCell,
+        let group = groupsResult?[indexPath.row] else {
+            return UITableViewCell()
+        }
+        let avatar = group.photo50
         let urlAvatar = URL(string: avatar)!
         let dataAvatar = try? Data(contentsOf: urlAvatar)
-            cell.GroupsNameLabel.text = groupRealm[indexPath.row].name
+            cell.GroupsNameLabel.text = group.name
             cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
         return cell
     }
@@ -56,6 +99,7 @@ class GroupsTableViewController: UITableViewController {
         }
 */
     }
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
 }

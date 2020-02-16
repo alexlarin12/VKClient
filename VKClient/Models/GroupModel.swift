@@ -8,13 +8,7 @@
 
 import UIKit
 import RealmSwift
-class GroupModel: Decodable {
-    var response:ResponseGroup?
-}
-class ResponseGroup: Decodable{
-    var count:Int
-    var items:[ItemsGroup]?
-}
+
 class ItemsGroup: Decodable{
      var id:Int = 0
      var name:String = ""
