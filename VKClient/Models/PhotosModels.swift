@@ -14,11 +14,12 @@ class ItemsPhotos: Decodable{
     var id:Int = 0
     var albumId:Int = 0
     var ownerId:Int = 0
+    var type:String = ""
     var url:String = ""
-    var text:String = ""
     var userLikes:Int = 0
     var countLikes:Int = 0
     var countReposts:Int = 0
+    var text:String = ""
     var realOffset:Int = 0
     enum ItemsPhotosKeys:String, CodingKey {
         case id
@@ -30,8 +31,9 @@ class ItemsPhotos: Decodable{
         case reposts
         case realOffset = "real_offset"
     }
-    enum SizesPhotosKeys:String, CodingKey {
-            case url
+    enum SizesPhotosKeys: String, CodingKey {
+        case type
+        case url
     }
     enum LikesPhotosKeys:String, CodingKey {
         case userLikes = "user_likes"
@@ -49,11 +51,12 @@ class ItemsPhotos: Decodable{
         self.albumId = try values.decode(Int.self, forKey: .albumId)
         self.ownerId = try values.decode(Int.self, forKey: .ownerId)
         self.text = try values.decode(String.self, forKey: .text)
-       
+        //  self.realOffset = try values.decode(Int.self, forKey: .realOffset)
+        
         var sizesValues = try values.nestedUnkeyedContainer(forKey: .sizes)
         let firstSizesValues = try sizesValues.nestedContainer(keyedBy: SizesPhotosKeys.self)
+        self.type = try firstSizesValues.decode(String.self, forKey: .type)
         self.url = try firstSizesValues.decode(String.self, forKey: .url)
- 
         
         let likesValues = try values.nestedContainer(keyedBy: LikesPhotosKeys.self, forKey: .likes)
         self.userLikes = try likesValues.decode(Int.self, forKey: .userLikes)
@@ -61,7 +64,9 @@ class ItemsPhotos: Decodable{
         
         let repostsValues = try values.nestedContainer (keyedBy:RepostsPhotosKeys.self, forKey: .reposts)
         self.countReposts = try! repostsValues.decode(Int.self, forKey: .countReposts)
-
+        
     }
-    
+   
 }
+
+   

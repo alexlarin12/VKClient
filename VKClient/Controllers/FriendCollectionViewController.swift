@@ -72,7 +72,7 @@ class FriendCollectionViewController: UICollectionViewController {
         let photo = photos.url
         let urlPhoto = URL(string: photo)!
         let dataPhoto = try? Data(contentsOf: urlPhoto)
-            cell.LikeCountLabel.text = "\(photos.countLikes)"
+        cell.LikeCountLabel.text = "\(photos.countLikes)"
             cell.FriendImageView.image = UIImage(data: dataPhoto!)
         return cell
     }
