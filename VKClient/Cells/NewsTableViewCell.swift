@@ -18,6 +18,9 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var NewsImageView: UIImageView!
     @IBOutlet weak var LikeButtonView: UIView!
     @IBOutlet weak var NewsCountLabel: UILabel!
+    @IBOutlet weak var NewsComments: UIButton!
+    @IBOutlet weak var NewsReposts: UIButton!
+    @IBOutlet weak var NewsViews: UIButton!
     
     @IBAction func NewsLikeButtonTap(_ sender: LikeButtonRed) {
         likeButton += 1

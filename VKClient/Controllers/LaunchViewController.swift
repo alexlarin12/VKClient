@@ -31,7 +31,7 @@ class LaunchViewController: UIViewController {
             URLQueryItem(name: "client_id", value: "7281894"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "262150"),
+            URLQueryItem(name: "scope", value:"wall,friends,photos,groups"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "v", value: "5.103")
         ]

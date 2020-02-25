@@ -75,7 +75,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" id="EVF-vh-b2C">
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" placeholder="Поиск" id="EVF-vh-b2C">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.29811492560000002" green="0.44486427309999999" blue="0.76866221430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -271,15 +271,17 @@
         <!--My Groups-->
         <scene sceneID="RXK-Jq-tjf">
             <objects>
-                <tableViewController id="8hA-u8-ehs" customClass="GroupsTableViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="8hA-u8-ehs" customClass="GroupsTableViewController" customModule="VKClient" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VqN-L7-cxR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" searchBarStyle="minimal" id="OdK-5f-ovo">
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" placeholder="Поиск" id="OdK-5f-ovo">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.31980133059999999" green="0.44665658470000003" blue="0.72552120689999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="barTintColor" red="0.27706781029999999" green="0.3991729617" blue="0.68238359689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
@@ -342,10 +344,10 @@
                                                     <point key="value" x="0.0" y="1"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                                    <color key="value" red="0.31032857860000002" green="0.46794679010000001" blue="0.85644272210000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="value" red="0.35895336319774956" green="0.49534546733950247" blue="0.82341056034482762" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                                    <color key="value" red="0.37455224990000002" green="0.49726605419999997" blue="0.79218983649999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="value" red="0.25992873309999998" green="0.4046348333" blue="0.74513345959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -523,7 +525,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pt9-QW-sXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="1089"/>
+            <point key="canvasLocation" x="3201" y="1088"/>
         </scene>
         <!--News-->
         <scene sceneID="r9u-Hj-atK">
@@ -547,11 +549,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vAc-6d-UkV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="News" id="bEZ-Bm-vyl">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="6SI-it-SYS">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <navigationItem key="navigationItem" title="News" id="t4y-j3-9ka">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mYU-ht-dfm">
                             <connections>
-                                <segue destination="NzJ-F8-XQ0" kind="unwind" unwindAction="UnwindSegueWithUnwindSegue:" id="UZc-3G-ZHq"/>
+                                <segue destination="XFt-wF-zFu" kind="show" id="9D1-e3-xdu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -560,9 +561,37 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Oy-Ba-Xoc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NzJ-F8-XQ0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2308" y="1092"/>
+            <point key="canvasLocation" x="4123" y="1088"/>
+        </scene>
+        <!--News version-->
+        <scene sceneID="XFo-6h-JbB">
+            <objects>
+                <tableViewController id="XFt-wF-zFu" customClass="NewsTableViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pdU-lf-NQc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="News" id="cVn-cg-1Lb" customClass="NewsCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cVn-cg-1Lb" id="jsJ-da-Bat">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XFt-wF-zFu" id="TzB-oz-SrD"/>
+                            <outlet property="delegate" destination="XFt-wF-zFu" id="9hp-qd-7pj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="News version" id="j0P-9N-NUp"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lvm-I8-ZYg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4933" y="1089"/>
         </scene>
         <!--MAIN-->
         <scene sceneID="WhS-0e-Xk7">
@@ -585,7 +614,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Tc-aP-Co5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368" y="1784"/>
+            <point key="canvasLocation" x="3201" y="1784"/>
         </scene>
         <!--Main-->
         <scene sceneID="Vbm-m7-wK6">
@@ -717,7 +746,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCu-mn-NYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1ht-CF-jxf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2307" y="1784"/>
+            <point key="canvasLocation" x="4123" y="1784"/>
         </scene>
         <!--GROUPS-->
         <scene sceneID="H90-o3-OdC">

@@ -26,6 +26,7 @@ class ResponseUser: Decodable{
         case canAccessClosed = "can_access_closed"
         case photo50 = "photo_50"
     }
+    
     convenience required init(from decoder:Decoder) throws{
         self.init()
         let values = try decoder.container(keyedBy: ResponseUserKeys.self)
@@ -36,4 +37,5 @@ class ResponseUser: Decodable{
         self.canAccessClosed = try values.decode(Bool.self, forKey: .canAccessClosed)
         self.photo50 = try values.decode(String.self, forKey: .photo50)
     }
+ 
 }

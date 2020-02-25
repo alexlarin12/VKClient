@@ -52,7 +52,7 @@ class FriendsTableViewController: UITableViewController {
                // Получаем список всех друзей
                self.friendsResult = try database.getFriendData()
                self.makeSortedSections()
-            self.tableView.reloadData()
+               self.tableView.reloadData()
            } catch {
             print(error)
             

@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ItemsGroup: Decodable{
      var id:Int = 0
      var name:String = ""
-     var screenName:String = ""
-     var isClosed:Int = 0
+     var screenName:String? = ""
+     var isClosed:Int? = 0
      var type:String = ""
      var isAdmin:Int = 0
      var isMember:Int = 0
@@ -37,6 +36,7 @@ class ItemsGroup: Decodable{
         case photo100 = "photo_100"
         case photo200 = "photo_200"
     }
+    
     convenience required init(from decoder:Decoder)throws {
         self.init()
         let values = try decoder.container(keyedBy: ItemsGroupKeys.self)
@@ -53,4 +53,5 @@ class ItemsGroup: Decodable{
         self.photo100 = try values.decode(String.self, forKey: .photo100)
         self.photo200 = try values.decode(String.self, forKey: .photo200)
     }
+ 
 }

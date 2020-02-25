@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ItemsFriend: Decodable {
     var id:Int = 0
@@ -28,6 +27,7 @@ class ItemsFriend: Decodable {
         case online
         case trackCode = "track_code"
     }
+   
     convenience required init(from decoder:Decoder) throws{
         self.init()
         let values = try decoder.container(keyedBy: ItemsFriendKeys.self)
@@ -41,5 +41,5 @@ class ItemsFriend: Decodable {
         self.trackCode = try values.decode(String.self, forKey: .trackCode)
         
     }
-    
+   
 }

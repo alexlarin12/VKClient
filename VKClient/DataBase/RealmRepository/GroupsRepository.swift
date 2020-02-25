@@ -21,12 +21,12 @@ class GroupsRepository{
                 let groupRealm = GroupRealm()
                 groupRealm.id = group.id
                 groupRealm.name = group.name
-                groupRealm.screenName = group.screenName
-                groupRealm.isClosed = group.isClosed
+                groupRealm.screenName = group.screenName ?? ""
+                groupRealm.isClosed = group.isClosed ?? 0
                 groupRealm.type = group.type
                 groupRealm.isAdmin = group.isAdmin
                 groupRealm.isMember = group.isMember
-                groupRealm.isAdvertiser = group.isAdvertiser
+                groupRealm.isAdvertiser = group.isAdvertiser 
                 groupRealm.site = group.site
                 groupRealm.photo50 = group.photo50
                 groupRealm.photo100 = group.photo100

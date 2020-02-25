@@ -34,7 +34,8 @@ extension LaunchViewController:WKNavigationDelegate{
         KeychainWrapper.standard.set(token ?? "", forKey: "token")
         let userId = params["user_id"]
         KeychainWrapper.standard.set(Int(userId ?? "") ?? 0, forKey: "id")
-        print(token ?? "token is empty")
+        print("token = \(token ?? "token is empty")")
+        print("user ID = \(userId ?? "user id is eppty")")
         session.token = token ?? ""
         session.userId = Int(userId ?? "") ?? 0
         let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
