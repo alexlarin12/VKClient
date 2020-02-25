@@ -14,6 +14,7 @@ class PhotosRealm:Object{
     @objc dynamic var albumId:Int = 0
     @objc dynamic var ownerId:Int = 0
     @objc dynamic var url:String = ""
+    @objc dynamic var type:String = ""
     @objc dynamic var text:String = ""
     @objc dynamic var userLikes:Int = 0
     @objc dynamic var countLikes:Int = 0
@@ -22,6 +23,6 @@ class PhotosRealm:Object{
     
      override class func primaryKey() -> String? {
                  return "id"
-             }
-    
+    }
+ 
 }

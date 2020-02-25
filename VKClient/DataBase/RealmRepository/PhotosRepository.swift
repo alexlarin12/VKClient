@@ -22,6 +22,7 @@ class PhotosRepository{
                    photosRealm.albumId = photo.albumId
                    photosRealm.ownerId = photo.ownerId
                    photosRealm.url = photo.url
+                   photosRealm.type = photo.type
                    photosRealm.text = photo.text
                    photosRealm.userLikes = photo.userLikes
                    photosRealm.countLikes = photo.countLikes

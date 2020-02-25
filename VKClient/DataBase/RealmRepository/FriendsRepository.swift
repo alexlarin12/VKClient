@@ -18,7 +18,7 @@ class FriendsRepositiry{
                let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
                let realm = try Realm(configuration: config)
                realm.beginWrite()
-           // realm.deleteAll()
+         //   realm.deleteAll()
                   var friendsToAdd = [FriendRealm]()
                   friends.forEach { friend in
                       let friendRealm = FriendRealm()
@@ -47,5 +47,13 @@ class FriendsRepositiry{
            } catch  {
                throw error
            }
+    }
+    func searchFriends(lastName: String) throws -> Results<FriendRealm> {
+            do {
+                 let realm = try Realm()
+                 return realm.objects(FriendRealm.self).filter("lastName CONTAINS[c] %@", lastName)
+            } catch {
+                 throw error
+            }
     }
 }

@@ -17,10 +17,11 @@ class GroupsTableViewController: UITableViewController {
     var groupsResult: Results<GroupRealm>?
     var token: NotificationToken?
     
- 
+    @IBOutlet weak var GroupSearchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        GroupSearchBar.delegate = self
         self.showGroups()
         apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId){ result in
             switch result{
@@ -103,3 +104,4 @@ class GroupsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
 }
+
