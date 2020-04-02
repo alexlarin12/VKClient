@@ -1,28 +1,47 @@
 //
-//  NewsModel.swift
+//  NewsModel2.swift
 //  VKClient
 //
-//  Created by Alex Larin on 24.02.2020.
+//  Created by Alex Larin on 27.02.2020.
 //  Copyright © 2020 Alex Larin. All rights reserved.
 //
 
 import Foundation
-// MARK: - News
-struct News: Decodable {
+struct NewsModel: Decodable {
+    let response: ItemsNews
+}
+
+
+struct ItemsNews: Decodable {
+    let items: [ResponseItem]
+    let profiles: [Profiles]
+    let groups: [Groups]
+    let nextFrom: String
+
+    enum CodingKeys: String, CodingKey {
+        case items, profiles, groups
+        case nextFrom = "next_from"
+    }
+}
+struct ResponseItem: Decodable {
+    let canDoubtCategory, canSetCategory: Bool?
     let type: String
     let sourceID, date: Int
-    let postType, text: String
-    let markedAsAds: Int
-    let attachments: [Attachment]?
-    let postSource: PostSource
-    let comments: Comments
-    let likes: Likes
-    let reposts: Reposts
-    let views: Views
-    let isFavorite: Bool
+    let postType, text: String?
+    let markedAsAds: Int?
+ //   let attachments: [NewsPhotoAttachments]?
+    var photos: [Photos]
+    let postSource: PostSource?
+    let comments: Comments?
+    let likes: Likes?
+    let reposts: Reposts?
+    let views: Views?
+    let isFavorite: Bool?
     let postID: Int
 
     enum CodingKeys: String, CodingKey {
+        case canDoubtCategory = "can_doubt_category"
+        case canSetCategory = "can_set_category"
         case type
         case sourceID = "source_id"
         case date
@@ -35,19 +54,59 @@ struct News: Decodable {
         case isFavorite = "is_favorite"
         case postID = "post_id"
     }
+     enum AttachmentsKeys: String, CodingKey {
+           case type
+    }
+    
+    init(from decoder:Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.canDoubtCategory = try container.decode(Bool.self, forKey: .canDoubtCategory)
+        self.canSetCategory = try container.decode(Bool.self, forKey: .canSetCategory)
+        self.type = try container.decode(String.self, forKey: .type)
+        self.sourceID = try container.decode(Int.self, forKey: .sourceID)
+        self.date = try container.decode(Int.self, forKey: .date)
+        self.postType = try container.decode(String.self, forKey: .postType)
+        self.text = try container.decode(String.self, forKey: .text)
+        self.markedAsAds = try container.decode(Int.self, forKey: .markedAsAds)
+        self.isFavorite = try container.decode(Bool.self, forKey: .isFavorite)
+        self.postID = try container.decode(Int.self, forKey: .postID)
+        self.postSource = try? container.decode(PostSource.self, forKey: .postSource)
+        self.comments = try? container.decode(Comments.self, forKey: .comments)
+        self.likes = try? container.decode(Likes.self, forKey: .likes)
+        self.reposts = try? container.decode(Reposts.self, forKey: .reposts)
+        self.views = try? container.decode(Views.self, forKey: .views)
+        
+        if let attachment = try? container.decode([NewsPhotoAttachments?].self, forKey: .attachments){
+            self.photos = attachment.compactMap { $0?.photo }
+        }else{
+            self.photos = []
+            
+        }
+        /*
+        if var newsAttachmentsArray = try? container.nestedUnkeyedContainer(forKey: .attachments){
+            while !newsAttachmentsArray.isAtEnd {
+                let singleAttachmentContainer = try newsAttachmentsArray.nestedContainer(keyedBy: AttachmentsKeys.self)
+                let attachmentType = try singleAttachmentContainer.decode(String.self, forKey: .type)
+                print(attachmentType)
+            }
+        }*/
+    }
 }
-
-// MARK: - Attachment
-struct Attachment: Decodable {
-    let type: AttachmentType
-    let photo: AttPhoto?
-    let video: Video?
+struct Attachments: Decodable {
+    let type: String
+    let photo: Photos
+    
+  /*  enum CodingKeys: String, CodingKey {
+        case type
+        case photo
+    }*/
 }
-
-// MARK: - Photo
-struct AttPhoto: Decodable {
+struct NewsPhotoAttachments: Decodable {
+    var photo: Photos
+}
+struct Photos: Decodable {
     let id, albumID, ownerID, userID: Int
-    let sizes: [AttSize]
+    let sizes: [Size]
     let text: String
     let date: Int
     let accessKey: String
@@ -61,92 +120,36 @@ struct AttPhoto: Decodable {
         case accessKey = "access_key"
     }
 }
-
-// MARK: - Size
-struct AttSize: Decodable {
-    let type: SizeType?
+struct Size: Decodable {
+    let type: TypeEnum
     let url: String
     let width, height: Int
-    let withPadding: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case url, width, height
-        case withPadding = "with_padding"
-    }
 }
-
-enum SizeType: String, Decodable {
+enum TypeEnum: String, Decodable {
     case m = "m"
     case o = "o"
     case p = "p"
     case q = "q"
     case r = "r"
     case s = "s"
+    case w = "w"
     case x = "x"
     case y = "y"
     case z = "z"
-    case w = "w"
 }
-
-enum AttachmentType: String, Decodable {
-    case photo = "photo"
-    case video = "video"
-}
-
-// MARK: - Video
-struct Video: Decodable {
-    let accessKey: String
-    let canComment, canLike, canRepost, canSubscribe: Int
-    let canAddToFaves, canAdd, comments, date: Int
-    let videoDescription: String
-    let duration: Int
-    let image: [Size]
-    let id, ownerID: Int
-    let title: String
-    let isFavorite: Int
-    let trackCode: String
+struct PostSource: Decodable {
     let type: String
-    let views, localViews: Int
-    let platform: String
-
-    enum CodingKeys: String, CodingKey {
-        case accessKey = "access_key"
-        case canComment = "can_comment"
-        case canLike = "can_like"
-        case canRepost = "can_repost"
-        case canSubscribe = "can_subscribe"
-        case canAddToFaves = "can_add_to_faves"
-        case canAdd = "can_add"
-        case comments, date
-        case videoDescription = "description"
-        case duration, image, id
-        case ownerID = "owner_id"
-        case title
-        case isFavorite = "is_favorite"
-        case trackCode = "track_code"
-        case type
-        case views
-        case localViews = "local_views"
-        case platform
-    }
 }
-
-// MARK: - Comments
 struct Comments: Decodable {
-    let count, canPost: Int
-    let groupsCanPost: Bool
+    var count, canPost: Int
 
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
-        case groupsCanPost = "groups_can_post"
     }
 }
-
-// MARK: - Likes
 struct Likes: Decodable {
-    let count, userLikes, canLike, canPublish: Int
+    var count, userLikes, canLike, canPublish: Int
 
     enum CodingKeys: String, CodingKey {
         case count
@@ -155,13 +158,6 @@ struct Likes: Decodable {
         case canPublish = "can_publish"
     }
 }
-
-// MARK: - PostSource
-struct PostSource: Decodable {
-    let type: String
-}
-
-// MARK: - Reposts
 struct Reposts: Decodable {
     let count, userReposted: Int
 
@@ -170,23 +166,22 @@ struct Reposts: Decodable {
         case userReposted = "user_reposted"
     }
 }
-
-// MARK: - Views
 struct Views: Decodable {
     let count: Int
 }
 
-// MARK: - Profile
-struct Profile: Decodable {
+
+struct Profiles: Decodable {
     let id: Int
     let firstName, lastName: String
-    let isClosed, canAccessClosed: Bool
+    let isClosed, canAccessClosed: Bool?
     let sex: Int
-    let screenName: String
+    let screenName: String?
     let photo50, photo100: String
-    let online, onlineMobile: Int
+    let online: Int
     let onlineInfo: OnlineInfo
-
+    let deactivated: String?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
@@ -198,18 +193,42 @@ struct Profile: Decodable {
         case photo50 = "photo_50"
         case photo100 = "photo_100"
         case online
-        case onlineMobile = "online_mobile"
         case onlineInfo = "online_info"
+        case deactivated
     }
 }
-
-// MARK: - OnlineInfo
 struct OnlineInfo: Decodable {
-    let visible, isOnline, isMobile: Bool
+    let visible: Bool
+    let lastSeen, appID: Int?
+    let isMobile: Bool?
 
     enum CodingKeys: String, CodingKey {
         case visible
-        case isOnline = "is_online"
+        case lastSeen = "last_seen"
+        case appID = "app_id"
         case isMobile = "is_mobile"
+    }
+}
+struct Groups: Decodable {
+    let id: Int
+    let name:String
+    let screenName: String
+    let isClosed: Int
+    let type: String
+    let isAdmin, isMember, isAdvertiser: Int
+    let photo50, photo100, photo200: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name = "name"
+        case screenName = "screen_name"
+        case isClosed = "is_closed"
+        case type
+        case isAdmin = "is_admin"
+        case isMember = "is_member"
+        case isAdvertiser = "is_advertiser"
+        case photo50 = "photo_50"
+        case photo100 = "photo_100"
+        case photo200 = "photo_200"
     }
 }
