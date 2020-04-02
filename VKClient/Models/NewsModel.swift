@@ -7,30 +7,31 @@
 //
 
 import Foundation
+import Kingfisher
+
 struct NewsModel: Decodable {
     let response: ItemsNews
 }
-
-
 struct ItemsNews: Decodable {
     let items: [ResponseItem]
     let profiles: [Profiles]
     let groups: [Groups]
     let nextFrom: String
-
     enum CodingKeys: String, CodingKey {
         case items, profiles, groups
         case nextFrom = "next_from"
     }
 }
 struct ResponseItem: Decodable {
-    let canDoubtCategory, canSetCategory: Bool?
+    let canDoubtCategory: Bool?
+    let canSetCategory: Bool?
     let type: String
     let sourceID, date: Int
     let postType, text: String?
     let markedAsAds: Int?
- //   let attachments: [NewsPhotoAttachments]?
-    var photos: [Photos]
+    var photos: [Photos]?
+    var links: [Link]?
+    var videos: [Video]?
     let postSource: PostSource?
     let comments: Comments?
     let likes: Likes?
@@ -38,7 +39,6 @@ struct ResponseItem: Decodable {
     let views: Views?
     let isFavorite: Bool?
     let postID: Int
-
     enum CodingKeys: String, CodingKey {
         case canDoubtCategory = "can_doubt_category"
         case canSetCategory = "can_set_category"
@@ -57,11 +57,10 @@ struct ResponseItem: Decodable {
      enum AttachmentsKeys: String, CodingKey {
            case type
     }
-    
     init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.canDoubtCategory = try container.decode(Bool.self, forKey: .canDoubtCategory)
-        self.canSetCategory = try container.decode(Bool.self, forKey: .canSetCategory)
+        self.canDoubtCategory = try? container.decode(Bool.self, forKey: .canDoubtCategory)
+        self.canSetCategory = try? container.decode(Bool.self, forKey: .canSetCategory)
         self.type = try container.decode(String.self, forKey: .type)
         self.sourceID = try container.decode(Int.self, forKey: .sourceID)
         self.date = try container.decode(Int.self, forKey: .date)
@@ -75,31 +74,47 @@ struct ResponseItem: Decodable {
         self.likes = try? container.decode(Likes.self, forKey: .likes)
         self.reposts = try? container.decode(Reposts.self, forKey: .reposts)
         self.views = try? container.decode(Views.self, forKey: .views)
-        
+       /*
+        if let attachment = try? container.decode([NewsLinkAttachments?].self, forKey: .attachments){
+            self.links = attachment.compactMap { $0?.link }
+            print("link\(attachment)")
+        }else{
+            self.links = []
+        }
+         if let attachment = try? container.decode([NewsVideoAttachments?].self, forKey: .attachments){
+                       self.videos = attachment.compactMap {$0?.video}
+                   print(attachment)
+                   }else{
+                       self.videos = []
+                   }
         if let attachment = try? container.decode([NewsPhotoAttachments?].self, forKey: .attachments){
             self.photos = attachment.compactMap { $0?.photo }
         }else{
             self.photos = []
-            
-        }
-        /*
+        }*/
         if var newsAttachmentsArray = try? container.nestedUnkeyedContainer(forKey: .attachments){
             while !newsAttachmentsArray.isAtEnd {
                 let singleAttachmentContainer = try newsAttachmentsArray.nestedContainer(keyedBy: AttachmentsKeys.self)
                 let attachmentType = try singleAttachmentContainer.decode(String.self, forKey: .type)
                 print(attachmentType)
+                switch attachmentType {
+                case "photo":
+                    let attachment = try? container.decode([NewsPhotoAttachments].self,forKey: .attachments)
+                    self.photos = attachment?.compactMap { $0.photo } ?? []
+                   // print(photos ?? [])
+                case "link":
+                    let attachmentLink = try? container.decode([NewsLinkAttachments].self, forKey: .attachments)
+                    self.links = attachmentLink?.compactMap { $0.link} ?? []
+                   // print(links ?? [])
+                case "video":
+                    let attachmentVideo = try? container.decode([NewsVideoAttachments].self, forKey: .attachments)
+                    self.videos = attachmentVideo?.compactMap { $0.video } ?? []
+                   // print(videos ?? [])
+                default: print("default")
+                }
             }
-        }*/
+        }
     }
-}
-struct Attachments: Decodable {
-    let type: String
-    let photo: Photos
-    
-  /*  enum CodingKeys: String, CodingKey {
-        case type
-        case photo
-    }*/
 }
 struct NewsPhotoAttachments: Decodable {
     var photo: Photos
@@ -109,15 +124,12 @@ struct Photos: Decodable {
     let sizes: [Size]
     let text: String
     let date: Int
-    let accessKey: String
-
     enum CodingKeys: String, CodingKey {
         case id
         case albumID = "album_id"
         case ownerID = "owner_id"
         case userID = "user_id"
         case sizes, text, date
-        case accessKey = "access_key"
     }
 }
 struct Size: Decodable {
@@ -136,6 +148,79 @@ enum TypeEnum: String, Decodable {
     case x = "x"
     case y = "y"
     case z = "z"
+}
+// LINK
+struct NewsLinkAttachments: Decodable {
+    var link: Link?
+}
+struct Link: Decodable {
+    var url: String?
+    var photo: LinkPhoto?
+    enum CodingKeys: String, CodingKey {
+        case photo = "photo"
+        case url
+    }
+}
+struct LinkPhoto: Decodable {
+    let sizes: [LinkSize]
+
+    enum CodingKeys: String, CodingKey {
+        case sizes = "sizes"
+    }
+}
+struct LinkSize: Decodable {
+    let type: TypeEnum
+    let url: String
+    let width: Int
+    let height: Int
+}
+// ВИДЕО
+struct NewsVideoAttachments: Decodable {
+    var video: Video
+}
+struct Video: Decodable {
+  /*  let accessKey: String
+    let canComment, canLike, canReposts, canSubscribe, canAddToFaves, canAdd, comments, date: Int
+    let description: String
+    let duration: Int */
+    var firstFrame: [FirstFrameVideo]?
+    var image: [ImageVideo]?
+    enum CodingKeys: String, CodingKey {
+      /*  case accessKey = "access_key"
+        case canComment = "can_comment"
+        case canLike = "can_like"
+        case canReposts = "can_reposts"
+        case canSubscribe = "can_subscribe"
+        case canAddToFaves = "can_add_to_faves"
+        case canAdd = "can_add"
+        case comments
+        case date
+        case description
+        case duration */
+        case image
+        case firstFrame = "first_frame"
+    }
+}
+struct ImageVideo: Decodable {
+    let height: height
+    let url: String
+    let width: Int
+}
+enum height: Int, Decodable {
+    case h96 = 96
+    case h120 = 120
+    case h240 = 240
+    case h450 = 450
+    case h720 = 720
+    case h320 = 320
+    case h1024 = 1024
+    case h4096 = 4096
+    
+}
+struct FirstFrameVideo: Decodable {
+    let height: Int
+    let url: String
+    let width: Int
 }
 struct PostSource: Decodable {
     let type: String
@@ -169,8 +254,6 @@ struct Reposts: Decodable {
 struct Views: Decodable {
     let count: Int
 }
-
-
 struct Profiles: Decodable {
     let id: Int
     let firstName, lastName: String
@@ -181,7 +264,6 @@ struct Profiles: Decodable {
     let online: Int
     let onlineInfo: OnlineInfo
     let deactivated: String?
-    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
@@ -215,9 +297,10 @@ struct Groups: Decodable {
     let screenName: String
     let isClosed: Int
     let type: String
-    let isAdmin, isMember, isAdvertiser: Int
+    let isAdmin: Int?
+    let isMember: Int?
+    let isAdvertiser: Int?
     let photo50, photo100, photo200: String
-
     enum CodingKeys: String, CodingKey {
         case id
         case name = "name"

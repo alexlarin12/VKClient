@@ -8,26 +8,21 @@
 
 import UIKit
 
-class NewsGroupsTableViewCell: UITableViewCell {
+class NewsHeaderTableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var NewsGroupsAvatar: CircleImageView!
+    @IBOutlet weak var NewsHeaderAvatar: CircleImageView!
     
-    @IBOutlet weak var NewsGroupsLabel: UILabel!
+    @IBOutlet weak var NewsHeaderLabel: UILabel!
     
-    @IBOutlet weak var NewsGroupsDataLabel: UILabel!
-    
-    
+    @IBOutlet weak var NewsHeaderDataLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

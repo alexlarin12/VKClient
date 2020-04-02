@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsOnePhotoCell: UICollectionViewCell {
 
+    @IBOutlet weak var newsOnePhoto: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

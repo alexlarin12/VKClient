@@ -26,7 +26,6 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
             self?.database.saveUserData(user: user)
         }

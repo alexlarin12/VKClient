@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+//@available(iOS 13.0, *)
 extension FriendsTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

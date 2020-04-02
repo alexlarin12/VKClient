@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 class GroupsTableViewController: UITableViewController {
     var apiService = ApiService()
@@ -27,6 +28,7 @@ class GroupsTableViewController: UITableViewController {
             switch result{
             case .success(let groups):
                 self.database.saveGroupData(groups: groups)
+                self.showGroups()
             case .failure(let error):
                 print(error)
             }
@@ -73,9 +75,10 @@ class GroupsTableViewController: UITableViewController {
         }
         let avatar = group.photo50
         let urlAvatar = URL(string: avatar)!
-        let dataAvatar = try? Data(contentsOf: urlAvatar)
+           // let dataAvatar = try? Data(contentsOf: urlAvatar)
             cell.GroupsNameLabel.text = group.name
-            cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
+           // cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
+            cell.GroupsAvatarImageView.kf.setImage(with: urlAvatar)
         return cell
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -11,7 +11,7 @@ struct Photo: Decodable {
     var id: Int
     var albumId: Int
     var ownerId: Int
-    var sizes: [Size]
+    var sizes: [Size1]
     var likes: Like
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct Photo: Decodable {
     }
 }
 
-struct Size: Codable {
+struct Size1: Codable {
     let type: TypeEnum
     let url: String
     let width: Int

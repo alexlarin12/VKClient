@@ -8,13 +8,27 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
+import AVFoundation
+
+enum NewsCellsTypes {
+    case header, text, attachments, footer
+}
+protocol NewsTableUpdater: class {
+    func updateTable()
+}
+
+
 
 class NewsViewController: UIViewController {
     var apiService = ApiService()
-    var news = [News]()
+    var news = [ResponseItem]()
+    var groups = [Groups]()
+    var profiles = [Profiles]()
     var database = NewsRepository()
     var newsResult: Results<NewsRealm>?
     var token: NotificationToken?
+    var cellsToDisplay: [NewsCellsTypes] = [.header, .text, .attachments, .footer]
     
     
     
@@ -22,17 +36,29 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewsTableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsIdentifire")
-        self.NewsTableView.rowHeight = 350
+        NewsTableView.register(UINib(nibName: "NewsTextTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTextIdentifire")
+        NewsTableView.register(UINib(nibName: "NewsHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsHeaderIdentifier")
+        NewsTableView.register(UINib(nibName: "NewsFooterTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsFooterIdentifire")
+        NewsTableView.register(UINib(nibName: "NewsAllPhotoCell", bundle: nil), forCellReuseIdentifier: "NewsAllPhotoIdentifire")
+        NewsTableView.register(UINib(nibName: "NewsVideoCell", bundle: nil), forCellReuseIdentifier: "NewsVideo")
+        NewsTableView.register(UINib(nibName: "NewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLink")
+        NewsTableView.register(UINib(nibName: "NewsEmptyCell", bundle: nil), forCellReuseIdentifier: "NewsEmpty")        //  self.NewsTableView.rowHeight = 200
+        
         self.NewsTableView.dataSource = self
+
         //self.getNewsFromDatabase()
-           apiService.loadNewsData(token: Session.instance.token, userId: Session.instance.userId)
-           { result in
-                        switch result{
+        apiService.loadNewsData(token: Session.instance.token, userId: Session.instance.userId){[weak self] result in
+   //         self?.news = news
+    //        print(news)
+  //      }
+         // { result in
+                       switch result{
                         case .success(let news):
-                          //  self.database.saveNewsData(news: news)
-                            self.news = news
-                            self.NewsTableView.reloadData()
+                            self?.groups = news.groups
+                            self?.news = news.items
+                            self?.profiles = news.profiles
+                         //   self?.database.saveNewsData(news: news.items)
+                            self?.NewsTableView.reloadData()
                         case .failure(let error):
                             print(error)
                         }
@@ -72,8 +98,4 @@ class NewsViewController: UIViewController {
               print(error)
            }
        }
-    
-    
-    
-    
 }

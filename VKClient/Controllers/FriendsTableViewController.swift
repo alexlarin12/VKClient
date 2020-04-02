@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 struct Section<T> {
     var title: String
@@ -16,7 +17,6 @@ struct Section<T> {
 
 class FriendsTableViewController: UITableViewController {
     var apiService = ApiService()
-    var friendRealm = [FriendRealm]()
     var database = FriendsRepositiry()
     
     var friendsResult: Results<FriendRealm>?
@@ -36,6 +36,7 @@ class FriendsTableViewController: UITableViewController {
             switch result{
             case .success(let friends):
                 self.database.saveFriendData(friends: friends)
+                self.getFriendsFromDatabase()
             case .failure(let error):
                 print(error)
             }
@@ -130,11 +131,12 @@ class FriendsTableViewController: UITableViewController {
                 return UITableViewCell()
         }
         let avatar = friend.photo50
-        let urlAvatar = URL(string: avatar)!
-        let dataAvatar = try? Data(contentsOf: urlAvatar)
+        let urlAvatar = URL(string: avatar)
+       // let dataAvatar = try? Data(contentsOf: urlAvatar)
         let fullName = friend.firstName + " " + friend.lastName
             cell.FriendNameLabel.text = fullName
-            cell.FriendsAvatarImageView.image = UIImage(data: dataAvatar!)
+           // cell.FriendsAvatarImageView.image = UIImage(data: dataAvatar!)
+        cell.FriendsAvatarImageView.kf.setImage(with: urlAvatar)
         return cell
     }
     
@@ -142,7 +144,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "WatchFriend",
+           if segue.identifier == "WatchFriend",
             let friendCollectionViewController = segue.destination as? FriendCollectionViewController,
             let indexPath = tableView.indexPathForSelectedRow {
             let name = (getModelAtIndex(indexPath: indexPath)?.firstName ?? "") + " " + (getModelAtIndex(indexPath: indexPath)?.lastName ?? "")

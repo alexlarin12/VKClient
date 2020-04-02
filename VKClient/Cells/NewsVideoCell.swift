@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NewsVideoCell: UITableViewCell {
 
+    @IBOutlet weak var VideoImage: UIImageView!
+  
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
+        
+        
         // Initialization code
     }
 
@@ -20,5 +28,17 @@ class NewsVideoCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+   
 }
+/*
+func playVideo(){
+              let videoURL = URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
+              let pleer = AVPlayer(url: videoURL)
+              let pleerLayer = AVPlayerLayer(player: pleer)
+           pleerLayer.frame = self.VideoView.bounds
+              pleerLayer.videoGravity = .resizeAspect
+              self.VideoView.layer.addSublayer(pleerLayer)
+              pleer.play()
+          }
+
+*/

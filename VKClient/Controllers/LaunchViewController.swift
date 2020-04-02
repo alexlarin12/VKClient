@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class LaunchViewController: UIViewController {
-    let session = Session.instance
+
     @IBOutlet weak var VKWebView: WKWebView!{
         didSet{
             VKWebView.navigationDelegate = self
@@ -28,12 +28,12 @@ class LaunchViewController: UIViewController {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path =  "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "7281894"),
+            URLQueryItem(name: "client_id", value: "7149485"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value:"wall,friends,photos,groups"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.103")
+            URLQueryItem(name: "v", value: "5.105")
         ]
         let request = URLRequest(url: urlComponents.url!)
         VKWebView.load(request)

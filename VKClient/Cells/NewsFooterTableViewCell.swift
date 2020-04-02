@@ -10,15 +10,23 @@ import UIKit
 
 class NewsFooterTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var LikeNews: LikeButtonRed!
+    
+    @IBOutlet weak var LikeCountNews: UILabel!
+    
+    @IBOutlet weak var CommentsCountNews: UIButton!
+    
+    @IBOutlet weak var RepostsCountNews: UIButton!
+    
+    @IBOutlet weak var EyeCountNews: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

@@ -8,18 +8,20 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 private let reuseIdentifier = "Cell"
+
 class FriendCollectionViewController: UICollectionViewController {
     var friendNameForTitle:String = ""
     var friendImageForCollection:String = ""
     var friendOwnerId:Int = 0
     var apiService = ApiService()
-    var photosRealm = [PhotosRealm]()
     let database = PhotosRepository()
     
     var token: NotificationToken?
     var photosResult: Results<PhotosRealm>?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +72,12 @@ class FriendCollectionViewController: UICollectionViewController {
                 return UICollectionViewCell()
         }
         let photo = photos.url
-        let urlPhoto = URL(string: photo)!
-        let dataPhoto = try? Data(contentsOf: urlPhoto)
+        let urlPhoto = URL(string: photo)
+       // let dataPhoto = try? Data(contentsOf: urlPhoto)
         cell.LikeCountLabel.text = "\(photos.countLikes)"
-            cell.FriendImageView.image = UIImage(data: dataPhoto!)
+      //  cell.FriendImageView.image = UIImage(data: dataPhoto!)
+        cell.FriendImageView.kf.setImage(with: urlPhoto)
+    
         return cell
     }
 }

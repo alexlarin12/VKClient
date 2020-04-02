@@ -18,7 +18,6 @@ class FriendRealm:Object{
     @objc dynamic var canAccessClosed:Bool = true
     @objc dynamic var photo50:String = ""
     @objc dynamic var online:Int = 0
-    @objc dynamic var trackCode:String = ""
     
      override class func primaryKey() -> String? {
            return "id"

@@ -11,12 +11,43 @@ import RealmSwift
 
 class NewsRealm: Object {
    //news
-   @objc dynamic var type: String = ""
-   @objc dynamic var sourceID: Int = 0
-   @objc dynamic var date: Int = 0
-   @objc dynamic var postType: String = ""
-   @objc dynamic var text: String = ""
-   @objc dynamic var markedAsAds: Int = 0
+     var attachments = List<NewsAttachmentRealm>()
+    @objc dynamic var type: String = ""
+    @objc dynamic var sourceID: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var postType: String = ""
+    @objc dynamic var text: String = ""
+    @objc dynamic var markedAsAds: Int = 0
+    @objc dynamic var comments: NewsCommentsRealm?
+    @objc dynamic var likes: LikeRealm?
+    @objc dynamic var reposts: NewsRepostsRealm?
+    @objc dynamic var views: NewsViewsRealm?
+    @objc dynamic var isFavorite: Bool = true
+    @objc dynamic var postID: Int = 0
+}
+class NewsAttachmentRealm: Object {
+    @objc dynamic var type = ""
+    @objc dynamic var photo:PhotosRealm?
+}
+class NewsCommentsRealm: Object {
+    @objc dynamic var count = 0
+}
+
+class NewsViewsRealm: Object {
+    @objc dynamic var count = 0
+}
+
+class NewsRepostsRealm: Object {
+    @objc dynamic var count = 0
+}
+
+
+
+
+
+
+
+/*
    //attachments
    @objc dynamic var typeAtt: String = ""
    @objc dynamic var idPhotoAtt: Int = 0
@@ -47,11 +78,10 @@ class NewsRealm: Object {
     //views
    @objc dynamic var countViews: Int = 0
     //news
-   @objc dynamic var isFavorite: Bool = true
-   @objc dynamic var postID: Int = 0
+  
     
   //  override class func primaryKey() -> String? {
     //    return "postID"
   //  }
     
-}
+*/

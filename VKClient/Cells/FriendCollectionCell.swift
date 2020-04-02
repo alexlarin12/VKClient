@@ -23,9 +23,6 @@ class FriendCollectionCell: UICollectionViewCell {
         self.FriendImageView.image = nil
     }
 
-    
-    
-    
     @IBAction func LikeButtonTap(_ sender: LikeButtonRed) {
         
         if likeCount - likeUseCount >= 1{

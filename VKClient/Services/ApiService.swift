@@ -68,7 +68,7 @@ class ApiService {
         loadData(request: request){ completion($0)}
     }
    
-    func loadNewsData(token:String, userId:Int, completion: @escaping (Out<[News], Error>) -> Void){
+    func loadNewsData(token:String, userId:Int, completion: @escaping (Out<ItemsNews, Error>) -> Void){
            var urlConstructor = URLComponents()
            urlConstructor.scheme = "https"
            urlConstructor.host = "api.vk.com"
@@ -76,13 +76,46 @@ class ApiService {
            urlConstructor.queryItems = [
                URLQueryItem(name: "filters", value: "post"),
                URLQueryItem(name: "count", value: "5"),
+           //    URLQueryItem(name: "owner_id", value: "\(userId)"),
                URLQueryItem(name: "access_token", value: token),
                URLQueryItem(name: "v", value: "5.103")
            ]
            let request = URLRequest(url:urlConstructor.url!)
-           loadData(request: request){ completion($0)}
+         //  loadData(request: request){ completion($0)}
+       
+         SessionManager.custom.request(request).responseData{
+                   response in
+        /*
+                   guard let data = response.value else{
+                    completion(.failure(RequestError.decodableError))
+                    return}
+                   do{
+                    let news = try JSONDecoder().decode(NewsModel.self, from: data)
+                    let items = news.response.items
+                    let profiles = news.response.profiles
+                    let groups = news.response.groups
+              
+                    completion(.success(news.response))
+                   }catch{
+                    completion(.failure(RequestError.decodableError))
+                   }
+               }
+ */
+             switch response.result {
+                   case let .failure(error):
+                       completion(.failure(error))
+                   case let .success(data):
+                       do {
+                        let newsResponse = try JSONDecoder().decode(NewsModel.self, from: data)
+                        let news = newsResponse.response
+                        completion(.success(news))
+                       } catch {
+                           completion(.failure(error))
+                       }
+              }
+           }
        }
-    
+  
     func loadPhotosData(token:String, ownerId:Int, completion: @escaping (Out<[ItemsPhotos], Error>) -> Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"

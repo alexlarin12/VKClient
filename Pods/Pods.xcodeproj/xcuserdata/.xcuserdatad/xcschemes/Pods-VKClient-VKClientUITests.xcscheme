@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D80A310389BED4010FF1254020CEB77E"
+               BlueprintIdentifier = "57DF302F052EA57C5B098E76E992C0E7"
                BlueprintName = "Pods-VKClient-VKClientUITests"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pods-VKClient-VKClientUITests.framework">

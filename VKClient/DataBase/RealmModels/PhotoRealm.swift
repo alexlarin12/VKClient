@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class PhotoRealm: Object {
+class PhotoRealm2: Object {
     @objc dynamic var albumId = 0
     @objc dynamic var date = 0
     @objc dynamic var id = 0
@@ -24,12 +24,12 @@ class PhotoRealm: Object {
     
     // Конвертация типа Realm к обычной модели
     func toModel() -> Photo {
-        var sizes = [Size]()
+        var sizes = [Size1]()
         
         // Проходим по всем вариантам размеров фотографий
         sizes.forEach { size in
             // Инициализируем значения всех свойств
-            let oneSize = Size(type: size.type,
+            let oneSize = Size1(type: size.type,
                                url: size.url,
                                width: size.width,
                                height: size.height)
