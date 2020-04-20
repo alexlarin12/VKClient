@@ -11,35 +11,83 @@ import UIKit
 import Kingfisher
 import AVFoundation
 
-
-extension NewsViewController:UITableViewDataSource{
+/*
+extension NewsViewController: UITableViewDataSource, UITableViewDelegate{
  
     
     func numberOfSections(in tableView: UITableView) -> Int {
-       
-      return news.count
+        if news.count == 0 {
+      return 1 + news.count
+        }else {
+            return news.count
+        }
     }
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-   
+        if section == 0{
+    return 1
+        } else {
        return 4
+        }
     }
-    
-    /*
+   func attachmentRowHeight(indexPath: IndexPath) -> CGFloat {
+          let linkAttachment = news[indexPath.section].links
+          let photosAttachment = news[indexPath.section].photos
+          let videoAttachment = news[indexPath.section].videos
+          /// Если внутри аттача есть вложения "photo"
+          if photosAttachment != nil {
+              if photosAttachment?.count == 1 {
+                  return 220
+              }
+              else if photosAttachment?.count == 2 {
+                  return 200
+              }
+              else if photosAttachment?.count == 3 {
+                  return 150
+              }
+              else {
+                  return 350
+              }
+              
+          /// Если любое другое вложение
+          } else if videoAttachment != nil {
+             return 150
+          } else if linkAttachment != nil {
+             if linkAttachment?.count == 1 {
+                             return 220
+                         }
+                         else if linkAttachment?.count == 2 {
+                             return 200
+                         }
+                         else if linkAttachment?.count == 3 {
+                             return 150
+                         }
+                         else {
+                return 350
+                
+            }
+                
+            } else {
+              return 0
+           }
+         
+      }
+   
+        
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
                                    let sectionNumber = indexPath.section
                                    let rowHeightOfCurrentSection = cellsToDisplay[indexPath.row]
                                    
-                                 /*  switch sectionNumber {
+                                   switch sectionNumber {
                                    case 0:
                                        return 60
-                                   case 1:
-                                       return 102
-                                   default:*/
+                                   default:
                                        
                                        switch rowHeightOfCurrentSection {
                                        case .header:
                                            return 65
+                                       case .repostHeader:
+                                           return 60
                                        case .text:
                                            return UITableView.automaticDimension
                                        case .attachments:
@@ -49,34 +97,8 @@ extension NewsViewController:UITableViewDataSource{
                                        }
                                    
                                }
-    func attachmentRowHeight(indexPath: IndexPath) -> CGFloat {
-        let linkAttachment = news[indexPath.section].links
-        let photosAttachment = news[indexPath.section].photos
-        let videoAttachment = news[indexPath.section].videos
-        /// Если внутри аттача есть вложения "photo"
-        if photosAttachment != nil {
-            if photosAttachment?.count == 1 {
-                return 220
-            }
-            else if photosAttachment?.count == 2 {
-                return 200
-            }
-            else if photosAttachment?.count == 3 {
-                return 150
-            }
-            else {
-                return 350
-            }
-            
-        /// Если любое другое вложение
-        } else if videoAttachment != nil {
-            return 70
-        /// Если репост
-       
-        } else {
-            return 0
-        }
-    }*/
+    }
+   
     func textCellCreation(indexPath:   IndexPath,
                           tableView:   UITableView,
                           position:    Int) -> UITableViewCell {
@@ -116,9 +138,9 @@ extension NewsViewController:UITableViewDataSource{
             }
         }
         return header
-     }
+    }
     
-     func footerCellCreation(indexPath:  IndexPath,
+    func footerCellCreation(indexPath:  IndexPath,
                                        tableView:  UITableView,
                                        position:   Int) -> UITableViewCell {
            
@@ -145,36 +167,20 @@ extension NewsViewController:UITableViewDataSource{
            }
            return footer
     }
-    /*
-    func photoCellCreation(indexPath:   IndexPath,
-                            tableView:   UITableView,
-                            position:    Int) -> UITableViewCell {
-          
-          guard let photo = tableView.dequeueReusableCell(withIdentifier: "NewsAllPhotoIdentifire", for: indexPath) as? NewsAllPhotoCell else { return UITableViewCell() }
-        
-         //      let url = URL(string: news[position].photos.first?.sizes.last?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
-         /*      photo.NewsPhotoImage.kf.setImage(with: url)*/
-        photo.photosToShow = news[position].photos ?? []
-        photo.photosInNews.reloadData()
-        return photo
-        
-    }*/
    
     func attCellCreation(indexPath:   IndexPath,
                            tableView:   UITableView,
                            position:    Int) -> UITableViewCell {
-        if news[indexPath.section].videos != nil {
-            let newsVideo = news[position].videos
+        if news[position].videos != nil {
+            let newsVideo = news[indexPath.section].videos
             guard let video = tableView.dequeueReusableCell(withIdentifier: "NewsVideo", for: indexPath) as? NewsVideoCell else { return UITableViewCell() }
-            let url = URL(string: newsVideo?.first?.image?.first(where: {$0.height.rawValue == 240 || $0.height.rawValue == 450})?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
+            let url = URL(string: newsVideo?.first?.image?.first(where: {$0.height.rawValue == 240 || $0.height.rawValue == 320 || $0.height.rawValue == 450})?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
+           
             video.VideoImage.kf.setImage(with: url)
-            let hightCell = newsVideo?.first?.image?.first(where: {$0.height.rawValue == 320})?.height
-            print(hightCell)
-       //     let widthCell = newsVideo?.first?.image?.last?.width ?? 400
-        //    video.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: widthCell, height: hightCell!.rawValue))
+            
             return video
         }
-        if news[indexPath.section].photos != nil {
+        if news[position].photos != nil {
             
             guard let photo = tableView.dequeueReusableCell(withIdentifier: "NewsAllPhotoIdentifire", for: indexPath) as? NewsAllPhotoCell else { return UITableViewCell() }
             photo.photosToShow = news[position].photos ?? []
@@ -195,11 +201,16 @@ extension NewsViewController:UITableViewDataSource{
             
         }
     }
-     
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 10 {
-                   let whatsNew = tableView.dequeueReusableCell(withIdentifier: "WhatsNew") as? WhatsNewTableViewCell
-                   return whatsNew ?? UITableViewCell()
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let whatsNew = tableView.dequeueReusableCell(withIdentifier: "WhatsNews") as? WhatsNewTableViewCell
+                          userRealm = database2.getUserData()
+                          userRealm.forEach { user in
+                              let avatar = user.photo50
+                              let urlAvatar = URL(string: avatar)
+                            whatsNew?.UserAvatar.kf.setImage(with: urlAvatar)}
+            return whatsNew ?? UITableViewCell()
                } else {
                    
             let itemNumber = indexPath.section
@@ -212,19 +223,16 @@ extension NewsViewController:UITableViewDataSource{
                                         tableView:  tableView,
                                         position:   itemNumber,
                                         sourceId:   sourceId)
+        case .repostHeader:
+            return headerCellCreation(  indexPath:  indexPath,
+                                        tableView:  tableView,
+                                        position:   itemNumber,
+                                        sourceId:   sourceId)
         case .text:
-                       
             return textCellCreation(    indexPath:  indexPath,
                                         tableView:  tableView,
                                         position:   itemNumber)
-                 /*  case .photo:
-                       return photoCellCreation(   indexPath:  indexPath,
-                                                   tableView:  tableView,
-                                                   position:   itemNumber)
-                */
-            
         case .attachments:
-           
             return attCellCreation(     indexPath:  indexPath,
                                         tableView:  tableView,
                                         position:   itemNumber)
@@ -235,12 +243,8 @@ extension NewsViewController:UITableViewDataSource{
             
             }
         }
-        
     }
-      
-        
-        
-        
+    
     /*
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -268,8 +272,10 @@ extension NewsViewController:UITableViewDataSource{
     */
     
 }
+/*
 extension NewsViewController: NewsTableUpdater {
     func updateTable() {
         NewsTableView.reloadData()
     }
-}
+}*/
+*/

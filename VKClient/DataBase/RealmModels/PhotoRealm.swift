@@ -10,12 +10,13 @@ import Foundation
 import RealmSwift
 
 class PhotoRealm2: Object {
-    @objc dynamic var albumId = 0
-    @objc dynamic var date = 0
-    @objc dynamic var id = 0
-    @objc dynamic var ownerId = 0
-    @objc dynamic var text: String?
-    var likes: LikeRealm?
+    @objc dynamic var albumId: Int = 0
+    @objc dynamic var date: Int = 0
+    @objc dynamic var id: Int = 0
+    @objc dynamic var ownerId: Int = 0
+    @objc dynamic var text: String = ""
+    @objc dynamic var likes: LikeRealm?
+    @objc dynamic var reposts: RepostRealm?
     var sizes = List<PhotoSizesRealm>()
     
     override class func primaryKey() -> String? {
@@ -23,7 +24,7 @@ class PhotoRealm2: Object {
     }
     
     // Конвертация типа Realm к обычной модели
-    func toModel() -> Photo {
+ /*   func toModel() -> Photo {
         var sizes = [Size1]()
         
         // Проходим по всем вариантам размеров фотографий
@@ -39,15 +40,18 @@ class PhotoRealm2: Object {
     
         // Инициализируем значения для свойств лайка
         let likes = Like(isLiked: self.likes?.isLiked ?? 0, count: self.likes?.count ?? 0)
-        
+        let reposts = RepostsPhoto(count: self.reposts?.count ?? 0)
         // Возвращаем модель в нужном формате
         return Photo(
                     id: id,
                     albumId: albumId,
                     ownerId: ownerId,
                     sizes: sizes,
-                    likes: likes)
-    }
+                    likes: likes,
+                    reposts: reposts,
+                    text: text,
+                    date: date)
+    }*/
 }
 
 class PhotoSizesRealm: Object {
@@ -65,4 +69,7 @@ class LikeRealm: Object {
         case isLiked = "user_likes"
         case count
     }
+}
+class RepostRealm: Object {
+    @objc dynamic var count = 0
 }

@@ -67,7 +67,5 @@ class ItemsPhotos: Decodable{
         self.countReposts = try! repostsValues.decode(Int.self, forKey: .countReposts)
         
     }
-   
-}
 
-   
+}

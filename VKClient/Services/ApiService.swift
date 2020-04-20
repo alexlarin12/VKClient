@@ -75,7 +75,7 @@ class ApiService {
            urlConstructor.path = "/method/newsfeed.get"
            urlConstructor.queryItems = [
                URLQueryItem(name: "filters", value: "post"),
-               URLQueryItem(name: "count", value: "5"),
+               URLQueryItem(name: "count", value: "20"),
            //    URLQueryItem(name: "owner_id", value: "\(userId)"),
                URLQueryItem(name: "access_token", value: token),
                URLQueryItem(name: "v", value: "5.103")
@@ -116,13 +116,14 @@ class ApiService {
            }
        }
   
-    func loadPhotosData(token:String, ownerId:Int, completion: @escaping (Out<[ItemsPhotos], Error>) -> Void){
+    func loadPhotosData(token:String, ownerId:Int, completion: @escaping (Out<[Photo], Error>) -> Void){
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
         urlConstructor.path = "/method/photos.getAll"
         urlConstructor.queryItems = [
             URLQueryItem(name: "owner_id", value: "\(ownerId)"),
+            URLQueryItem(name: "count", value: "12"),
             URLQueryItem(name: "extended", value: "5"),
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.103")

@@ -18,7 +18,7 @@ class FriendsRepositiry{
                let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
                let realm = try Realm(configuration: config)
                realm.beginWrite()
-            //   realm.deleteAll()
+             // realm.deleteAll()
                   var friendsToAdd = [FriendRealm]()
                   friends.forEach { friend in
                       let friendRealm = FriendRealm()
@@ -30,6 +30,7 @@ class FriendsRepositiry{
                       friendRealm.photo50 = friend.photo50 
                       friendRealm.online = friend.online
                       friendsToAdd.append(friendRealm)
+                    
                   }
                realm.add(friendsToAdd, update: .modified)
                try realm.commitWrite()

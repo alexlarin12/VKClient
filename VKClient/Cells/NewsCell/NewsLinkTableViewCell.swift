@@ -11,6 +11,9 @@ import UIKit
 class NewsLinkTableViewCell: UITableViewCell {
 
     @IBOutlet weak var LinkImageView: UIImageView!
+    @IBOutlet weak var TextLinkLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

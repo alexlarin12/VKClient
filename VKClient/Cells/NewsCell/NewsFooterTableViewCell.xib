@@ -79,14 +79,12 @@
                                             <constraint firstItem="o9Y-QX-c87" firstAttribute="top" secondItem="spz-hf-QRh" secondAttribute="top" id="8Qx-d8-cgY"/>
                                             <constraint firstItem="iK6-Mr-sJM" firstAttribute="centerY" secondItem="o9Y-QX-c87" secondAttribute="centerY" id="BuE-tb-4Fr"/>
                                             <constraint firstItem="3fT-fK-hTh" firstAttribute="leading" secondItem="p8T-uD-iYy" secondAttribute="trailing" constant="20" id="DxI-BC-VXB"/>
-                                            <constraint firstAttribute="height" constant="36" id="Hag-mC-sN3"/>
+                                            <constraint firstItem="spz-hf-QRh" firstAttribute="centerY" secondItem="aYg-W1-qX1" secondAttribute="centerY" id="YXE-gi-dsl"/>
                                             <constraint firstItem="o9Y-QX-c87" firstAttribute="bottom" secondItem="spz-hf-QRh" secondAttribute="bottom" id="dZ6-df-9Qh"/>
-                                            <constraint firstItem="spz-hf-QRh" firstAttribute="top" secondItem="aYg-W1-qX1" secondAttribute="top" constant="8" id="eVX-KJ-IbS"/>
                                             <constraint firstItem="p8T-uD-iYy" firstAttribute="centerY" secondItem="iK6-Mr-sJM" secondAttribute="centerY" id="elo-Dl-hHP"/>
                                             <constraint firstItem="spz-hf-QRh" firstAttribute="leading" secondItem="aYg-W1-qX1" secondAttribute="leading" constant="16" id="gQX-8C-6L9"/>
                                             <constraint firstItem="3fT-fK-hTh" firstAttribute="centerY" secondItem="p8T-uD-iYy" secondAttribute="centerY" id="oXc-H3-bNj"/>
                                             <constraint firstItem="o9Y-QX-c87" firstAttribute="leading" secondItem="spz-hf-QRh" secondAttribute="trailing" constant="8" id="rue-NB-XJa"/>
-                                            <constraint firstAttribute="bottom" secondItem="spz-hf-QRh" secondAttribute="bottom" constant="8" id="ryx-RY-8bs"/>
                                             <constraint firstAttribute="trailing" secondItem="3fT-fK-hTh" secondAttribute="trailing" constant="8" id="uCq-ZE-R7u"/>
                                             <constraint firstItem="p8T-uD-iYy" firstAttribute="leading" secondItem="iK6-Mr-sJM" secondAttribute="trailing" constant="20" id="y1F-GM-pCL"/>
                                             <constraint firstItem="iK6-Mr-sJM" firstAttribute="leading" secondItem="o9Y-QX-c87" secondAttribute="trailing" constant="20" id="z5z-fP-tkM"/>
@@ -104,7 +102,6 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="44" id="7Zi-XF-U2s"/>
                             <constraint firstItem="4wC-q6-lgl" firstAttribute="top" secondItem="dhP-Ps-e46" secondAttribute="top" id="CAZ-BT-edU"/>
                             <constraint firstItem="4wC-q6-lgl" firstAttribute="centerY" secondItem="dhP-Ps-e46" secondAttribute="centerY" id="MkD-bJ-B4p"/>
                             <constraint firstItem="4wC-q6-lgl" firstAttribute="leading" secondItem="dhP-Ps-e46" secondAttribute="leading" id="div-zI-FPl"/>

@@ -13,6 +13,9 @@ class FriendCollectionCell: UICollectionViewCell {
     @IBOutlet weak var FriendImageView: UIImageView!
     
     @IBOutlet weak var LikeCountLabel: UILabel!
+    @IBOutlet weak var TextPhotoLabel: UILabel!
+    @IBOutlet weak var DatePhotoLabel: UILabel!
+    @IBOutlet weak var RepostPhotoButton: UIButton!
     
     @IBOutlet weak var LikeButton: LikeButtonRed!
     var likeCount = 0

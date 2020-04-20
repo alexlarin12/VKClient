@@ -11,9 +11,7 @@ import RealmSwift
 import Kingfisher
 import AVFoundation
 
-enum NewsCellsTypes {
-    case header, text, attachments, footer
-}
+/*
 protocol NewsTableUpdater: class {
     func updateTable()
 }
@@ -24,8 +22,11 @@ class NewsViewController: UIViewController {
     var apiService = ApiService()
     var news = [ResponseItem]()
     var groups = [Groups]()
+    var videos = [Video]()
     var profiles = [Profiles]()
     var database = NewsRepository()
+    var database2 = UserRepository()
+    var userRealm = [UserRealm]()
     var newsResult: Results<NewsRealm>?
     var token: NotificationToken?
     var cellsToDisplay: [NewsCellsTypes] = [.header, .text, .attachments, .footer]
@@ -42,7 +43,8 @@ class NewsViewController: UIViewController {
         NewsTableView.register(UINib(nibName: "NewsAllPhotoCell", bundle: nil), forCellReuseIdentifier: "NewsAllPhotoIdentifire")
         NewsTableView.register(UINib(nibName: "NewsVideoCell", bundle: nil), forCellReuseIdentifier: "NewsVideo")
         NewsTableView.register(UINib(nibName: "NewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLink")
-        NewsTableView.register(UINib(nibName: "NewsEmptyCell", bundle: nil), forCellReuseIdentifier: "NewsEmpty")        //  self.NewsTableView.rowHeight = 200
+        NewsTableView.register(UINib(nibName: "NewsEmptyCell", bundle: nil), forCellReuseIdentifier: "NewsEmpty")
+        NewsTableView.register(UINib(nibName: "WhatsNewTableViewCell", bundle: nil), forCellReuseIdentifier: "WhatsNews")        //  self.NewsTableView.rowHeight = 200
         
         self.NewsTableView.dataSource = self
 
@@ -63,20 +65,19 @@ class NewsViewController: UIViewController {
                             print(error)
                         }
            }
-       
+         apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
+                   self?.database2.saveUserData(user: user)
+               }
     }
     private func getNewsFromDatabase() {
-             do {
-                 self.newsResult = try database.getNewsData()
-                 self.NewsTableView.reloadData()
-             } catch {
-              print(error)
-              
-          }
+       do {
+            self.newsResult = try database.getNewsData()
+            self.NewsTableView.reloadData()
+        } catch {
+        print(error)
       }
-    
-    
-     func showNews(){
+    }
+    func showNews(){
         do{
            newsResult = try database.getNewsData()
            token = newsResult?.observe { [weak self] results in
@@ -98,4 +99,4 @@ class NewsViewController: UIViewController {
               print(error)
            }
        }
-}
+}*/

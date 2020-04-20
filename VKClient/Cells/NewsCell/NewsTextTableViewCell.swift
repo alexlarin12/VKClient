@@ -11,7 +11,7 @@ import UIKit
 class NewsTextTableViewCell: UITableViewCell {
 
     @IBOutlet weak var NewsTextLabel: UILabel!
-    @IBOutlet weak var NewsTextView: UITextView!
+  //  @IBOutlet weak var NewsTextView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -145,14 +145,15 @@ class FriendsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if segue.identifier == "WatchFriend",
-            let friendCollectionViewController = segue.destination as? FriendCollectionViewController,
+            let friendViewController = segue.destination as? FriendViewController,
             let indexPath = tableView.indexPathForSelectedRow {
+            print(indexPath)
             let name = (getModelAtIndex(indexPath: indexPath)?.firstName ?? "") + " " + (getModelAtIndex(indexPath: indexPath)?.lastName ?? "")
             let image = getModelAtIndex(indexPath: indexPath)?.photo50
             let ownerId = getModelAtIndex(indexPath: indexPath)?.id
-            friendCollectionViewController.friendNameForTitle = name
-            friendCollectionViewController.friendImageForCollection = image ?? ""
-            friendCollectionViewController.friendOwnerId = ownerId ?? 0
+            friendViewController.friendNameForTitle = name
+            friendViewController.friendImageForCollection = image ?? ""
+            friendViewController.friendOwnerId = ownerId ?? 0
         }
     }
 }

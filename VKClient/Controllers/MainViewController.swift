@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainViewController: UIViewController {
     var apiService = ApiService()
@@ -34,9 +35,8 @@ class MainViewController: UIViewController {
             MainNameLabel.text = user.firstName
             MainIdLabel.text = user.lastName
             let avatar = user.photo50
-            let urlAvatar = URL(string: avatar)!
-            let dataAvatar = try? Data(contentsOf: urlAvatar)
-            MainImageView.image = UIImage(data: dataAvatar!)
+            let urlAvatar = URL(string: avatar)
+            MainImageView.kf.setImage(with: urlAvatar)
         }
     
                

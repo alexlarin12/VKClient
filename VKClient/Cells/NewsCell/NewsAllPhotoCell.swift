@@ -39,7 +39,7 @@ extension NewsAllPhotoCell {
             
             /// Берем нужные размеры фото и кешируем с помощью Kingfisher
             if let url = URL(string: photosToShow[indexPath.row].sizes.first(where: {
-                $0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"  })?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg") {
+                $0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z" })?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg") {
                 photoCell.newsOnePhoto.kf.setImage(with: url)
             }
            

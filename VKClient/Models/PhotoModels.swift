@@ -13,6 +13,9 @@ struct Photo: Decodable {
     var ownerId: Int
     var sizes: [Size1]
     var likes: Like
+    var reposts: RepostsPhoto
+    var text: String
+    var date: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -20,9 +23,23 @@ struct Photo: Decodable {
         case ownerId = "owner_id"
         case sizes
         case likes
+        case reposts
+        case text
+        case date
     }
+    func toRealm() -> PhotoRealm2 {
+        let photoToRealm = PhotoRealm2()
+        photoToRealm.albumId = albumId
+        photoToRealm.date = date
+        photoToRealm.id = id
+        photoToRealm.ownerId = ownerId
+        photoToRealm.text = text
+        photoToRealm.sizes.append(objectsIn: sizes.map { $0.toRealm() })
+        photoToRealm.likes = likes.toRealm()
+        return photoToRealm
+    }
+    
 }
-
 struct Size1: Codable {
     let type: TypeEnum
     let url: String
@@ -41,6 +58,15 @@ struct Size1: Codable {
         case z = "z" //z — пропорциональная копия изображения с максимальным размером 1080x1024;
         case w = "w" //w — пропорциональная копия изображения с максимальным размером 2560x2048px.
     }
+     func toRealm() -> PhotoSizesRealm {
+           let photoRealm = PhotoSizesRealm()
+           photoRealm.url = url
+           photoRealm.type = type.rawValue
+           photoRealm.width = width
+           photoRealm.height = height
+           return photoRealm
+       }
+    
 }
 
 struct Like: Decodable {
@@ -58,4 +84,16 @@ struct Like: Decodable {
         likeRealm.isLiked = isLiked
         return likeRealm
     }
+}
+struct RepostsPhoto: Decodable {
+    var count: Int
+    enum CodingKeys: String, CodingKey {
+        case count
+    }
+     func toRealm() -> RepostRealm {
+           let repostRealm = RepostRealm()
+           repostRealm.count = count
+           return repostRealm
+       }
+    
 }
