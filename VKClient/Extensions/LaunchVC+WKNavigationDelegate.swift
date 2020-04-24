@@ -34,9 +34,10 @@ extension LaunchViewController:WKNavigationDelegate{
         KeychainWrapper.standard.set(token ?? "", forKey: "token")
         let userId = params["user_id"]
         KeychainWrapper.standard.set(Int(userId ?? "") ?? 0, forKey: "id")
-        print(token ?? "token is empty")
-        session.token = token ?? ""
-        session.userId = Int(userId ?? "") ?? 0
+        print("token = \(token ?? "token is empty")")
+        print("user ID = \(userId ?? "user id is eppty")")
+        Session.instance.token = token ?? ""
+        Session.instance.userId = Int(userId ?? "") ?? 0
         let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
     
         performSegue(withIdentifier: "FromLaunchToFriends", sender: tokenFromKeychain)

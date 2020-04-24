@@ -20,6 +20,7 @@ class PhotosRealm:Object{
     @objc dynamic var countLikes:Int = 0
     @objc dynamic var countReposts:Int = 0
     @objc dynamic var realOffset:Int = 0
+    @objc dynamic var date:Int = 0
     
      override class func primaryKey() -> String? {
                  return "id"

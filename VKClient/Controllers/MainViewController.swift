@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainViewController: UIViewController {
     var apiService = ApiService()
@@ -26,7 +27,6 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
             self?.database.saveUserData(user: user)
         }
@@ -35,9 +35,8 @@ class MainViewController: UIViewController {
             MainNameLabel.text = user.firstName
             MainIdLabel.text = user.lastName
             let avatar = user.photo50
-            let urlAvatar = URL(string: avatar)!
-            let dataAvatar = try? Data(contentsOf: urlAvatar)
-            MainImageView.image = UIImage(data: dataAvatar!)
+            let urlAvatar = URL(string: avatar)
+            MainImageView.kf.setImage(with: urlAvatar)
         }
     
                

@@ -7,7 +7,9 @@ target 'VKClient' do
   pod 'Alamofire'
   pod 'RealmSwift'
   pod 'SwiftKeychainWrapper'
-  pod 'Firebase/Core'
+  pod 'Kingfisher'
+  
+ 
 
   # Pods for VKClient
 
