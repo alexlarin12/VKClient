@@ -28,16 +28,19 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
+            DispatchQueue.main.async {
             self?.database.saveUserData(user: user)
+            }
         }
-        userRealm = database.getUserData()
-        userRealm.forEach { user in
-            MainNameLabel.text = user.firstName
-            MainIdLabel.text = user.lastName
-            let avatar = user.photo50
-            let urlAvatar = URL(string: avatar)
-            MainImageView.kf.setImage(with: urlAvatar)
-        }
+            
+            self.userRealm = self.database.getUserData()
+            self.userRealm.forEach { user in
+                self.MainNameLabel.text = user.firstName
+                self.MainIdLabel.text = user.lastName
+                let avatar = user.photo50
+                let urlAvatar = URL(string: avatar)
+                self.MainImageView.kf.setImage(with: urlAvatar)
+            }
     
                
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)

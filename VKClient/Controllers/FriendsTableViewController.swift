@@ -35,8 +35,10 @@ class FriendsTableViewController: UITableViewController {
         apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId) { result in
             switch result{
             case .success(let friends):
+                DispatchQueue.main.async {
                 self.database.saveFriendData(friends: friends)
-                self.getFriendsFromDatabase()
+                    self.getFriendsFromDatabase()
+                }
             case .failure(let error):
                 print(error)
             }
@@ -151,9 +153,11 @@ class FriendsTableViewController: UITableViewController {
             let name = (getModelAtIndex(indexPath: indexPath)?.firstName ?? "") + " " + (getModelAtIndex(indexPath: indexPath)?.lastName ?? "")
             let image = getModelAtIndex(indexPath: indexPath)?.photo50
             let ownerId = getModelAtIndex(indexPath: indexPath)?.id
+            let online = getModelAtIndex(indexPath: indexPath)?.online
             friendViewController.friendNameForTitle = name
             friendViewController.friendImageForCollection = image ?? ""
             friendViewController.friendOwnerId = ownerId ?? 0
+            friendViewController.friendStatus = online ?? 0
         }
     }
 }

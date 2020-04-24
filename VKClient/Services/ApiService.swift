@@ -21,17 +21,19 @@ class ApiService {
     private let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
     
     func loadData<T:Decodable>(request:URLRequest,completion: @escaping(Out<[T], Error>) ->Void){
-       SessionManager.custom.request(request).responseData{
-            response in
-            switch response.result {
-              case .failure(let error):
-                completion(.failure(RequestError.failedRequest(massage: error.localizedDescription)))
-              case .success(let data):
-                do {
-                  let result = try JSONDecoder().decode(CommonResponse<T>.self, from: data)
-                  completion(.success(result.response.items))
-                } catch {
-                  completion(.failure(error))
+        DispatchQueue.global(qos: .background).async {
+            SessionManager.custom.request(request).responseData{
+                response in
+                switch response.result {
+                    case .failure(let error):
+                    completion(.failure(RequestError.failedRequest(massage: error.localizedDescription)))
+                    case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(CommonResponse<T>.self, from: data)
+                        completion(.success(result.response.items))
+                    } catch {
+                        completion(.failure(error))
+                    }
                 }
             }
         }
@@ -67,54 +69,42 @@ class ApiService {
         let request = URLRequest(url:urlConstructor.url!)
         loadData(request: request){ completion($0)}
     }
-   
+    
+    
     func loadNewsData(token:String, userId:Int, completion: @escaping (Out<ItemsNews, Error>) -> Void){
-           var urlConstructor = URLComponents()
-           urlConstructor.scheme = "https"
-           urlConstructor.host = "api.vk.com"
-           urlConstructor.path = "/method/newsfeed.get"
-           urlConstructor.queryItems = [
-               URLQueryItem(name: "filters", value: "post"),
-               URLQueryItem(name: "count", value: "20"),
+        DispatchQueue.global(qos: .background).async {
+            var urlConstructor = URLComponents()
+            urlConstructor.scheme = "https"
+            urlConstructor.host = "api.vk.com"
+            urlConstructor.path = "/method/newsfeed.get"
+            urlConstructor.queryItems = [
+                URLQueryItem(name: "filters", value: "post"),
+                URLQueryItem(name: "count", value: "10"),
            //    URLQueryItem(name: "owner_id", value: "\(userId)"),
-               URLQueryItem(name: "access_token", value: token),
-               URLQueryItem(name: "v", value: "5.103")
-           ]
-           let request = URLRequest(url:urlConstructor.url!)
+                URLQueryItem(name: "access_token", value: token),
+                URLQueryItem(name: "v", value: "5.103")
+            ]
+            let request = URLRequest(url:urlConstructor.url!)
          //  loadData(request: request){ completion($0)}
        
-         SessionManager.custom.request(request).responseData{
+            SessionManager.custom.request(request).responseData{
                    response in
-        /*
-                   guard let data = response.value else{
-                    completion(.failure(RequestError.decodableError))
-                    return}
-                   do{
-                    let news = try JSONDecoder().decode(NewsModel.self, from: data)
-                    let items = news.response.items
-                    let profiles = news.response.profiles
-                    let groups = news.response.groups
-              
-                    completion(.success(news.response))
-                   }catch{
-                    completion(.failure(RequestError.decodableError))
-                   }
-               }
- */
-             switch response.result {
-                   case let .failure(error):
-                       completion(.failure(error))
-                   case let .success(data):
-                       do {
+                switch response.result {
+                case let .failure(error):
+                    completion(.failure(error))
+                case let .success(data):
+                    do {
                         let newsResponse = try JSONDecoder().decode(NewsModel.self, from: data)
                         let news = newsResponse.response
-                        completion(.success(news))
-                       } catch {
-                           completion(.failure(error))
-                       }
-              }
-           }
-       }
+                             completion(.success(news))
+                    } catch {
+                            completion(.failure(error))
+                        
+                    }
+                }
+             }
+        }
+    }
   
     func loadPhotosData(token:String, ownerId:Int, completion: @escaping (Out<[Photo], Error>) -> Void){
         var urlConstructor = URLComponents()
@@ -129,10 +119,14 @@ class ApiService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        loadData(request: request){ completion($0)}
+            self.loadData(request: request){ completion($0)
+            
+            }
     }
         
     func loadUserData(token:String, userId:Int, completion: @escaping ([ResponseUser]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+        
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -143,6 +137,8 @@ class ApiService {
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.103")
         ]
+         
+            
         let request = URLRequest(url:urlConstructor.url!)
         SessionManager.custom.request(request).responseData{
             response in
@@ -154,7 +150,8 @@ class ApiService {
             }catch{
                 print(error)
             }
+            }
         }
     }
-    
 }
+

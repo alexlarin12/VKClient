@@ -23,31 +23,39 @@ class NewsTableViewController: UITableViewController {
     var database2 = UserRepository()
     var userRealm = [UserRealm]()
     var cellsToDisplay: [NewsCellsTypes] = [.header, .repostHeader, .text, .attachments, .footer]
-    
+    let newsLinkCell = NewsLinkTableViewCell()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-            tableView.register(UINib(nibName: "NewsTextTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTextIdentifire")
-            tableView.register(UINib(nibName: "NewsHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsHeaderIdentifier")
-            tableView.register(UINib(nibName: "RepostHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "RepostHeaderIdentifire")
-            tableView.register(UINib(nibName: "NewsFooterTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsFooterIdentifire")
-            tableView.register(UINib(nibName: "NewsAllPhotoCell", bundle: nil), forCellReuseIdentifier: "NewsAllPhotoIdentifire")
-            tableView.register(UINib(nibName: "NewsVideoCell", bundle: nil), forCellReuseIdentifier: "NewsVideo")
-            tableView.register(UINib(nibName: "NewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLink")
-            tableView.register(UINib(nibName: "NewsEmptyCell", bundle: nil), forCellReuseIdentifier: "NewsEmpty")
-            tableView.register(UINib(nibName: "WhatsNewTableViewCell", bundle: nil), forCellReuseIdentifier: "WhatsNews")
         
-            apiService.loadNewsData(token: Session.instance.token, userId: Session.instance.userId){[weak self] result in
+            self.tableView.register(UINib(nibName: "NewsTextTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTextIdentifire")
+            self.tableView.register(UINib(nibName: "NewsHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsHeaderIdentifier")
+            self.tableView.register(UINib(nibName: "RepostHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "RepostHeaderIdentifire")
+            self.tableView.register(UINib(nibName: "NewsFooterTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsFooterIdentifire")
+            self.tableView.register(UINib(nibName: "NewsAllPhotoCell", bundle: nil), forCellReuseIdentifier: "NewsAllPhotoIdentifire")
+            self.tableView.register(UINib(nibName: "NewsVideoCell", bundle: nil), forCellReuseIdentifier: "NewsVideo")
+            self.tableView.register(UINib(nibName: "NewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLink")
+            self.tableView.register(UINib(nibName: "NewsEmptyCell", bundle: nil), forCellReuseIdentifier: "NewsEmpty")
+            self.tableView.register(UINib(nibName: "WhatsNewTableViewCell", bundle: nil), forCellReuseIdentifier: "WhatsNews")
+        
+       
+        
+            self.apiService.loadNewsData(token: Session.instance.token, userId: Session.instance.userId){[weak self] result in
                 switch result{
                 case .success(let news):
+                    DispatchQueue.main.async {
                     self?.groups = news.groups
                     self?.news = news.items
                     self?.profiles = news.profiles
                     self?.tableView.reloadData()
+                    }
                 case .failure(let error):
                     print(error)
                 }
             }
-            apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
+        
+
+            self.apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
                           self?.database2.saveUserData(user: user)
             }
     }
@@ -69,21 +77,26 @@ class NewsTableViewController: UITableViewController {
             return cellsToDisplay.count
         }
     }
-    func attachmentRowHeight(indexPath: IndexPath) -> CGFloat {
+    func attachmentRowHeight(indexPath: IndexPath ) -> CGFloat {
         let linkAttachment = news[indexPath.section].links
         let photosAttachment = news[indexPath.section].photos
         let videoAttachment = news[indexPath.section].videos
-        /// Если внутри аттача есть вложения "photo"
-        
+       
         if photosAttachment != nil {
             if photosAttachment?.count == 1 {
                let widthScreen = tableView.frame.width
-                let widthRaw = news[indexPath.section].photos?.first?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.width
-                let hightRaw = news[indexPath.section].photos?.first?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.height
-                let hightPhoto = CGFloat(hightRaw!)
-                let widthPhoto = CGFloat(widthRaw!)
+               if let widthRaw = news[indexPath.section].photos?.first?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.width,
+                let hightRaw = news[indexPath.section].photos?.first?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.height{
+                let hightPhoto = CGFloat(hightRaw)
+                let widthPhoto = CGFloat(widthRaw)
+                
                 let hight = CGFloat((hightPhoto / widthPhoto) * (widthScreen - 32))
                 return hight
+               }else {
+                print("photosAttachment - unknown format")
+                return 0
+                
+                }
             }
             else if photosAttachment?.count == 2 {
                 return 200
@@ -102,23 +115,18 @@ class NewsTableViewController: UITableViewController {
             switch heightRaw {
             case .h240:
                 let widthRaw = news[indexPath.section].videos?.first?.image?.first(where: {$0.height.rawValue == 240})?.width
-                let widthPhoto = CGFloat(widthRaw!)
+                let widthPhoto = CGFloat(widthRaw ?? 240)
                 let height = CGFloat((CGFloat(240) / widthPhoto) * (widthScreen + 32))
-                print(widthScreen)
-                print(widthPhoto)
-                print("h240  \(height)")
                 return height
             case .h320:
                 let widthRaw = news[indexPath.section].videos?.first?.image?.first(where: {$0.height.rawValue == 320})?.width
-                let widthPhoto = CGFloat(widthRaw!)
+                let widthPhoto = CGFloat(widthRaw ?? 320)
                 let height = CGFloat((CGFloat(320) / widthPhoto) * (widthScreen - 32))
-                print("h320  \(height)")
                 return height
             case .h450:
                 let widthRaw = news[indexPath.section].videos?.first?.image?.first(where: {$0.height.rawValue == 450})?.width
-                let widthPhoto = CGFloat(widthRaw!)
+                let widthPhoto = CGFloat(widthRaw ?? 450)
                 let height = CGFloat((CGFloat(450) / widthPhoto) * (widthScreen - 32))
-                print("h450  \(height)")
                 return height
             default:
                 return 250
@@ -126,13 +134,17 @@ class NewsTableViewController: UITableViewController {
             
         } else if linkAttachment != nil {
             let widthScreen = tableView.frame.width
-            let widthRaw = news[indexPath.section].links?.first?.photo?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.width
-            let hightRaw = news[indexPath.section].links?.first?.photo?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.height
-                           let hightPhoto = CGFloat(hightRaw!)
-                           let widthPhoto = CGFloat(widthRaw!)
-                           let hight = CGFloat((hightPhoto / widthPhoto) * (widthScreen - 32))
-            
-            return hight
+            let widthRaw = news[indexPath.section].links?.first?.photo?.sizes.first?/*(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?*/.width
+            let hightRaw = news[indexPath.section].links?.first?.photo?.sizes.first?/*(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?*/.height
+            let hightPhoto = CGFloat(hightRaw ?? 320)
+            let widthPhoto = CGFloat(widthRaw ?? 320)
+            let textLabel = news[indexPath.section].links?.first?.title
+            if textLabel == nil{
+                let hight = CGFloat((hightPhoto / widthPhoto) * (widthScreen - 32))
+                return hight} else {
+                let height = CGFloat((hightPhoto / widthPhoto) * (widthScreen - 32) + 100)
+                return height
+            }
       
         } else {
             return 2
@@ -302,9 +314,15 @@ class NewsTableViewController: UITableViewController {
          }
          if news[position].links != nil {
              guard let link = tableView.dequeueReusableCell(withIdentifier: "NewsLink", for: indexPath) as? NewsLinkTableViewCell else { return UITableViewCell() }
-                let urlLink = news[position].links
-                let url = URL(string: urlLink?.first?.photo?.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
-            
+            let urlLink = news[indexPath.section].links
+                
+            let url = URL(string: urlLink?.first?.photo?.sizes.first?/*(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?*/.url ??
+                    "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
+            if let linkTitle = urlLink?.first?.button?.title{
+                link.LinkTitleButton.backgroundColor = UIColor.gray
+                link.LinkTitleButton.setTitle(linkTitle, for: .normal)
+                
+            }
                 link.LinkImageView.kf.setImage(with: url)
                 link.TextLinkLabel.text = urlLink?.first?.title
                 return link

@@ -59,6 +59,7 @@ struct ResponseItem: Decodable {
      enum AttachmentsKeys: String, CodingKey {
            case type
     }
+  
     init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.canDoubtCategory = try? container.decode(Bool.self, forKey: .canDoubtCategory)
@@ -89,12 +90,12 @@ struct ResponseItem: Decodable {
                 var singleAttachmentsContainer = try singleAttachmentContainer.nestedUnkeyedContainer(forKey: .attachments)
                 let attachmentContainer = try singleAttachmentsContainer.nestedContainer(keyedBy: AttachmentsKeys.self)
                 let attachmentType = try attachmentContainer.decode(String.self, forKey: .type)
-               // print("type\(attachmentType)")
+                print("type\(attachmentType)")
                 switch attachmentType {
                 case "photo":
                     let attachment = try? singleAttachmentContainer.decode([NewsPhotoAttachments].self,forKey: .attachments)
                     self.photos = attachment?.compactMap { $0.photo } ?? []
-                  //  print(photos ?? [])
+                    //print(photos ?? [])
                 case "link":
                     let attachmentLink = try? singleAttachmentContainer.decode([NewsLinkAttachments].self, forKey: .attachments)
                     self.links = attachmentLink?.compactMap { $0.link} ?? []
@@ -102,8 +103,8 @@ struct ResponseItem: Decodable {
                 case "video":
                     let attachmentVideo = try? singleAttachmentContainer.decode([NewsVideoAttachments].self, forKey: .attachments)
                     self.videos = attachmentVideo?.compactMap { $0.video } ?? []
-                   // print(videos ?? [])
-                default: print("default")
+                    //print(videos ?? [])
+                default: print("defaultAttachmentType in CopyHistory")
                 }
                 
                 
@@ -142,12 +143,12 @@ struct ResponseItem: Decodable {
                 case "link":
                     let attachmentLink = try? container.decode([NewsLinkAttachments].self, forKey: .attachments)
                     self.links = attachmentLink?.compactMap { $0.link} ?? []
-                   //print(links ?? [])
+                  // print(links ?? [])
                 case "video":
                     let attachmentVideo = try? container.decode([NewsVideoAttachments].self, forKey: .attachments)
                     self.videos = attachmentVideo?.compactMap { $0.video } ?? []
                    // print(videos ?? [])
-                default: print("default")
+                default: print("defaultAttachmentType")
                 }
             }
         }
@@ -175,6 +176,13 @@ struct Size: Decodable {
     let width, height: Int
 }
 enum TypeEnum: String, Decodable {
+    case a = "a"
+    case b = "b"
+    case c = "c"
+    case d = "d"
+    case e = "e"
+    case k = "k"
+    case l = "l"
     case m = "m"
     case o = "o"
     case p = "p"
@@ -194,9 +202,11 @@ struct Link: Decodable {
     var url: String?
     var title: String
     var photo: LinkPhoto?
+    var button: LinkButton?
     enum CodingKeys: String, CodingKey {
         case title
         case photo = "photo"
+        case button
         case url
     }
 }
@@ -212,6 +222,12 @@ struct LinkSize: Decodable {
     let url: String
     let width: Int
     let height: Int
+}
+struct LinkButton: Decodable {
+    let title: String
+    enum CodingKeys: String, CodingKey {
+        case title
+    }
 }
 // ВИДЕО
 struct NewsVideoAttachments: Decodable {
@@ -251,6 +267,10 @@ enum height: Int, Decodable {
     case h240 = 240
     case h450 = 450
     case h720 = 720
+    case h180 = 180
+    case h405 = 405
+    case h576 = 576
+    case h2304 = 2304
     case h320 = 320
     case h1024 = 1024
     case h4096 = 4096
@@ -354,19 +374,21 @@ struct Groups: Decodable {
         case photo200 = "photo_200"
     }
 }
+/// CopyHistoryAttachment
+struct CopyHistoryAttachment: Decodable {
+    let photo: Photos?
+    let link: Link?
+    let video: Video?
+}
 struct CopyHistory: Decodable {
     let id, ownerID, fromID, date: Int
     let text: String
     let attachments: [CopyHistoryAttachment]?
-    
+      
     enum CodingKeys: String, CodingKey {
-        case id, date, text, attachments
+        case id, date, text
+        case attachments
         case ownerID = "owner_id"
         case fromID = "from_id"
     }
-}
-
-/// CopyHistoryAttachment
-struct CopyHistoryAttachment: Decodable {
-    let photo: Photos?
 }

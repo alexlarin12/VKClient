@@ -27,8 +27,11 @@ class GroupsTableViewController: UITableViewController {
         apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId){ result in
             switch result{
             case .success(let groups):
+                DispatchQueue.main.async {
                 self.database.saveGroupData(groups: groups)
-                self.showGroups()
+                    self.showGroups()
+                    
+                }
             case .failure(let error):
                 print(error)
             }
