@@ -103,7 +103,7 @@
                                                     <rect key="frame" x="16" y="9" width="60" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="Q16-HA-bM0" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60.000000000000028"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -371,7 +371,7 @@
                                                     <rect key="frame" x="16" y="9" width="60" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="N38-Kw-8gL" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60.000000000000028"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -494,7 +494,7 @@
                                                     <rect key="frame" x="16" y="9" width="60" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="khu-fC-bKf" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60.000000000000028"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -590,7 +590,7 @@
                                         <rect key="frame" x="16" y="8" width="60" height="60"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="96P-g2-ygc" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60.000000000000028"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -605,8 +605,8 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjc-Mo-3q4">
-                                        <rect key="frame" x="92" y="40.5" width="35.5" height="15"/>
-                                        <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="12"/>
+                                        <rect key="frame" x="92" y="40.5" width="37.5" height="15"/>
+                                        <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -817,7 +817,7 @@
             </objects>
             <point key="canvasLocation" x="3181" y="1088"/>
         </scene>
-        <!--News version-->
+        <!--News -->
         <scene sceneID="XFo-6h-JbB">
             <objects>
                 <tableViewController id="XFt-wF-zFu" customClass="NewsTableViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -840,7 +840,7 @@
                             <outlet property="delegate" destination="XFt-wF-zFu" id="9hp-qd-7pj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News version" id="j0P-9N-NUp"/>
+                    <navigationItem key="navigationItem" title="News " id="j0P-9N-NUp"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lvm-I8-ZYg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -884,7 +884,7 @@
                                         <rect key="frame" x="16" y="12.5" width="75" height="75"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="dal-EJ-ObB" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75.000000000000028"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -904,8 +904,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHB-PQ-VnZ">
-                                        <rect key="frame" x="111" y="66.5" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="111" y="61.5" width="49.5" height="26"/>
+                                        <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>

@@ -34,10 +34,11 @@ class UserRepository{
            }
        }
        func getUserData() -> Array<UserRealm>{
+       
            do {
-               let realm = try Realm()
-               let userFromRealm = realm.objects(UserRealm.self)
-               userRealm = Array(userFromRealm)
+            let realm = try Realm()
+            let userFromRealm = realm.objects(UserRealm.self)
+            self.userRealm = Array(userFromRealm)
            } catch {
                print(error)
            }
