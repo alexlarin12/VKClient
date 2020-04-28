@@ -15,7 +15,7 @@ class ItemsGroup: Decodable{
      var isClosed:Int? = 0
      var type:String = ""
      var isAdmin:Int = 0
-     var isMember:Int = 0
+     var isMember:Int = 1
      var isAdvertiser:Int = 0
      var site:String = ""
      var photo50:String = ""

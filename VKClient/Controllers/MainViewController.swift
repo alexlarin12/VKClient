@@ -19,7 +19,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var LightLabel: UILabel!
     @IBOutlet weak var DarkLabel: UILabel!
-   
+   // Экземпляр очереди операций:
+    let myOperayionQueue = OperationQueue()
     
     @IBAction func DarkLightSwitch(_ sender: Any) {
         let changeColorNotification = Notification.Name("changeColorNotification")
@@ -27,10 +28,34 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
-            DispatchQueue.main.async {
-            self?.database.saveUserData(user: user)
+        // операция загрузки и парсинга:
+        let dowmlodOperation = DownloadOperation(token: Session.instance.token, userId: Session.instance.userId)
+        myOperayionQueue.addOperation(dowmlodOperation)
+        // операция сохранения полученных данных в RealmЖ
+        let saveToRealmOperation = SaveToRealmDataOperation()
+            // устанавливаем зависимость от операции загрузки и парсинга:
+        saveToRealmOperation.addDependency(dowmlodOperation)
+        myOperayionQueue.addOperation(saveToRealmOperation)
+        // операция получения данных из Realm для отображения на дисплее:
+        let displayDataOperation = DisplayDataOperation()
+            // устанавливаем зависимость от операции сохранения данных в Realm:
+        displayDataOperation.addDependency(saveToRealmOperation)
+            // вывод работы с UI на главную очередь после завершения myOperayion:
+        displayDataOperation.completionBlock = {
+            OperationQueue.main.addOperation {
+                self.MainNameLabel.text = displayDataOperation.mainNameLabel
+                self.MainIdLabel.text = displayDataOperation.mainIdLabel
+                let avatar = displayDataOperation.avatar
+                let urlAvatar = URL(string: avatar ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg")
+                self.MainImageView.kf.setImage(with: urlAvatar)
             }
+        }
+        myOperayionQueue.addOperation(displayDataOperation)
+        
+     /*
+        apiService.loadUserData(token: Session.instance.token, userId: Session.instance.userId) { [weak self] user in
+    
+            self?.database.saveUserData(user: user)
         }
             
             self.userRealm = self.database.getUserData()
@@ -41,7 +66,7 @@ class MainViewController: UIViewController {
                 let urlAvatar = URL(string: avatar)
                 self.MainImageView.kf.setImage(with: urlAvatar)
             }
-    
+    */
                
         self.view.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         let changeColorNotification = Notification.Name("changeColorNotification")

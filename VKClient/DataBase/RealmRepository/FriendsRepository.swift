@@ -15,10 +15,10 @@ class FriendsRepositiry{
     
      func saveFriendData(friends: [ItemsFriend]){
            do {
-               let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
+               let config = Realm.Configuration(deleteRealmIfMigrationNeeded:true)
                let realm = try Realm(configuration: config)
                realm.beginWrite()
-              // realm.deleteAll()
+              realm.deleteAll()
                   var friendsToAdd = [FriendRealm]()
                   friends.forEach { friend in
                       let friendRealm = FriendRealm()

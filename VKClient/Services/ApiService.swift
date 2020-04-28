@@ -19,7 +19,7 @@ class ApiService {
     typealias Out = Swift.Result
     private let idFromKeychain = KeychainWrapper.standard.integer(forKey: "id")!
     private let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
-    
+
     func loadData<T:Decodable>(request:URLRequest,completion: @escaping(Out<[T], Error>) ->Void){
         DispatchQueue.global(qos: .background).async {
             SessionManager.custom.request(request).responseData{
@@ -79,7 +79,7 @@ class ApiService {
             urlConstructor.path = "/method/newsfeed.get"
             urlConstructor.queryItems = [
                 URLQueryItem(name: "filters", value: "post"),
-                URLQueryItem(name: "count", value: "10"),
+                URLQueryItem(name: "count", value: "20"),
            //    URLQueryItem(name: "owner_id", value: "\(userId)"),
                 URLQueryItem(name: "access_token", value: token),
                 URLQueryItem(name: "v", value: "5.103")
@@ -123,9 +123,21 @@ class ApiService {
             
             }
     }
-        
+     /*
+     let request = Alamofire.request("https://jsonplaceholder.typicode.com/posts")
+             let op = GetDataOperation(request: request)
+             op.completionBlock = {
+                 print(op.data)
+             }
+             opq.addOperation(op)
+     */
+
+    
+    
+    
+    
     func loadUserData(token:String, userId:Int, completion: @escaping ([ResponseUser]) -> Void) {
-        DispatchQueue.global(qos: .background).async {
+     //   DispatchQueue.global(qos: .background).async {
         
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
@@ -140,18 +152,20 @@ class ApiService {
          
             
         let request = URLRequest(url:urlConstructor.url!)
+            
         SessionManager.custom.request(request).responseData{
             response in
             guard let data = response.value else{return}
             do{
                 let user = try JSONDecoder().decode(UserModel.self, from: data).response
-        //      self.useRealmData.saveUserData(user: self.usersRealm)
                 completion(user ?? [])
             }catch{
                 print(error)
             }
-            }
         }
+       
+    //    }
+        
     }
 }
 
