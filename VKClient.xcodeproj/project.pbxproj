@@ -41,6 +41,7 @@
 		434B630A240843B2006F93CE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B6309240843B2006F93CE /* NewsModel.swift */; };
 		434BBEB02456EC0C0014D774 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */; };
 		434BBEB22456ED420014D774 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEB12456ED420014D774 /* GetDataOperation.swift */; };
+		434BBEBC245A27240014D774 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEBB245A27240014D774 /* CustomButton.swift */; };
 		434E9A4423E9F43800B3D3F3 /* FriendsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */; };
 		434E9A4623E9F45300B3D3F3 /* GroupsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */; };
 		434E9A4823E9F46F00B3D3F3 /* PhotosRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */; };
@@ -154,6 +155,7 @@
 		434B6309240843B2006F93CE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		434BBEB12456ED420014D774 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
+		434BBEBB245A27240014D774 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRepository.swift; sourceTree = "<group>"; };
 		434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsRepository.swift; sourceTree = "<group>"; };
 		434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRepository.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				437ABB8B23A18B0E0001B3CB /* ShadowView.swift */,
 				437ABB8D23A4E54A0001B3CB /* CircleImageView.swift */,
 				437ABB8F23A5571D0001B3CB /* LikeButton.swift */,
+				434BBEBB245A27240014D774 /* CustomButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VKClient-VKClientUITests/Pods-VKClient-VKClientUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
@@ -719,6 +723,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
@@ -773,6 +778,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VKClient/Pods-VKClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
@@ -781,6 +787,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
@@ -819,6 +826,7 @@
 				43A90C0323CF70AB00C1B72A /* FriendModel.swift in Sources */,
 				43FA71D12439AE1E00E17B6A /* NewsTableViewController.swift in Sources */,
 				434E9A4623E9F45300B3D3F3 /* GroupsRepository.swift in Sources */,
+				434BBEBC245A27240014D774 /* CustomButton.swift in Sources */,
 				43444DC8241CDC92001308BA /* NewsFooterTableViewCell.swift in Sources */,
 				4342C60023D36BE600C944B2 /* PhotosModels2.swift in Sources */,
 				4345E7E223C9DB15002F50EC /* Session.swift in Sources */,

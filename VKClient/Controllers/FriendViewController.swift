@@ -52,16 +52,13 @@ class FriendViewController: UIViewController {
         FriendPhotoCV.addSubview(refreshControl)
         
         showPhotos()
-        apiService.loadPhotosData(token: Session.instance.token, ownerId: friendOwnerId){ result in
-            DispatchQueue.main.async {
-                switch result{
-                case .success(let photos):
-                    self.database.savePhotosData(ownerId: self.friendOwnerId , photos: photos)
-                case .failure(let error):
-                    print(error)
-                }
-            }
+        apiService.loadPhotosData(token: Session.instance.token, ownerId: friendOwnerId)
+            .done { photos in
+                self.database.savePhotosData(ownerId: self.friendOwnerId , photos: photos)
+        }.catch {(error) in
+             print("Мы получили ошибку на странице фото: \(error)")
         }
+        
         
       /*  self.FriendPhotoCV.dataSource = self
         self.FriendPhotoCV.delegate = self*/

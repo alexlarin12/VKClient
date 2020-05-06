@@ -30,9 +30,9 @@ class FriendsTableViewController: UITableViewController {
         
         FriendsSearchBar.delegate = self
         
-       // self.showFriends()
-        self.getFriendsFromDatabase()
-        apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId) { result in
+      //  self.showFriends()
+      //  self.getFriendsFromDatabase()
+     /*   apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId) { result in
             switch result{
             case .success(let friends):
                 DispatchQueue.main.async {
@@ -42,7 +42,26 @@ class FriendsTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             }
+        }*/
+       self.getFriendsFromDatabase()
+       apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId)
+        .done { friends in
+            self.database.saveFriendData(friends: friends)
+            self.showFriends()
+            self.getFriendsFromDatabase()
         }
+        .recover({(error) in
+        return self.apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId)
+            .done { friends in
+            // guard let self = self else {return}
+             self.database.saveFriendData(friends: friends)
+             self.showFriends()
+            }
+        })
+        .catch { error in
+            print("Мы получили ошибку на странице друзей: \(error)")
+        }
+       
         updateNavigationBar()
     }
     
