@@ -39,6 +39,8 @@
 		434A3FB023CE555200219B09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A3FAF23CE555200219B09 /* SessionManager.swift */; };
 		434A8CF8242A87AA00D00BFE /* NewsModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A8CF7242A87AA00D00BFE /* NewsModel2.swift */; };
 		434B630A240843B2006F93CE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B6309240843B2006F93CE /* NewsModel.swift */; };
+		434BBEB02456EC0C0014D774 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */; };
+		434BBEB22456ED420014D774 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEB12456ED420014D774 /* GetDataOperation.swift */; };
 		434E9A4423E9F43800B3D3F3 /* FriendsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */; };
 		434E9A4623E9F45300B3D3F3 /* GroupsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */; };
 		434E9A4823E9F46F00B3D3F3 /* PhotosRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */; };
@@ -150,6 +152,8 @@
 		434A3FAF23CE555200219B09 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		434A8CF7242A87AA00D00BFE /* NewsModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel2.swift; sourceTree = "<group>"; };
 		434B6309240843B2006F93CE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		434BBEB12456ED420014D774 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRepository.swift; sourceTree = "<group>"; };
 		434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsRepository.swift; sourceTree = "<group>"; };
 		434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRepository.swift; sourceTree = "<group>"; };
@@ -294,6 +298,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		434BBEAC2456DCD70014D774 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */,
+				434BBEB12456ED420014D774 /* GetDataOperation.swift */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
 		434E9A4123E9F34D00B3D3F3 /* RealmModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +357,7 @@
 		437ABB3D23A167750001B3CB /* VKClient */ = {
 			isa = PBXGroup;
 			children = (
+				434BBEAC2456DCD70014D774 /* Operation */,
 				43444DCE241CEE1C001308BA /* Layouts */,
 				438D1F9A23E20FBB00D684BE /* DataBase */,
 				434A3FA823CE372D00219B09 /* Services */,
@@ -826,11 +840,13 @@
 				43444DC024116380001308BA /* NewsHeaderTableViewCell.swift in Sources */,
 				43A90C0523CF70C800C1B72A /* GroupModel.swift in Sources */,
 				4342AD0123DD749700CF06E0 /* CommonResponse.swift in Sources */,
+				434BBEB22456ED420014D774 /* GetDataOperation.swift in Sources */,
 				437ABB8A23A17DC20001B3CB /* GradientView.swift in Sources */,
 				43E88783243A188E001224A9 /* FriendViewController.swift in Sources */,
 				434A8CF8242A87AA00D00BFE /* NewsModel2.swift in Sources */,
 				437ABB7A23A171350001B3CB /* GroupsTableViewController.swift in Sources */,
 				437ABB3F23A167750001B3CB /* AppDelegate.swift in Sources */,
+				434BBEB02456EC0C0014D774 /* AsyncOperation.swift in Sources */,
 				4345E7E423C9DF34002F50EC /* MainViewController.swift in Sources */,
 				438D1F9C23E20FEA00D684BE /* FriendRealm.swift in Sources */,
 				43444DD0241CEE8B001308BA /* NewsCellPicturesLayout.swift in Sources */,

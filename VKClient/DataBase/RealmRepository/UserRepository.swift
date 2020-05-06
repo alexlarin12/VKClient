@@ -10,38 +10,42 @@ import Foundation
 import RealmSwift
 
 class UserRepository{
-     var userRealm = [UserRealm]()
-     func saveUserData(user: [ResponseUser]){
-           do {
-               let realm = try Realm()
+    var userRealm = [UserRealm]()
+    
+    func saveUserData(user: [ResponseUser]){
+        do {
+            let realm = try Realm()
             var userToAdd = [UserRealm]()
-               realm.beginWrite()
+            realm.beginWrite()
             let userRealm = UserRealm()
             user.forEach { user in
-                userRealm.id = user.id
-                userRealm.firstName = user.firstName
-                userRealm.lastName = user.lastName
-                userRealm.isClosed = user.isClosed
-                userRealm.canAccessClosed = user.canAccessClosed
-                userRealm.photo50 = user.photo50
-                userToAdd.append(userRealm)
-            }
-               realm.add(userToAdd, update: .modified)
-               try realm.commitWrite()
+            userRealm.id = user.id
+            userRealm.firstName = user.firstName
+            userRealm.lastName = user.lastName
+            userRealm.isClosed = user.isClosed
+            userRealm.canAccessClosed = user.canAccessClosed
+            userRealm.photo50 = user.photo50
+            userToAdd.append(userRealm)
+        }
+            realm.add(userToAdd, update: .modified)
+            try realm.commitWrite()
       //         print(try! Realm().configuration.fileURL!)
-           } catch {
-               print(error)
-           }
-       }
-       func getUserData() -> Array<UserRealm>{
+        } catch {
+            print(error)
+        }
+      
+    }
+    
+    
+    func getUserData() -> Array<UserRealm>{
        
-           do {
+        do {
             let realm = try Realm()
             let userFromRealm = realm.objects(UserRealm.self)
             self.userRealm = Array(userFromRealm)
-           } catch {
-               print(error)
-           }
-        return userRealm
-       }
+        } catch {
+            print(error)
+        }
+    return userRealm
+    }
 }

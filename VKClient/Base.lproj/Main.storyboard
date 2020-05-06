@@ -357,36 +357,34 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupsIdentifire" rowHeight="78" id="nw1-1g-aCT" customClass="GroupsCell" customModule="VKClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="78"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupsIdentifire" rowHeight="76" id="nw1-1g-aCT" customClass="GroupsCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="414" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nw1-1g-aCT" id="M4o-ra-kyM">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbG-yr-1ES" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNs-sh-DPO" customClass="ShadowView" customModule="VKClient" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="9" width="60" height="60"/>
+                                                    <rect key="frame" x="16" y="8" width="60" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="N38-Kw-8gL" customClass="CircleImageView" customModule="VKClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60.000000000000028"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="N38-Kw-8gL" secondAttribute="bottom" id="EXM-Cw-9uk"/>
-                                                        <constraint firstItem="N38-Kw-8gL" firstAttribute="centerY" secondItem="bNs-sh-DPO" secondAttribute="centerY" id="IgP-pt-fcr"/>
                                                         <constraint firstItem="N38-Kw-8gL" firstAttribute="leading" secondItem="bNs-sh-DPO" secondAttribute="leading" id="SG0-D9-5qe"/>
                                                         <constraint firstAttribute="width" secondItem="bNs-sh-DPO" secondAttribute="height" multiplier="1:1" id="Yoq-QY-XRu"/>
                                                         <constraint firstAttribute="trailing" secondItem="N38-Kw-8gL" secondAttribute="trailing" id="Zzj-IF-WZ2"/>
-                                                        <constraint firstAttribute="height" constant="60" id="fm5-Gj-0It"/>
                                                         <constraint firstItem="N38-Kw-8gL" firstAttribute="top" secondItem="bNs-sh-DPO" secondAttribute="top" id="wE9-CW-TiR"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-SS-P5F">
-                                                    <rect key="frame" x="96" y="28.5" width="42" height="21"/>
+                                                    <rect key="frame" x="96" y="27.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -394,12 +392,11 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bNs-sh-DPO" secondAttribute="bottom" constant="8" id="EI5-Dv-f03"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lmP-SS-P5F" secondAttribute="trailing" constant="16" id="NYz-mJ-fFB"/>
                                                 <constraint firstItem="bNs-sh-DPO" firstAttribute="centerY" secondItem="sbG-yr-1ES" secondAttribute="centerY" id="PW5-Jr-O30"/>
+                                                <constraint firstItem="bNs-sh-DPO" firstAttribute="height" secondItem="sbG-yr-1ES" secondAttribute="height" multiplier="0.789474" id="Sb6-IX-nbO"/>
                                                 <constraint firstItem="lmP-SS-P5F" firstAttribute="leading" secondItem="bNs-sh-DPO" secondAttribute="trailing" constant="20" id="SgL-KM-t34"/>
                                                 <constraint firstItem="bNs-sh-DPO" firstAttribute="leading" secondItem="sbG-yr-1ES" secondAttribute="leading" constant="16" id="Un5-JQ-apu"/>
-                                                <constraint firstItem="bNs-sh-DPO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sbG-yr-1ES" secondAttribute="top" constant="8" id="Xxr-yr-i5P"/>
                                                 <constraint firstItem="lmP-SS-P5F" firstAttribute="centerY" secondItem="sbG-yr-1ES" secondAttribute="centerY" id="fSz-yD-bbP"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -427,7 +424,6 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="sbG-yr-1ES" secondAttribute="trailing" id="7oV-7C-aSW"/>
                                         <constraint firstItem="sbG-yr-1ES" firstAttribute="top" secondItem="M4o-ra-kyM" secondAttribute="top" id="87K-A5-aOh"/>
-                                        <constraint firstItem="sbG-yr-1ES" firstAttribute="centerY" secondItem="M4o-ra-kyM" secondAttribute="centerY" id="UN2-zW-1vS"/>
                                         <constraint firstItem="sbG-yr-1ES" firstAttribute="leading" secondItem="M4o-ra-kyM" secondAttribute="leading" id="qKA-cg-Hrg"/>
                                         <constraint firstAttribute="bottom" secondItem="sbG-yr-1ES" secondAttribute="bottom" id="tdY-2s-odb"/>
                                     </constraints>

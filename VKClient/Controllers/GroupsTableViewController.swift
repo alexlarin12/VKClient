@@ -28,7 +28,7 @@ class GroupsTableViewController: UITableViewController {
             switch result{
             case .success(let groups):
                 DispatchQueue.main.async {
-                self.database.saveGroupData(groups: groups)
+                    self.database.saveGroupData(groups: groups)
                     self.showGroups()
                     
                 }
@@ -71,6 +71,13 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupsResult?.count ?? 0
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if groupsResult?[indexPath.row].isMember != 0{
+            return 75
+        }else {
+            return 0
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as? GroupsCell,
         let group = groupsResult?[indexPath.row] else {
@@ -82,7 +89,7 @@ class GroupsTableViewController: UITableViewController {
             cell.GroupsNameLabel.text = group.name
            // cell.GroupsAvatarImageView.image = UIImage(data: dataAvatar!)
             cell.GroupsAvatarImageView.kf.setImage(with: urlAvatar)
-        return cell
+            return cell
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
