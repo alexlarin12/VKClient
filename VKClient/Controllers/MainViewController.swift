@@ -28,7 +28,51 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+       // путь к папкам caches, document, tmp
+        let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let tmpDirectory = FileManager.default.temporaryDirectory
+        print(cachesDirectory!)
+        print(documentDirectory!)
+        print(tmpDirectory)
+        // create URL for TextFile in tmpDirectory:
+        let testFile = tmpDirectory.appendingPathComponent("textFile.txt").path
+        let testImageFile = tmpDirectory.appendingPathComponent("image.png").path
+        // delete old files:
+        do {
+            try FileManager.default.removeItem(atPath: testFile)
+            try FileManager.default.removeItem(atPath: testImageFile)
+        } catch  {
+            print(error)
+        }
+
+        print(testFile) // print path
+        // exist or dont exist:
+        var fileExist = FileManager.default.fileExists(atPath: testFile)
+        print("File Exist \(fileExist)")//print result
+        // create date for file:
+        let data = "Hello world!".data(using: .utf8)
+        // create file
+        FileManager.default.createFile(atPath: testFile, contents: data, attributes: nil)
+        fileExist = FileManager.default.fileExists(atPath: testFile)
+        // get text
+        let text = try? String(contentsOfFile: testFile)
+        print(text ?? "no text")
+        print("File Exist \(fileExist)")
+        
+       
+        let dataImage = UIImage(named: "cat5")?.pngData()
+        FileManager.default.createFile(atPath: testImageFile, contents: dataImage, attributes: nil)
+        let image = UIImage(contentsOfFile: testImageFile)
+        fileExist = FileManager.default.fileExists(atPath: testImageFile)
+        print("image exist \(fileExist)")
+        print("image exist \(String(describing: image))")
+       
+        
+        
+     
         // операция загрузки и парсинга:
+
         let dowmlodOperation = DownloadOperation(token: Session.instance.token, userId: Session.instance.userId)
         myOperayionQueue.addOperation(dowmlodOperation)
         // операция сохранения полученных данных в RealmЖ

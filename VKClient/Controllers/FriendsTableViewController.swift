@@ -24,7 +24,7 @@ class FriendsTableViewController: UITableViewController {
     var token: NotificationToken?
     
     @IBOutlet weak var FriendsSearchBar: UISearchBar!
-    
+    var photoService = PhotoService(container: UITableView())
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -152,12 +152,14 @@ class FriendsTableViewController: UITableViewController {
                 return UITableViewCell()
         }
         let avatar = friend.photo50
-        let urlAvatar = URL(string: avatar)
+       // let urlAvatar = URL(string: avatar)
        // let dataAvatar = try? Data(contentsOf: urlAvatar)
         let fullName = friend.firstName + " " + friend.lastName
-            cell.FriendNameLabel.text = fullName
+        cell.FriendNameLabel.text = fullName
            // cell.FriendsAvatarImageView.image = UIImage(data: dataAvatar!)
-        cell.FriendsAvatarImageView.kf.setImage(with: urlAvatar)
+        /* cell.FriendsAvatarImageView.kf.setImage(with: urlAvatar)*/
+        cell.FriendsAvatarImageView.image = photoService.photo(atIndexpath: indexPath, byUrl: avatar)
+     
         return cell
     }
     
