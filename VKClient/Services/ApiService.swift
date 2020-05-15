@@ -9,9 +9,13 @@
 import Foundation
 import Alamofire
 import SwiftKeychainWrapper
+import PromiseKit
+
 enum RequestError:Error{
     case failedRequest(massage:String)
     case decodableError
+    case notFound
+    case parsingFailed
 }
 class ApiService {
     let useRealmData = FriendsRepositiry()
@@ -19,27 +23,27 @@ class ApiService {
     typealias Out = Swift.Result
     private let idFromKeychain = KeychainWrapper.standard.integer(forKey: "id")!
     private let tokenFromKeychain = KeychainWrapper.standard.string(forKey: "token")
-
-    func loadData<T:Decodable>(request:URLRequest,completion: @escaping(Out<[T], Error>) ->Void){
-        DispatchQueue.global(qos: .background).async {
-            SessionManager.custom.request(request).responseData{
-                response in
+    
+    // Дженерик функция для запроса к серверу:
+    func loadData<T:Decodable>(request:URLRequest) -> Promise<[T]> {
+        return Promise<[T]> { resolver in
+            SessionManager.custom.request(request).responseData{ response in
                 switch response.result {
                     case .failure(let error):
-                    completion(.failure(RequestError.failedRequest(massage: error.localizedDescription)))
+                        resolver.reject(error)
                     case .success(let data):
                     do {
                         let result = try JSONDecoder().decode(CommonResponse<T>.self, from: data)
-                        completion(.success(result.response.items))
+                        resolver.fulfill(result.response.items)
                     } catch {
-                        completion(.failure(error))
+                        resolver.reject(RequestError.parsingFailed)
                     }
                 }
             }
         }
     }
-    
-    func loadFriendsData(token:String, userId:Int, completion: @escaping (Out<[ItemsFriend], Error>) -> Void){
+    // список друзей:
+    func loadFriendsData(token:String, userId:Int) -> Promise<[ItemsFriend]>{
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -51,10 +55,41 @@ class ApiService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        loadData(request: request){ completion($0)}
+        return loadData(request: request)
     }
     
-    func loadGroupsData(token:String, userId:Int, completion: @escaping (Out<[ItemsGroup], Error>) -> Void){
+    /*
+    func loadFriendsData(token:String, userId:Int) -> Promise<[ItemsFriend]>{
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = "https"
+        urlConstructor.host = "api.vk.com"
+        urlConstructor.path = "/method/friends.get"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "user_id", value: String(userId)),
+            URLQueryItem(name: "fields", value: "photo_50"),
+            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "v", value: "5.103")
+        ]
+        let request = URLRequest(url:urlConstructor.url!)
+         
+        return Promise<[ItemsFriend]> {resolver in
+            SessionManager.custom.request(request).responseData{ response in
+                switch response.result {
+                case .failure(let error):
+                    resolver.reject(error)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(CommonResponse<ItemsFriend>.self, from: data)
+                        resolver.fulfill(result.response.items)
+                    } catch {
+                        resolver.reject(RequestError.parsingFailed)
+                    }
+                }
+            }
+        }
+    }*/
+    // список групп:
+    func loadGroupsData(token:String, userId:Int) -> Promise<[ItemsGroup]>{
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -67,10 +102,34 @@ class ApiService {
             URLQueryItem(name: "v", value: "5.103")
         ]
         let request = URLRequest(url:urlConstructor.url!)
-        loadData(request: request){ completion($0)}
+        return loadData(request: request)
     }
+      // список фото:
+    func loadPhotosData(token:String, ownerId:Int) -> Promise<[Photo]>{
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = "https"
+        urlConstructor.host = "api.vk.com"
+        urlConstructor.path = "/method/photos.getAll"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "owner_id", value: "\(ownerId)"),
+            URLQueryItem(name: "count", value: "12"),
+            URLQueryItem(name: "extended", value: "5"),
+            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "v", value: "5.103")
+        ]
+        let request = URLRequest(url:urlConstructor.url!)
+        return loadData(request: request)
+    }
+       /*
+       let request = Alamofire.request("https://jsonplaceholder.typicode.com/posts")
+               let op = GetDataOperation(request: request)
+               op.completionBlock = {
+                   print(op.data)
+               }
+               opq.addOperation(op)
+       */
     
-    
+    // новости:
     func loadNewsData(token:String, userId:Int, completion: @escaping (Out<ItemsNews, Error>) -> Void){
         DispatchQueue.global(qos: .background).async {
             var urlConstructor = URLComponents()
@@ -105,40 +164,9 @@ class ApiService {
              }
         }
     }
-  
-    func loadPhotosData(token:String, ownerId:Int, completion: @escaping (Out<[Photo], Error>) -> Void){
-        var urlConstructor = URLComponents()
-        urlConstructor.scheme = "https"
-        urlConstructor.host = "api.vk.com"
-        urlConstructor.path = "/method/photos.getAll"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "owner_id", value: "\(ownerId)"),
-            URLQueryItem(name: "count", value: "12"),
-            URLQueryItem(name: "extended", value: "5"),
-            URLQueryItem(name: "access_token", value: token),
-            URLQueryItem(name: "v", value: "5.103")
-        ]
-        let request = URLRequest(url:urlConstructor.url!)
-            self.loadData(request: request){ completion($0)
-            
-            }
-    }
-     /*
-     let request = Alamofire.request("https://jsonplaceholder.typicode.com/posts")
-             let op = GetDataOperation(request: request)
-             op.completionBlock = {
-                 print(op.data)
-             }
-             opq.addOperation(op)
-     */
-
-    
-    
-    
-    
+    // инфо о пользователе
     func loadUserData(token:String, userId:Int, completion: @escaping ([ResponseUser]) -> Void) {
-     //   DispatchQueue.global(qos: .background).async {
-        
+    
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -163,8 +191,6 @@ class ApiService {
                 print(error)
             }
         }
-       
-    //    }
         
     }
 }

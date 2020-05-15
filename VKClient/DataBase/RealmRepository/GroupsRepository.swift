@@ -14,8 +14,10 @@ class GroupsRepository{
     
     func saveGroupData(groups: [ItemsGroup]){
          do {
-            let realm = try Realm()
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
+            let realm = try Realm(configuration: config)
             realm.beginWrite()
+            //realm.deleteAll()
             var groupsToAdd = [GroupRealm]()
             groups.forEach { group in
                 let groupRealm = GroupRealm()
@@ -35,6 +37,8 @@ class GroupsRepository{
             }
             realm.add(groupsToAdd, update: .modified)
             try realm.commitWrite()
+             print(try! Realm().configuration.fileURL!)
+            
          } catch  {
              print(error)
          }

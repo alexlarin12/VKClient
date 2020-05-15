@@ -24,18 +24,19 @@ class GroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         GroupSearchBar.delegate = self
         self.showGroups()
-        apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId){ result in
-            switch result{
-            case .success(let groups):
-                DispatchQueue.main.async {
-                    self.database.saveGroupData(groups: groups)
-                    self.showGroups()
-                    
-                }
-            case .failure(let error):
-                print(error)
+        apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId)
+            .done { groups in
+                self.database.saveGroupData(groups: groups)
+                self.showGroups()
+        }.recover({(error) in
+            return self.apiService.loadGroupsData(token: Session.instance.token, userId: Session.instance.userId)
+            .done { groups in
+            self.database.saveGroupData(groups: groups)
+            self.showGroups()
             }
-        }
+            }).catch { error in
+                print("Мы получили ошибку на странице групп: \(error)")
+            }
     }
     
     deinit {
