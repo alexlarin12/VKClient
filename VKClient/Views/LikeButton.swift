@@ -39,7 +39,7 @@ import UIKit
         }
         func setupView(){
             self.addTarget(self, action: #selector(changeState), for: .touchUpInside)
-            self.backgroundColor = UIColor.clear
+            self.backgroundColor = UIColor.lightGray
             self.layer.cornerRadius = min(self.bounds.height, self.bounds.width)/5
             clipsToBounds = true
             

@@ -29,7 +29,7 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         FriendsSearchBar.delegate = self
-        
+       
       //  self.showFriends()
       //  self.getFriendsFromDatabase()
      /*   apiService.loadFriendsData(token: Session.instance.token, userId: Session.instance.userId) { result in
@@ -131,12 +131,13 @@ class FriendsTableViewController: UITableViewController {
     */
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
            let view = UIView()
-           view.backgroundColor = #colorLiteral(red: 0.2403630912, green: 0.4364806414, blue: 0.8139752746, alpha: 1)
+           view.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.4039215686, blue: 0.7019607843, alpha: 1)
            let label = UILabel()
            label.text = sortedFriendsResults[section].title
            label.frame = CGRect(x: 10, y: 5, width: 14, height: 15)
            label.textColor = UIColor.white
            label.adjustsFontSizeToFitWidth = true
+           label.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.4039215686, blue: 0.7019607843, alpha: 1)
            view.addSubview(label)
            return view
     }

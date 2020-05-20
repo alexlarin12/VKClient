@@ -21,7 +21,7 @@ class FriendCollectionViewController: UICollectionViewController {
     
     var token: NotificationToken?
     var photosResult: Results<PhotoRealm2>?
-  
+  let dateTimeHelper = DateTimeHelper()
     
     
     override func viewDidLoad() {
@@ -89,7 +89,8 @@ class FriendCollectionViewController: UICollectionViewController {
         cell.TextPhotoLabel.text = photos.text
         cell.RepostPhotoButton.setTitle(reposts, for: .normal)
         cell.FriendImageView.kf.setImage(with: urlPhoto)
-        cell.DatePhotoLabel.text = DateTimeHelper.getFormattedDate(from: Date(timeIntervalSince1970: TimeInterval(photos.date)))
+        cell.DatePhotoLabel.text = dateTimeHelper.getFormattedDate(indexPath: indexPath, from: Date(timeIntervalSince1970: TimeInterval(photos.date)))
+       // cell.DatePhotoLabel.text = DateTimeHelper.getFormattedDate(for indexPath:indexPath, from: Date(timeIntervalSince1970: TimeInterval(photos.date)))
         return cell
     }
 }
