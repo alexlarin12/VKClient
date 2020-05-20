@@ -42,6 +42,7 @@
 		434BBEB02456EC0C0014D774 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */; };
 		434BBEB22456ED420014D774 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEB12456ED420014D774 /* GetDataOperation.swift */; };
 		434BBEBC245A27240014D774 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEBB245A27240014D774 /* CustomButton.swift */; };
+		434BBEBE24687BCB0014D774 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434BBEBD24687BCB0014D774 /* PhotoService.swift */; };
 		434E9A4423E9F43800B3D3F3 /* FriendsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */; };
 		434E9A4623E9F45300B3D3F3 /* GroupsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */; };
 		434E9A4823E9F46F00B3D3F3 /* PhotosRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */; };
@@ -156,6 +157,7 @@
 		434BBEAF2456EC0C0014D774 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		434BBEB12456ED420014D774 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		434BBEBB245A27240014D774 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		434BBEBD24687BCB0014D774 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		434E9A4323E9F43800B3D3F3 /* FriendsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRepository.swift; sourceTree = "<group>"; };
 		434E9A4523E9F45300B3D3F3 /* GroupsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsRepository.swift; sourceTree = "<group>"; };
 		434E9A4723E9F46F00B3D3F3 /* PhotosRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRepository.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				434A3FA923CE376500219B09 /* ApiService.swift */,
 				436B556323E6089300965E04 /* UseKeychainData.swift */,
 				43444DD1241D1D74001308BA /* DataTimeHelper.swift */,
+				434BBEBD24687BCB0014D774 /* PhotoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				437ABB8E23A4E54A0001B3CB /* CircleImageView.swift in Sources */,
 				43061C9023AE4FFF00D9A90D /* CustomPopAnimator.swift in Sources */,
 				43E88785243B0E8F001224A9 /* FriendVC+UICollectionViewDataSource.swift in Sources */,
+				434BBEBE24687BCB0014D774 /* PhotoService.swift in Sources */,
 				43444DDB241D63C2001308BA /* NewsPhotoTableViewCell.swift in Sources */,
 				438D1FA023E2102000D684BE /* PhotosRealm.swift in Sources */,
 				43E8878E243C639A001224A9 /* FriendOnePhotoCell.swift in Sources */,

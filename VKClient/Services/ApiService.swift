@@ -120,15 +120,7 @@ class ApiService {
         let request = URLRequest(url:urlConstructor.url!)
         return loadData(request: request)
     }
-       /*
-       let request = Alamofire.request("https://jsonplaceholder.typicode.com/posts")
-               let op = GetDataOperation(request: request)
-               op.completionBlock = {
-                   print(op.data)
-               }
-               opq.addOperation(op)
-       */
-    
+     
     // новости:
     func loadNewsData(token:String, userId:Int, completion: @escaping (Out<ItemsNews, Error>) -> Void){
         DispatchQueue.global(qos: .background).async {

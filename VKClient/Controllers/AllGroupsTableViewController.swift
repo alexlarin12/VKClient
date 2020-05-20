@@ -21,7 +21,7 @@ class AllGroupsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     //   AllGroupsSearchBar.delegate = self
+        //   AllGroupsSearchBar.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,6 +30,7 @@ class AllGroupsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+   
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -49,6 +50,7 @@ class AllGroupsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsIdentifire", for: indexPath) as! GroupsCell
         cell.GroupsNameLabel.text = groups[indexPath.row].groupName
         cell.GroupsAvatarImageView.image = UIImage(named: groups[indexPath.row].groupImage)
+        
         // Configure the cell...
 
         return cell
