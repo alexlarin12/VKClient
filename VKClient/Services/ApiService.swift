@@ -122,7 +122,8 @@ class ApiService {
     }
      
     // новости:
-    func loadNewsData(token:String, userId:Int, completion: @escaping (Out<ItemsNews, Error>) -> Void){
+   // func loadNewsData(token:String, userId:Int, nextFrom:String?, completion: @escaping (Out<ItemsNews, Error>) -> Void){
+    func loadNewsData(token:String, userId:Int, nextFrom:String?, startTime: Double, completion: @escaping (Out<ItemsNews, Error>) -> Void){
         DispatchQueue.global(qos: .background).async {
             var urlConstructor = URLComponents()
             urlConstructor.scheme = "https"
@@ -130,10 +131,12 @@ class ApiService {
             urlConstructor.path = "/method/newsfeed.get"
             urlConstructor.queryItems = [
                 URLQueryItem(name: "filters", value: "post"),
-                URLQueryItem(name: "count", value: "20"),
-           //    URLQueryItem(name: "owner_id", value: "\(userId)"),
+                URLQueryItem(name: "count", value: "5"),
+                URLQueryItem(name: "owner_id", value: "\(userId)"),
                 URLQueryItem(name: "access_token", value: token),
-                URLQueryItem(name: "v", value: "5.103")
+                URLQueryItem(name: "v", value: "5.103"),
+                URLQueryItem(name: "start_from", value: nextFrom ?? ""),
+                URLQueryItem(name: "start_time", value: "\(startTime)")
             ]
             let request = URLRequest(url:urlConstructor.url!)
          //  loadData(request: request){ completion($0)}
@@ -158,32 +161,30 @@ class ApiService {
     }
     // инфо о пользователе
     func loadUserData(token:String, userId:Int, completion: @escaping ([ResponseUser]) -> Void) {
-    
-        var urlConstructor = URLComponents()
-        urlConstructor.scheme = "https"
-        urlConstructor.host = "api.vk.com"
-        urlConstructor.path = "/method/users.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: String(userId)),
-            URLQueryItem(name: "fields", value: "photo_50"),
-            URLQueryItem(name: "access_token", value: token),
-            URLQueryItem(name: "v", value: "5.103")
-        ]
-         
+        DispatchQueue.global(qos: .background).async {
+            var urlConstructor = URLComponents()
+            urlConstructor.scheme = "https"
+            urlConstructor.host = "api.vk.com"
+            urlConstructor.path = "/method/users.get"
+            urlConstructor.queryItems = [
+                URLQueryItem(name: "user_id", value: String(userId)),
+                URLQueryItem(name: "fields", value: "photo_50"),
+                URLQueryItem(name: "access_token", value: token),
+                URLQueryItem(name: "v", value: "5.103")
+            ]
+            let request = URLRequest(url:urlConstructor.url!)
             
-        let request = URLRequest(url:urlConstructor.url!)
-            
-        SessionManager.custom.request(request).responseData{
-            response in
-            guard let data = response.value else{return}
-            do{
-                let user = try JSONDecoder().decode(UserModel.self, from: data).response
-                completion(user ?? [])
-            }catch{
-                print(error)
+            SessionManager.custom.request(request).responseData{
+                response in
+                guard let data = response.value else{return}
+                do{
+                    let user = try JSONDecoder().decode(UserModel.self, from: data).response
+                    completion(user ?? [])
+                }catch{
+                    print(error)
+                }
             }
         }
-        
     }
 }
 

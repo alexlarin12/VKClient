@@ -29,7 +29,7 @@ class GroupsRepository{
                 groupRealm.isAdmin = group.isAdmin
                 groupRealm.isMember = group.isMember
                 groupRealm.isAdvertiser = group.isAdvertiser 
-                groupRealm.site = group.site
+            //    groupRealm.site = group.site
                 groupRealm.photo50 = group.photo50
                 groupRealm.photo100 = group.photo100
                 groupRealm.photo200 = group.photo200

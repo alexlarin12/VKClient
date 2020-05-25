@@ -14,9 +14,9 @@ struct NewsModel: Decodable {
 }
 struct ItemsNews: Decodable {
     let items: [ResponseItem]
-    let profiles: [Profiles]
-    let groups: [Groups]
-    let nextFrom: String
+    let profiles: [ItemsFriend]
+    let groups: [ItemsGroup]
+    let nextFrom: String?
     enum CodingKeys: String, CodingKey {
         case items, profiles, groups
         case nextFrom = "next_from"
@@ -26,7 +26,8 @@ struct ResponseItem: Decodable {
     let canDoubtCategory: Bool?
     let canSetCategory: Bool?
     let type: String
-    let sourceID, date: Int
+    let sourceID: Int
+    let date: Double
     let postType, text: String?
     var copyHistory: [CopyHistory]? = []
     let markedAsAds: Int?
@@ -66,7 +67,7 @@ struct ResponseItem: Decodable {
         self.canSetCategory = try? container.decode(Bool.self, forKey: .canSetCategory)
         self.type = try container.decode(String.self, forKey: .type)
         self.sourceID = try container.decode(Int.self, forKey: .sourceID)
-        self.date = try container.decode(Int.self, forKey: .date)
+        self.date = try container.decode(Double.self, forKey: .date)
         self.postType = try container.decode(String.self, forKey: .postType)
         self.text = try container.decode(String.self, forKey: .text)
         self.markedAsAds = try container.decode(Int.self, forKey: .markedAsAds)
@@ -313,13 +314,14 @@ struct Reposts: Decodable {
 struct Views: Decodable {
     let count: Int
 }
+/*
 struct Profiles: Decodable {
     let id: Int
     let firstName, lastName: String
     let isClosed, canAccessClosed: Bool?
-    let sex: Int
-    let screenName: String?
-    let photo50, photo100: String
+   // let sex: Int
+   // let screenName: String?
+    let photo50/*, photo100*/: String
     let online: Int
     let onlineInfo: OnlineInfo
     let deactivated: String?
@@ -329,10 +331,10 @@ struct Profiles: Decodable {
         case lastName = "last_name"
         case isClosed = "is_closed"
         case canAccessClosed = "can_access_closed"
-        case sex
-        case screenName = "screen_name"
+     //   case sex
+      //  case screenName = "screen_name"
         case photo50 = "photo_50"
-        case photo100 = "photo_100"
+     //   case photo100 = "photo_100"
         case online
         case onlineInfo = "online_info"
         case deactivated
@@ -349,7 +351,8 @@ struct OnlineInfo: Decodable {
         case appID = "app_id"
         case isMobile = "is_mobile"
     }
-}
+}*/
+/*
 struct Groups: Decodable {
     let id: Int
     let name:String
@@ -373,7 +376,7 @@ struct Groups: Decodable {
         case photo100 = "photo_100"
         case photo200 = "photo_200"
     }
-}
+}*/
 /// CopyHistoryAttachment
 struct CopyHistoryAttachment: Decodable {
     let photo: Photos?

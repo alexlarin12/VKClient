@@ -14,7 +14,7 @@ class NewsRealm: Object {
      var attachments = List<NewsAttachmentRealm>()
     @objc dynamic var type: String = ""
     @objc dynamic var sourceID: Int = 0
-    @objc dynamic var date: Int = 0
+    @objc dynamic var date: Double = 0
     @objc dynamic var postType: String = ""
     @objc dynamic var text: String = ""
     @objc dynamic var markedAsAds: Int = 0
