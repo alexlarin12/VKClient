@@ -24,7 +24,8 @@ class NewsTableViewController: UITableViewController {
     var userRealm = [UserRealm]()
     var cellsToDisplay: [NewsCellsTypes] = [.header, .repostHeader, .text, .attachments, .footer]
     let newsLinkCell = NewsLinkTableViewCell()
-
+    let dateTimeHelper = DateTimeHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -211,7 +212,7 @@ class NewsTableViewController: UITableViewController {
             
          guard let header = tableView.dequeueReusableCell(withIdentifier: "NewsHeaderIdentifier", for: indexPath) as? NewsHeaderTableViewCell else { return UITableViewCell() }
          
-         header.NewsHeaderDataLabel.text = DateTimeHelper.getFormattedDate(from: Date(timeIntervalSince1970: TimeInterval(news[position].date)))
+        header.NewsHeaderDataLabel.text = dateTimeHelper.getFormattedDate(indexPath: indexPath, from: Date(timeIntervalSince1970: TimeInterval(news[position].date)))
          
              for account in profiles {
                 if sourceId == account.id * -1 || sourceId == account.id {
@@ -241,7 +242,7 @@ class NewsTableViewController: UITableViewController {
             
         guard let header = tableView.dequeueReusableCell(withIdentifier: "RepostHeaderIdentifire", for: indexPath) as? RepostHeaderTableViewCell else { return UITableViewCell() }
          
-        header.RepostDataLabel.text = DateTimeHelper.getFormattedDate(from: Date(timeIntervalSince1970: TimeInterval(news[position].copyHistory?.first?.date ?? 0)))
+        header.RepostDataLabel.text = dateTimeHelper.getFormattedDate(indexPath: indexPath, from: Date(timeIntervalSince1970: TimeInterval(news[position].copyHistory?.first?.date ?? 0)))
       
              for account in profiles {
                 if fromId == account.id * -1 || fromId == account.id {

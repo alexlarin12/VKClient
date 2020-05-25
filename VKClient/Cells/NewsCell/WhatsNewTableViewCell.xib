@@ -39,13 +39,14 @@
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Что у Вас нового?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="omU-LU-pbh">
                                 <rect key="frame" x="72" y="5" width="210" height="40"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.27706781029999999" green="0.3991729617" blue="0.68238359689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBw-JI-DSo">
                                 <rect key="frame" x="298" y="12.5" width="30" height="25"/>
+                                <color key="backgroundColor" red="0.27706781029999999" green="0.3991729617" blue="0.68238359689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="0wU-Bg-anh"/>
                                     <constraint firstAttribute="width" constant="30" id="PfW-yZ-E3n"/>
@@ -55,6 +56,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bED-EL-hTQ">
                                 <rect key="frame" x="344" y="12.5" width="30" height="25"/>
+                                <color key="backgroundColor" red="0.27706781029999999" green="0.3991729617" blue="0.68238359689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2Ey-oI-yK8"/>
                                     <constraint firstAttribute="width" constant="30" id="ECm-Nn-WKg"/>
