@@ -11,7 +11,7 @@ import RealmSwift
 class GroupsRepository{
     
     var groupRealm = [GroupRealm]()
-    
+    // метод сохранения групп в Realm:
     func saveGroupData(groups: [ItemsGroup]){
          do {
             let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
@@ -42,21 +42,23 @@ class GroupsRepository{
          } catch  {
              print(error)
          }
-     }
-     func getGroupData() throws -> Results<GroupRealm> {
+    }
+    //метод получения групп из Realm:
+    func getGroupData() throws -> Results<GroupRealm> {
          do {
             let realm = try Realm()
             return realm.objects(GroupRealm.self)
          } catch {
              throw error
          }
-     }
-      func searchGroups(name: String) throws -> Results<GroupRealm> {
+    }
+    //метод поиска групп в Realm:
+    func searchGroups(name: String) throws -> Results<GroupRealm> {
           do {
               let realm = try Realm()
               return realm.objects(GroupRealm.self).filter("name CONTAINS[c] %@", name)
           } catch {
               throw error
           }
-      }
+    }
 }

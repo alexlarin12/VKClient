@@ -13,11 +13,11 @@ class FriendOnePhotoCell: UICollectionViewCell {
     @IBOutlet weak var FriendPhotoImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
     }
     override func prepareForReuse() {
            super.prepareForReuse()
            self.FriendPhotoImageView.image = nil
-       }
+    }
     
 }

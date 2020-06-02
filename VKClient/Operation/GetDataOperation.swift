@@ -42,15 +42,15 @@ class SaveToRealmDataOperation: AsyncOperation{
 
 class DisplayDataOperation:AsyncOperation{
     let database = UserRepository()
-    var mainNameLabel: String?
-    var mainIdLabel: String?
+    var firstName: String?
+    var lastName: String?
     var avatar: String?
     
         override func main() {
             let userRealm = self.database.getUserData()
             userRealm.forEach { user in
-                self.mainNameLabel = user.firstName
-                self.mainIdLabel = user.lastName
+                self.firstName = user.firstName
+                self.lastName = user.lastName
                 self.avatar = user.photo50
                 }
             self.state = .finished

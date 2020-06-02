@@ -9,6 +9,7 @@ target 'VKClient' do
   pod 'SwiftKeychainWrapper'
   pod 'Kingfisher'
   pod 'PromiseKit'
+  pod 'Texture'
   
  
 

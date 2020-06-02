@@ -17,29 +17,12 @@ class NewsVideoCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        
-        
-        // Initialization code
+      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
    
 }
-/*
-func playVideo(){
-              let videoURL = URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
-              let pleer = AVPlayer(url: videoURL)
-              let pleerLayer = AVPlayerLayer(player: pleer)
-           pleerLayer.frame = self.VideoView.bounds
-              pleerLayer.videoGravity = .resizeAspect
-              self.VideoView.layer.addSublayer(pleerLayer)
-              pleer.play()
-          }
-
-*/

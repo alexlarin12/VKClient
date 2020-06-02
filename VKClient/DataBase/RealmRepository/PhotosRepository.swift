@@ -11,14 +11,14 @@ import RealmSwift
 class PhotosRepository{
  //   var photosRealm = [PhotosRealm]()
     var photoRealm = [PhotoRealm2]()
+    //метод сохранения фото в Realm:
     func savePhotosData(ownerId:Int, photos: [Photo]){
-           do {
-               let realm = try Realm()
-            //   let oldData = realm.objects(PhotoRealm2.self).filter("ownerId == \(ownerId)")
+        do {
+            let realm = try Realm()
             let oldLikes = realm.objects(LikeRealm.self)
             let oldReposts = realm.objects(RepostRealm.self)
             let oldSizes = realm.objects(PhotoSizesRealm.self)
-               realm.beginWrite()
+            realm.beginWrite()
             var photosToAdd = [PhotoRealm2]()
            
             photos.forEach{photo in
@@ -33,46 +33,31 @@ class PhotosRepository{
                 photosRealm.reposts = photo.reposts.toRealm()
                 photosToAdd.append(photosRealm)
             }
-           /*    var photosToAdd = [PhotosRealm]()
-               photos.forEach{photo in
-                   let photosRealm = PhotosRealm()
-                   photosRealm.id = photo.id
-                   photosRealm.albumId = photo.albumId
-                   photosRealm.ownerId = photo.ownerId
-                photosRealm.url = photo.sizes.first(where: {$0.type.rawValue == "x" || $0.type.rawValue == "y" || $0.type.rawValue == "z"})?.url ?? "https://sun9-63.userapi.com/c627628/v627628412/3aa85/EwORTurDS_k.jpg"
-                //   photosRealm.type = photo.type
-                photosRealm.text = photo.text
-              
-               //    photosRealm.userLikes = photo.userLikes
-                photosRealm.countLikes = photo.likes.count
-              //  photosRealm.countReposts = photo.countReposts
-                //   photosRealm.realOffset = photo.realOffset
-                   photosToAdd.append(photosRealm)
-                }*/
             realm.delete(oldLikes)
             realm.delete(oldReposts)
             realm.delete(oldSizes)
                 realm.add(photosToAdd,update: .modified)
                 try realm.commitWrite()
-             } catch {
+            } catch {
                print(error)
-               }
+            }
     }
-    
+    //метод получения фото из Realm:
     func getPhotosData(ownerId:Int) throws -> Results<PhotoRealm2> {
-           do {
-               let realm = try Realm()
-               return realm.objects(PhotoRealm2.self).filter("ownerId == \(ownerId)")
-           } catch {
-               throw error
-             }
+        do {
+            let realm = try Realm()
+            return realm.objects(PhotoRealm2.self).filter("ownerId == \(ownerId)")
+        } catch {
+            throw error
+        }
     }
+    //метод получения фото из Realm по imageID:
     func getPhotosId(imageId: Int) throws -> Results<PhotoRealm2> {
-         do {
-                      let realm = try Realm()
-                      return realm.objects(PhotoRealm2.self).filter("id == \(imageId)")
-                  } catch {
-                      throw error
-                    }
+        do {
+            let realm = try Realm()
+            return realm.objects(PhotoRealm2.self).filter("id == \(imageId)")
+        } catch {
+            throw error
+        }
     }
 }

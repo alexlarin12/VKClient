@@ -22,36 +22,6 @@ class PhotoRealm2: Object {
     override class func primaryKey() -> String? {
         return "id"
     }
-    
-    // Конвертация типа Realm к обычной модели
- /*   func toModel() -> Photo {
-        var sizes = [Size1]()
-        
-        // Проходим по всем вариантам размеров фотографий
-        sizes.forEach { size in
-            // Инициализируем значения всех свойств
-            let oneSize = Size1(type: size.type,
-                               url: size.url,
-                               width: size.width,
-                               height: size.height)
-            // И добавляем каждый вариант в массив вариантов
-            sizes.append(oneSize)
-        }
-    
-        // Инициализируем значения для свойств лайка
-        let likes = Like(isLiked: self.likes?.isLiked ?? 0, count: self.likes?.count ?? 0)
-        let reposts = RepostsPhoto(count: self.reposts?.count ?? 0)
-        // Возвращаем модель в нужном формате
-        return Photo(
-                    id: id,
-                    albumId: albumId,
-                    ownerId: ownerId,
-                    sizes: sizes,
-                    likes: likes,
-                    reposts: reposts,
-                    text: text,
-                    date: date)
-    }*/
 }
 
 class PhotoSizesRealm: Object {

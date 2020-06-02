@@ -11,7 +11,7 @@ import RealmSwift
 
 class UserRepository{
     var userRealm = [UserRealm]()
-    
+  // метод сохранения пользователя в Realm:
     func saveUserData(user: [ResponseUser]){
         do {
             let realm = try Realm()
@@ -29,16 +29,14 @@ class UserRepository{
         }
             realm.add(userToAdd, update: .modified)
             try realm.commitWrite()
-      //         print(try! Realm().configuration.fileURL!)
         } catch {
             print(error)
         }
       
     }
     
-    
+    // метод получения пользователя из Realm:
     func getUserData() -> Array<UserRealm>{
-       
         do {
             let realm = try Realm()
             let userFromRealm = realm.objects(UserRealm.self)
@@ -48,4 +46,5 @@ class UserRepository{
         }
     return userRealm
     }
+    
 }

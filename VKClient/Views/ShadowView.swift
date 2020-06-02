@@ -15,8 +15,6 @@ class ShadowView: UIView {
   
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        // Drawing code
-      //  self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.borderColor = #colorLiteral(red: 0.3654780984, green: 0.3364349902, blue: 0.3280779719, alpha: 1).cgColor
         self.layer.cornerRadius = bounds.width/2
         self.layer.borderWidth = 2

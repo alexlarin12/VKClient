@@ -12,8 +12,8 @@ import RealmSwift
 class FriendsRepositiry{
     
      var friendRealm = [FriendRealm]()
-    
-     func saveFriendData(friends: [ItemsFriend]){
+    // метод сохранения друзей в Realm:
+    func saveFriendData(friends: [ItemsFriend]){
            do {
                let config = Realm.Configuration(deleteRealmIfMigrationNeeded:false)
                let realm = try Realm(configuration: config)
@@ -40,6 +40,7 @@ class FriendsRepositiry{
                print(error)
            }
     }
+    //метод получения друзей из Realm:
     func getFriendData() throws-> Results<FriendRealm> {
            do {
                let realm = try Realm()
@@ -48,6 +49,7 @@ class FriendsRepositiry{
                throw error
            }
     }
+    //метод поиска друзей в Realm:
     func searchFriends(lastName: String) throws -> Results<FriendRealm> {
             do {
                  let realm = try Realm()

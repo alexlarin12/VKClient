@@ -10,7 +10,7 @@ import Foundation
 class DateTimeHelper {
     var dateTextCache: [IndexPath: String] = [:]
     /// Просто форматированная дата
-    public static func getDateTimeString(dateTime : Date?, format : String) -> String {
+    func getDateTimeString(dateTime : Date?, format : String) -> String {
         let dateTime = dateTime ?? Date();
         let formatter = DateFormatter()
         formatter.dateFormat = format
@@ -46,6 +46,6 @@ class DateTimeHelper {
                 self.dateTextCache[indexPath] = stringDate
                 return stringDate
             }
-            }
+        }
     }
 }

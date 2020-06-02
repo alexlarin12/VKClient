@@ -17,14 +17,22 @@ class NewsLinkTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
-
     }
-
+    func configur(ButtonTitle: String){
+           if ButtonTitle == ""  {
+              // newsTextHeight.constant = 0
+               LinkTitleButton.isHidden = true
+           } else {
+               LinkTitleButton.isHidden = false
+           }
+       }
+    
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
     
 }
