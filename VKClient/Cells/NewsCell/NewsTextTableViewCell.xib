@@ -20,20 +20,40 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5n-G2-g5B">
                         <rect key="frame" x="16" y="0.0" width="288" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-vA-TuV">
-                                <rect key="frame" x="16" y="2.5" width="256" height="45"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Text of news will be here" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SV7-TE-dhM">
+                                <rect key="frame" x="16" y="0.0" width="256" height="0.0"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="U1n-ye-gDY"/>
+                                </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQT-bv-0hh">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="25"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="AT2-00-FtH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="12"/>
+                                <state key="normal" title="...show more">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="showMoreButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="si4-Ar-kEi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1v4-vA-TuV" firstAttribute="height" secondItem="R5n-G2-g5B" secondAttribute="height" multiplier="0.9" id="G0i-gP-eau"/>
-                            <constraint firstItem="1v4-vA-TuV" firstAttribute="centerY" secondItem="R5n-G2-g5B" secondAttribute="centerY" id="Z2F-ph-89q"/>
-                            <constraint firstItem="1v4-vA-TuV" firstAttribute="leading" secondItem="R5n-G2-g5B" secondAttribute="leading" constant="16" id="ds1-di-LGD"/>
-                            <constraint firstAttribute="trailing" secondItem="1v4-vA-TuV" secondAttribute="trailing" constant="16" id="wbk-ob-KZe"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iQT-bv-0hh" secondAttribute="bottom" id="295-2s-VSk"/>
+                            <constraint firstItem="iQT-bv-0hh" firstAttribute="leading" secondItem="R5n-G2-g5B" secondAttribute="leading" id="5x3-dm-EFj"/>
+                            <constraint firstItem="SV7-TE-dhM" firstAttribute="leading" secondItem="R5n-G2-g5B" secondAttribute="leading" constant="16" id="Pkl-wE-acy"/>
+                            <constraint firstAttribute="trailing" secondItem="iQT-bv-0hh" secondAttribute="trailing" id="VX8-eg-8B7"/>
+                            <constraint firstItem="SV7-TE-dhM" firstAttribute="bottom" secondItem="iQT-bv-0hh" secondAttribute="top" id="Xz9-hN-XhT"/>
+                            <constraint firstAttribute="trailing" secondItem="SV7-TE-dhM" secondAttribute="trailing" constant="16" id="fQs-oq-wBO"/>
+                            <constraint firstItem="SV7-TE-dhM" firstAttribute="top" secondItem="R5n-G2-g5B" secondAttribute="top" id="frr-BQ-Req"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -47,9 +67,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="D38-zQ-mIi"/>
             <connections>
-                <outlet property="NewsTextLabel" destination="1v4-vA-TuV" id="xSK-a9-c6A"/>
+                <outlet property="NewsTextView" destination="SV7-TE-dhM" id="ofb-Oy-uPd"/>
+                <outlet property="ShowMore" destination="iQT-bv-0hh" id="m3m-bx-q3Q"/>
+                <outlet property="newsTextHeight" destination="U1n-ye-gDY" id="Ggy-XE-6tQ"/>
             </connections>
-            <point key="canvasLocation" x="139" y="125"/>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
         </tableViewCell>
     </objects>
 </document>

@@ -20,7 +20,13 @@ class NewsHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+    }
+    
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

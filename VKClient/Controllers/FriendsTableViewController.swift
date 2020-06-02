@@ -103,6 +103,7 @@ class FriendsTableViewController: UITableViewController {
                print(error)
            }
     }
+   
     func updateNavigationBar() {
         let backButtonItem = UIBarButtonItem()  //Убираем надпись на кнопке возврата
         backButtonItem.title = ""
