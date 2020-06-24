@@ -27,5 +27,7 @@ extension FriendsTableViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
     // Скрываем клавиатуру после нажатия "search"
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { view.endEditing(true) }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { view.endEditing(true)
+        
+    }
 }

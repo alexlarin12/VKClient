@@ -27,45 +27,27 @@ extension FriendViewController: UICollectionViewDataSource{
     }
    
     func showPhotos(){
-               do{
-                   photosResult = try database.getPhotosData(ownerId: friendOwnerId)
-                   token = photosResult?.observe { [weak self] results in
-                       switch results{
-                       case .error(let error):
-                           print(error)
-                       case .initial:
-                           self?.FriendPhotoCV.reloadData()
-                       case let .update(_, deletions, insertions, modifications):
-                           self?.FriendPhotoCV.performBatchUpdates({
-                               self?.FriendPhotoCV.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
-                               self?.FriendPhotoCV.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0) }))
-                               self?.FriendPhotoCV.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
-                           }, completion: nil)
-                       }
-                   }
-               }catch{
-                   print(error)
-               }
+        do{
+            photosResult = try database.getPhotosData(ownerId: friendOwnerId)
+            token = photosResult?.observe { [weak self] results in
+                switch results{
+                    case .error(let error):
+                        print(error)
+                    case .initial:
+                        self?.FriendPhotoCV.reloadData()
+                    case let .update(_, deletions, insertions, modifications):
+                        self?.FriendPhotoCV.performBatchUpdates({
+                        self?.FriendPhotoCV.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+                        self?.FriendPhotoCV.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0) }))
+                        self?.FriendPhotoCV.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
+                        }, completion: nil)
+                }
+            }
+        }catch{
+            print(error)
+        }
     }
      
-   
-    
-  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "WatchPhoto",
-            
-            let friendCollectionViewController = segue.destination as? FriendCollectionViewController,
-            let indexPath = FriendPhotoCV.indexPath(for: FriendOnePhotoCell()) {
-            /*
-             let name = (getModelAtIndex(indexPath: indexPath)?.firstName ?? "") + " " + (getModelAtIndex(indexPath: indexPath)?.lastName ?? "")
-             let image = getModelAtIndex(indexPath: indexPath)?.photo50
-             let ownerId = getModelAtIndex(indexPath: indexPath)?.id
-             friendViewController.friendNameForTitle = name
-             friendViewController.friendImageForCollection = image ?? ""
-             friendViewController.friendOwnerId = ownerId ?? 0*/
-        }
-    }*/
-    
-    
 }
 extension FriendViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -76,12 +58,8 @@ extension FriendViewController: UICollectionViewDelegate, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
          return true
-     }
+    }
   
-   
-         /*   func getModelAtIndex(indexPath: IndexPath) -> PhotosRealm? {
-        return sortedPhotosResults[indexPath.section].items[indexPath.row]
-      }*/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "WatchPhoto",

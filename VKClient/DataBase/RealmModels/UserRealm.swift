@@ -17,7 +17,7 @@ class UserRealm:Object{
     @objc dynamic var canAccessClosed:Bool = true
     @objc dynamic var photo50:String = ""
     
-     override class func primaryKey() -> String? {
-                    return "id"
-                }
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

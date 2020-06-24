@@ -19,8 +19,8 @@ class FriendRealm:Object{
     @objc dynamic var photo50:String = ""
     @objc dynamic var online:Int = 0
     
-     override class func primaryKey() -> String? {
+    override class func primaryKey() -> String? {
            return "id"
-       }
+    }
     
 }

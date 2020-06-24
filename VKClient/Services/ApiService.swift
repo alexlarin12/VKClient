@@ -58,36 +58,6 @@ class ApiService {
         return loadData(request: request)
     }
     
-    /*
-    func loadFriendsData(token:String, userId:Int) -> Promise<[ItemsFriend]>{
-        var urlConstructor = URLComponents()
-        urlConstructor.scheme = "https"
-        urlConstructor.host = "api.vk.com"
-        urlConstructor.path = "/method/friends.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: String(userId)),
-            URLQueryItem(name: "fields", value: "photo_50"),
-            URLQueryItem(name: "access_token", value: token),
-            URLQueryItem(name: "v", value: "5.103")
-        ]
-        let request = URLRequest(url:urlConstructor.url!)
-         
-        return Promise<[ItemsFriend]> {resolver in
-            SessionManager.custom.request(request).responseData{ response in
-                switch response.result {
-                case .failure(let error):
-                    resolver.reject(error)
-                case .success(let data):
-                    do {
-                        let result = try JSONDecoder().decode(CommonResponse<ItemsFriend>.self, from: data)
-                        resolver.fulfill(result.response.items)
-                    } catch {
-                        resolver.reject(RequestError.parsingFailed)
-                    }
-                }
-            }
-        }
-    }*/
     // список групп:
     func loadGroupsData(token:String, userId:Int) -> Promise<[ItemsGroup]>{
         var urlConstructor = URLComponents()
@@ -122,7 +92,6 @@ class ApiService {
     }
      
     // новости:
-   // func loadNewsData(token:String, userId:Int, nextFrom:String?, completion: @escaping (Out<ItemsNews, Error>) -> Void){
     func loadNewsData(token:String, userId:Int, nextFrom:String?, startTime: Double, completion: @escaping (Out<ItemsNews, Error>) -> Void){
         DispatchQueue.global(qos: .background).async {
             var urlConstructor = URLComponents()
@@ -139,7 +108,6 @@ class ApiService {
                 URLQueryItem(name: "start_time", value: "\(startTime)")
             ]
             let request = URLRequest(url:urlConstructor.url!)
-         //  loadData(request: request){ completion($0)}
        
             SessionManager.custom.request(request).responseData{
                    response in

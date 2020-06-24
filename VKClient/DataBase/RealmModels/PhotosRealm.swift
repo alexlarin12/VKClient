@@ -22,8 +22,8 @@ class PhotosRealm:Object{
     @objc dynamic var realOffset:Int = 0
     @objc dynamic var date:Int = 0
     
-     override class func primaryKey() -> String? {
-                 return "id"
+    override class func primaryKey() -> String? {
+        return "id"
     }
  
 }

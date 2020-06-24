@@ -23,10 +23,8 @@ class GroupRealm:Object{
     @objc dynamic var photo100:String = ""
     @objc dynamic var photo200:String = ""
     
-    
-    
     override class func primaryKey() -> String? {
-              return "id"
-          }
+        return "id"
+    }
     
 }
